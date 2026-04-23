@@ -95,8 +95,8 @@ const pageTitle = `${data.title} — Thonking`;
 
       <div class="mt-14 relative aspect-[16/9] rounded-3xl border-2 border-ink overflow-hidden shadow-[0_30px_60px_-20px_rgba(26,24,21,0.3)]">
         <div class="absolute inset-0 flex flex-col items-center justify-center" style="background: linear-gradient(135deg, #0a0a0f 0%, #1a1815 100%);">
-          <div class="font-display font-black text-base-soft text-center leading-tight text-5xl md:text-7xl">ElevenLabs <span class="text-secondary">Batch</span></div>
-          <div class="mt-4 font-mono text-sm md:text-base uppercase tracking-[0.2em] text-base-soft/60">TXT · JSON · .DOCX → OGG</div>
+          <div class="font-display font-black text-[#f5f0e8] text-center leading-tight text-5xl md:text-7xl">ElevenLabs <span class="text-secondary">Batch</span></div>
+          <div class="mt-4 font-mono text-sm md:text-base uppercase tracking-[0.2em] text-[#f5f0e8]/60">TXT · JSON · .DOCX → OGG</div>
           <svg aria-hidden="true" class="mt-8 w-64 md:w-96" viewBox="0 0 160 32">
             {Array.from({ length: 40 }).map((_, i) => {
               const h = 4 + Math.abs(Math.sin(i * 0.7)) * 22;
@@ -123,7 +123,7 @@ const pageTitle = `${data.title} — Thonking`;
       </section>
 
       {slides.map((s) => (
-        <dialog data-slide={s.id} class="gdd-dialog relative w-[min(92vw,720px)] max-h-[92vh] p-0 m-auto rounded-3xl border-[3px] border-ink bg-[#0a0a0f] text-base-soft backdrop:bg-ink/80 backdrop:backdrop-blur-sm overflow-hidden" aria-label={`Preview: ${s.label}`}>
+        <dialog data-slide={s.id} class="gdd-dialog relative w-[min(92vw,720px)] max-h-[92vh] p-0 m-auto rounded-3xl border-[3px] border-ink bg-[#0a0a0f] text-[#f5f0e8] backdrop:bg-ink/80 backdrop:backdrop-blur-sm overflow-hidden" aria-label={`Preview: ${s.label}`}>
           <div class="relative aspect-[3/4] w-full" style="--slide-pad: 30px; --slide-meta: 13px; --slide-sub: 26px; --slide-body: 13px; --slide-footer: 11px; --slide-gap-sm: 7px; --slide-bar-h: 7px;">
             <ElevenLabsSlide variant={s.variant} />
           </div>
@@ -197,12 +197,12 @@ const pageTitle = `${data.title} — Thonking`;
             </div>
           </div>
 
-          <div class="rounded-3xl border-2 border-ink/10 p-6" style="background: #f5f0e8;">
+          <div class="rounded-3xl border-2 border-ink/10 bg-base-soft p-6">
             <div class="flex items-center gap-2 mb-4"><svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="#1a1815" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="5" rx="1" /><rect x="3" y="10" width="18" height="5" rx="1" /><rect x="3" y="16" width="18" height="5" rx="1" /></svg><h3 class="font-mono text-[11px] uppercase tracking-[0.2em] text-ink font-semibold">Stack</h3></div>
             <ul class="flex flex-wrap gap-2">{stack.map((s) => <li class="rounded-full border border-ink/20 bg-base-soft/80 px-3 py-1 font-mono text-xs uppercase tracking-[0.14em] text-ink">{s}</li>)}</ul>
           </div>
 
-          <div class="rounded-3xl border-2 border-ink/10 p-6" style="background: #f5f0e8;">
+          <div class="rounded-3xl border-2 border-ink/10 bg-base-soft p-6">
             <div class="flex items-center gap-2 mb-4"><svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="#1a1815" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12l-8 8a2 2 0 0 1-3 0L3 14a2 2 0 0 1 0-3l8-8h8v8Z" /><circle cx="15" cy="9" r="1.5" fill="#1a1815" /></svg><h3 class="font-mono text-[11px] uppercase tracking-[0.2em] text-ink font-semibold">Tags</h3></div>
             <ul class="flex flex-wrap gap-2">{data.tags.map((t) => <li class="rounded-full border border-dashed border-ink/30 px-3 py-1 font-mono text-xs uppercase tracking-[0.14em] text-ink/70">{t}</li>)}</ul>
           </div>
