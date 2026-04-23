@@ -184,41 +184,32 @@ const {
         />
         <div
           class:list={[
-            "relative h-full flex items-center justify-between",
+            "relative h-full flex flex-col items-center justify-center text-center",
             hero ? "px-10 md:px-16" : "px-8 md:px-12",
           ]}
         >
-          <div>
-            <div class="inline-flex items-center gap-2 rounded-full border border-secondary/60 bg-ink px-3 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-secondary">
-              🔒 NDA
-            </div>
-            <div
-              class:list={[
-                "mt-4 font-display font-black text-[#f5f0e8] leading-[0.95]",
-                hero ? "text-5xl md:text-7xl" : "text-3xl md:text-4xl",
-              ]}
-            >
-              Un videojuego para
-              <br />
-              <span class="text-secondary">20,000 empleados.</span>
-            </div>
-            <div class="mt-3 font-mono text-[11px] md:text-sm uppercase tracking-[0.2em] text-[#f5f0e8]/50">
-              Retailer top-3 de México · NDA
-            </div>
+          <div
+            class:list={[
+              "inline-flex items-center gap-2 rounded-full border-2 border-secondary bg-ink font-mono uppercase tracking-[0.22em] text-secondary shadow-[4px_4px_0_0_#1a1815]",
+              hero
+                ? "px-5 py-2 text-sm md:text-base"
+                : "px-4 py-1.5 text-xs md:text-sm",
+            ]}
+          >
+            🔒 NDA
           </div>
-          <div class="hidden md:block">
-            <img
-              src="/mascot/mascot-hero-idle.webp"
-              alt=""
-              aria-hidden="true"
-              width="1200"
-              height="1200"
-              class:list={[
-                "h-auto opacity-60 float-a",
-                hero ? "w-56 lg:w-72" : "w-40",
-              ]}
-              style="filter: grayscale(0.3);"
-            />
+          <div
+            class:list={[
+              "mt-5 font-display font-black text-[#f5f0e8] leading-[0.95]",
+              hero ? "text-5xl md:text-7xl" : "text-3xl md:text-4xl",
+            ]}
+          >
+            Un videojuego para
+            <br />
+            <span class="text-secondary">20,000 empleados.</span>
+          </div>
+          <div class="mt-3 font-mono text-[10px] md:text-xs uppercase tracking-[0.2em] text-[#f5f0e8]/50">
+            Retailer top-3 de México
           </div>
         </div>
       </div>
