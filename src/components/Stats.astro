@@ -37,17 +37,17 @@ const stats: Stat[] = [
 
     <!-- Stats band -->
     <div
-      class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-4 gap-y-10 md:gap-y-12 lg:gap-0 lg:divide-x lg:divide-ink/10 border-y-2 border-ink/10 py-10 md:py-12"
+      class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-x-8 md:gap-x-6 gap-y-10 md:gap-y-12 lg:gap-0 lg:divide-x lg:divide-ink/10 border-y-2 border-ink/10 py-10 md:py-12"
     >
       {
         stats.map((s, i) => (
           <div
             class:list={[
-              "flex flex-col items-start text-left lg:px-6 xl:px-8",
+              "flex flex-col items-start text-left lg:px-6 xl:px-8 min-w-0",
               i === stats.length - 1 && "max-md:col-span-2 max-md:items-center max-md:text-center",
             ]}
           >
-            <div class="flex items-baseline whitespace-nowrap font-display font-black text-5xl md:text-6xl lg:text-[3.5rem] xl:text-6xl leading-none tracking-[-0.03em] text-ink tabular-nums">
+            <div class="flex items-baseline whitespace-nowrap font-display font-black text-4xl sm:text-5xl md:text-6xl lg:text-[3.25rem] xl:text-6xl leading-none tracking-[-0.03em] text-ink tabular-nums">
               <span data-count data-target={s.value}>0</span>
               {s.suffix && <span class="text-primary ml-0.5">{s.suffix}</span>}
             </div>
