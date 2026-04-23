@@ -26,6 +26,9 @@ pnpm-debug.log*
 # vscode
 .vscode/
 
+# visual studio
+.vs/
+
 # internal docs (Claude context, no necesita ir al repo)
 docs/
 

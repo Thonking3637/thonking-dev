@@ -10,7 +10,7 @@ const stats: Stat[] = [
   { value: 6221, suffix: "+", label: "Descargas", sub: "GDD Template" },
   { value: 1, label: "Retailer", sub: "Retail Top 3 · México" },
   { value: 6, label: "Años", sub: "en gamedev" },
-  { value: 20000, suffix: "+", label: "Empleados", sub: "entrenados · cliente enterprise" },
+  { value: 20, suffix: "k+", label: "Empleados", sub: "entrenados · cliente enterprise" },
   { value: 7, label: "Productos", sub: "publicados" },
 ];
 ---
@@ -44,13 +44,12 @@ const stats: Stat[] = [
           <div
             class:list={[
               "flex flex-col items-start text-left lg:px-8 xl:px-10 min-w-0",
-              i === 3 && "relative z-10",
               i === stats.length - 1 && "max-md:col-span-2 max-md:items-center max-md:text-center",
             ]}
           >
             <div class="flex items-baseline whitespace-nowrap font-display font-black text-4xl sm:text-5xl md:text-6xl lg:text-[2.75rem] xl:text-[3.25rem] leading-none tracking-[-0.03em] text-ink tabular-nums">
               <span data-count data-target={s.value}>0</span>
-              {s.suffix && <span class={`text-primary ${i === 3 ? 'ml-3 lg:ml-5 xl:ml-6' : 'ml-0.5'}`}>{s.suffix}</span>}
+              {s.suffix && <span class="text-primary ml-0.5">{s.suffix}</span>}
             </div>
             <div class="mt-4 font-mono text-[11px] md:text-xs uppercase tracking-[0.18em] font-semibold text-[#b89a3d]">
               {s.label}
