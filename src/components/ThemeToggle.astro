@@ -1,0 +1,89 @@
+---
+// Toggle light/dark con transición suave
+---
+
+<button
+  type="button"
+  data-theme-toggle
+  class="relative grid size-8 place-items-center rounded-full text-ink/70 hover:text-ink hover:bg-ink/5 transition-colors"
+  aria-label="Cambiar entre modo claro y oscuro"
+  title="Cambiar tema"
+>
+  <!-- Sun (visible en light mode) -->
+  <svg
+    class="size-[18px] transition-all duration-300 dark:opacity-0 dark:-rotate-90 dark:scale-0"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2.2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <circle cx="12" cy="12" r="4" fill="#f4d35e" stroke="#1a1815" />
+    <path d="M12 2v2" />
+    <path d="M12 20v2" />
+    <path d="M4.93 4.93l1.41 1.41" />
+    <path d="M17.66 17.66l1.41 1.41" />
+    <path d="M2 12h2" />
+    <path d="M20 12h2" />
+    <path d="M4.93 19.07l1.41-1.41" />
+    <path d="M17.66 6.34l1.41-1.41" />
+  </svg>
+
+  <!-- Moon (visible en dark mode) -->
+  <svg
+    class="absolute size-[18px] opacity-0 rotate-90 scale-0 transition-all duration-300 dark:opacity-100 dark:rotate-0 dark:scale-100"
+    viewBox="0 0 24 24"
+    fill="none"
+    stroke="currentColor"
+    stroke-width="2.2"
+    stroke-linecap="round"
+    stroke-linejoin="round"
+    aria-hidden="true"
+  >
+    <path
+      d="M20 14.5A8.5 8.5 0 0 1 9.5 4 7 7 0 1 0 20 14.5Z"
+      fill="#f4d35e"
+      stroke="currentColor"
+    />
+    <!-- tiny stars -->
+    <circle cx="5.5" cy="8.5" r="0.6" fill="currentColor" stroke="none" />
+    <circle cx="7" cy="14" r="0.5" fill="currentColor" stroke="none" />
+    <circle cx="15.5" cy="5.5" r="0.5" fill="currentColor" stroke="none" />
+  </svg>
+</button>
+
+<script is:inline>
+  (function () {
+    var buttons = document.querySelectorAll("[data-theme-toggle]");
+    if (!buttons.length) return;
+
+    function setTheme(nextIsDark) {
+      var root = document.documentElement;
+      root.classList.add("theme-transitioning");
+      root.classList.toggle("dark", nextIsDark);
+      try {
+        localStorage.setItem("theme", nextIsDark ? "dark" : "light");
+      } catch (_) {}
+      window.setTimeout(function () {
+        root.classList.remove("theme-transitioning");
+      }, 320);
+    }
+
+    buttons.forEach(function (btn) {
+      btn.addEventListener("click", function () {
+        setTheme(!document.documentElement.classList.contains("dark"));
+      });
+    });
+
+    // Si el usuario NO ha elegido tema explícito, sigue al sistema
+    try {
+      var mql = window.matchMedia("(prefers-color-scheme: dark)");
+      mql.addEventListener("change", function (e) {
+        if (!localStorage.getItem("theme"))
+          document.documentElement.classList.toggle("dark", e.matches);
+      });
+    } catch (_) {}
+  })();
+</script>

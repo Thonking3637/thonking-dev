@@ -1,0 +1,222 @@
+---
+export type SlideVariant = "index" | "prompts" | "bosses" | "appendix";
+
+interface Props {
+  variant: SlideVariant;
+}
+const { variant } = Astro.props;
+
+const indexEntries: Array<[string, number]> = [
+  ["Objetivos del juego", 4],
+  ["Descripción general de la historia", 4],
+  ["Controles del juego", 4],
+  ["Requerimientos tecnológicos", 4],
+  ["Parte frontal del juego", 4],
+  ["Cutscene description", 4],
+  ["Título / pantalla de inicio", 5],
+  ["Otras pantallas", 5],
+  ["Personaje del jugador", 7],
+  ["Jefes", 12],
+  ["Non-player characters", 13],
+  ["Minijuegos", 13],
+  ["Apéndice", 14],
+];
+
+const prompts = [
+  {
+    label: "Configuración",
+    q: "¿Cómo inicia el juego el jugador?",
+  },
+  {
+    label: "Ubicaciones y su relación con la narrativa",
+    q: "¿Cómo el jugador consigue ir de una ubicación a otra?",
+  },
+  {
+    label: "Final",
+    q: "¿Cuál es el final de la historia?",
+  },
+];
+
+const bosses = [
+  "Descripción e imágenes",
+  "Interacción con el jugador",
+  "Patrones de movimiento",
+  "Patrones de ataque",
+];
+
+const appendixAssets = [
+  "Animaciones personajes",
+  "Animaciones enemigos",
+  "Efectos de sonido",
+  "Música",
+  "Localización niveles",
+];
+
+const appendixScripts = ["Jugador", "Enemigos", "Jefes", "NPCs"];
+
+const headers: Record<
+  SlideVariant,
+  { label: string; title: string; titleSub?: string }
+> = {
+  index: { label: "Índice · Pág 01", title: "ÍNDICE" },
+  prompts: {
+    label: "Pág 02 · Historia",
+    title: "Descripción general",
+    titleSub: "de la historia",
+  },
+  bosses: { label: "Pág 03 · Jefes", title: "JEFES" },
+  appendix: { label: "Pág 04 · Apéndice", title: "APÉNDICE" },
+};
+
+const h = headers[variant];
+---
+
+<div
+  class="gdd-slide-inner relative h-full w-full flex flex-col"
+  style="padding: var(--slide-pad, 14px); background: #1a1815; color: #ffe8d4;"
+>
+  <!-- Header meta -->
+  <div
+    class="flex items-center justify-between font-mono uppercase tracking-[0.22em] text-[#8b7e6a]"
+    style="font-size: var(--slide-meta, 7px);"
+  >
+    <span>{h.label}</span>
+    <span aria-hidden="true">—</span>
+  </div>
+
+  <!-- Title -->
+  <h4
+    class="mt-[4%] font-pixel font-bold leading-[0.95] text-[#f4d35e]"
+    style="font-size: var(--slide-title, 20px);"
+  >
+    {h.title}
+    {h.titleSub && (
+      <span class="block text-white/80" style="font-size: var(--slide-title-sub, 11px);">
+        {h.titleSub}
+      </span>
+    )}
+  </h4>
+
+  <!-- Variant content -->
+  <div
+    class="flex-1 min-h-0 mt-[5%] flex flex-col"
+    style="font-size: var(--slide-body, 7px); line-height: 1.35;"
+  >
+    {
+      variant === "index" && (
+        <ol
+          class="flex flex-col font-mono"
+          style="gap: var(--slide-gap-sm, 3px);"
+        >
+          {indexEntries.map(([name, page]) => (
+            <li class="flex items-baseline gap-[6px]">
+              <span class="text-white/85 truncate">{name}</span>
+              <span
+                class="flex-1 border-b border-dotted border-white/25 mb-[2px]"
+                aria-hidden="true"
+              />
+              <span class="text-[#f4d35e] font-semibold tabular-nums shrink-0">
+                {String(page).padStart(2, "0")}
+              </span>
+            </li>
+          ))}
+        </ol>
+      )
+    }
+
+    {
+      variant === "prompts" && (
+        <div class="flex flex-col" style="gap: var(--slide-gap-md, 9px);">
+          {prompts.map((p) => (
+            <div>
+              <div class="flex items-start gap-[5px] font-mono font-semibold text-white/90">
+                <span class="text-[#f4d35e]">→</span>
+                <span>{p.label}</span>
+              </div>
+              <div
+                class="mt-[3px] italic text-white/60 font-mono"
+                style="padding-left: var(--slide-indent, 12px);"
+              >
+                {p.q}
+              </div>
+            </div>
+          ))}
+        </div>
+      )
+    }
+
+    {
+      variant === "bosses" && (
+        <div class="flex flex-col" style="gap: var(--slide-gap-md, 9px);">
+          {bosses.map((b, i) => (
+            <div class="flex items-center gap-[8px]">
+              <span
+                class="shrink-0 inline-block bg-[#f4d35e]"
+                style="width: var(--slide-square, 10px); height: var(--slide-square, 10px); box-shadow: inset 0 0 0 1px #1a1815;"
+                aria-hidden="true"
+              />
+              <span class="flex-1 text-white/85 font-mono">{b}</span>
+              <span class="text-[#8b7e6a] font-mono tabular-nums">
+                {String(i + 1).padStart(2, "0")}
+              </span>
+            </div>
+          ))}
+        </div>
+      )
+    }
+
+    {
+      variant === "appendix" && (
+        <div class="grid grid-cols-2 gap-[6%] h-full">
+          <div class="flex flex-col">
+            <div
+              class="font-mono font-bold text-[#f4d35e] uppercase tracking-[0.12em]"
+              style="font-size: var(--slide-sub, 7px);"
+            >
+              Listas de assets
+            </div>
+            <ul
+              class="mt-[8%] flex flex-col font-mono"
+              style="gap: var(--slide-gap-sm, 4px);"
+            >
+              {appendixAssets.map((a) => (
+                <li class="flex items-start gap-[5px] text-white/85">
+                  <span class="text-[#f4d35e] leading-none">☐</span>
+                  <span>{a}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+          <div class="flex flex-col border-l border-white/10 pl-[8%]">
+            <div
+              class="font-mono font-bold text-[#f4d35e] uppercase tracking-[0.12em]"
+              style="font-size: var(--slide-sub, 7px);"
+            >
+              VO Scripts
+            </div>
+            <ul
+              class="mt-[8%] flex flex-col font-mono"
+              style="gap: var(--slide-gap-sm, 4px);"
+            >
+              {appendixScripts.map((s) => (
+                <li class="flex items-start gap-[5px] text-white/85">
+                  <span class="text-[#f4d35e] leading-none">→</span>
+                  <span>{s}</span>
+                </li>
+              ))}
+            </ul>
+          </div>
+        </div>
+      )
+    }
+  </div>
+
+  <!-- Footer -->
+  <div
+    class="mt-auto pt-[4%] border-t border-white/10 flex items-center justify-between font-mono uppercase tracking-[0.22em] text-[#8b7e6a]"
+    style="font-size: var(--slide-footer, 6px);"
+  >
+    <span>THONKING · GDD Template</span>
+    <span class="text-[#f4d35e]">v1.1</span>
+  </div>
+</div>

@@ -1,0 +1,257 @@
+---
+import { getEntry } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import ProductSchema from "../../components/ProductSchema.astro";
+import SolviSlide from "../../components/SolviSlide.astro";
+
+const product = await getEntry("products", "solvi");
+if (!product) throw new Error("solvi product entry not found");
+const { data } = product;
+
+type SolviSlideVariant = "dashboard" | "capture" | "categories" | "insight";
+const slides: Array<{ id: string; variant: SolviSlideVariant; label: string }> = [
+  { id: "dashboard", variant: "dashboard", label: "Dashboard mensual" },
+  { id: "capture", variant: "capture", label: "Transacción auto-capturada" },
+  { id: "categories", variant: "categories", label: "Categorías y rankings" },
+  { id: "insight", variant: "insight", label: "Insight semanal" },
+];
+
+const stack = ["Kotlin", "Jetpack Compose", "Firebase", "Gemini"];
+
+const howItWorks = [
+  { title: "Auto-captura desde notifs push de bancos peruanos", body: "BCP, Interbank, BBVA, Scotiabank. Android NotificationListener lee las notifs que tu banco ya envía y las convierte en transacciones." },
+  { title: "Categorización automática con IA (Gemini)", body: "Cada gasto se clasifica por comercio, patrón y contexto. Aprende de tus correcciones — en 2 semanas es 95% preciso." },
+  { title: "Insights mensuales sin abrir la app", body: "Push notifications semanales con patrones detectados: 'Gastas más los viernes', 'Categoría X subió 12% vs. mes pasado', 'Meta en riesgo'." },
+  { title: "Diseño específico para contexto Perú", body: "Soles y dólares como primera clase. Yape, Plin, transferencias interbancarias reconocidas. Sin modelo mental gringo forzado." },
+  { title: "Privacy-first: datos locales en tu dispositivo", body: "Tus transacciones viven en tu teléfono. Solo backups cifrados a Firebase si tú lo activas. Cero venta de data a terceros, jamás." },
+];
+
+const lessons = [
+  { icon: "globe", text: "Apps 'gringas' no funcionan igual en LATAM. Mint no existe acá, YNAB cobra en dólares. El vacío lo debe llenar alguien local." },
+  { icon: "signal", text: "Android NotificationListener abre puertas que nadie explota. Toda la data financiera ya está en el teléfono — solo hay que organizarla." },
+  { icon: "bolt", text: "Jetpack Compose acelera brutalmente el shipping. Del mockup al screen funcional en horas, no días. Es lo más cerca de 'pensar el UI' que existe en Android." },
+  { icon: "eye", text: "Beta privada > lanzamiento público para apps personales. Feedback real de 20 testers > 1,000 descargas silenciosas." },
+  { icon: "chat", text: "El problema de finanzas personales en Perú es cultural, no técnico. La tech es easy, el hábito de mirar tu gasto es lo difícil." },
+];
+
+const pageTitle = `${data.title} — Thonking`;
+---
+
+<Layout title={pageTitle} description={data.tagline} path={`/productos/${product.id}`}>
+  <Navbar />
+  <main id="main" class="relative pt-24 md:pt-28 pb-24 overflow-hidden">
+    <div aria-hidden="true" class="absolute inset-0 -z-10 opacity-[0.08]" style="background-image: radial-gradient(circle, #1a1815 1px, transparent 1px); background-size: 28px 28px;"></div>
+    <div aria-hidden="true" class="pointer-events-none select-none absolute inset-x-0 top-28 flex justify-center">
+      <span class="hero-stroke font-pixel text-[24vw] md:text-[14vw] leading-none tracking-tight opacity-[0.05]">SOLVI</span>
+    </div>
+
+    <article class="relative mx-auto w-full max-w-[1200px] px-6 md:px-10">
+      <a href="/productos" class="group inline-flex items-center gap-2 rounded-full border-2 border-ink/15 bg-base-soft px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-ink/80 hover:bg-secondary hover:border-ink hover:text-ink transition">
+        <svg viewBox="0 0 40 32" class="size-5 transition-transform group-hover:-translate-x-0.5" fill="none" stroke="#1a1815" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4 L4 16 L14 28"></path><path d="M4 16 L36 16"></path><circle cx="4" cy="16" r="1.5" fill="#1a1815"></circle></svg>
+        Volver a productos
+      </a>
+
+      <header class="mt-10 md:mt-12 relative grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div class="lg:col-span-8 relative">
+          <div class="inline-flex items-center gap-1.5 rounded-full border-2 border-ink text-ink px-3 py-1 font-mono text-[11px] uppercase tracking-[0.18em] font-semibold shadow-[3px_3px_0_0_#1a1815]" style="background: #a8e6cf;">
+            <span class="size-1.5 rounded-full bg-ink animate-pulse"></span>
+            Beta privada
+          </div>
+          <h1 class="relative mt-6 font-display font-black text-6xl sm:text-7xl lg:text-[7.5rem] xl:text-[9rem] leading-[0.88] tracking-[-0.04em]">
+            <span class="relative inline-block pr-2">
+              <span class="relative z-10 text-secondary">Solvi</span>
+              <svg aria-hidden="true" viewBox="0 0 110 110" class="absolute -top-6 md:-top-8 -right-10 md:-right-12 w-10 md:w-12 spin-slow rotate-[12deg]">
+                <path d="M55 10 L66 42 L100 44 L72 64 L82 96 L55 78 L28 96 L38 64 L10 44 L44 42 Z" transform="translate(3 4)" fill="#1a1815" />
+                <path d="M55 10 L66 42 L100 44 L72 64 L82 96 L55 78 L28 96 L38 64 L10 44 L44 42 Z" fill="#f4d35e" stroke="#1a1815" stroke-width="5" stroke-linejoin="round" />
+              </svg>
+              <svg aria-hidden="true" viewBox="0 0 480 40" class="absolute -bottom-2 left-0 w-full h-8 overflow-visible" preserveAspectRatio="none">
+                <path class="draw-line" d="M4 22 C 100 6, 200 34, 280 18 S 440 6, 476 22" stroke="#f4d35e" stroke-width="14" stroke-linecap="round" fill="none" />
+              </svg>
+            </span>
+          </h1>
+          <p class="mt-8 text-lg md:text-xl text-muted leading-[1.7] max-w-2xl">
+            Tracker de gastos que
+            <span class="px-1 rounded text-ink font-semibold" style="background: rgba(168,230,207,0.4);">odio todos los existentes</span>
+            — o son caros, o no funcionan en Perú, o requieren ingresar cada gasto manual. Solvi usa las
+            <span class="bg-primary/15 px-1 rounded text-ink font-semibold">notificaciones push de tu banco peruano</span>
+            para auto-capturar transacciones, categorizarlas con IA, y darte insights sin que hagas nada.
+          </p>
+          <div class="mt-8 flex flex-wrap items-center gap-4">
+            <a href="mailto:gabriel@thonking.dev?subject=Beta%20de%20Solvi" class="group inline-flex items-center gap-3 rounded-full bg-ink text-base-soft pl-7 pr-2.5 py-3 font-semibold text-lg md:text-xl hover:text-ink transition-colors" onmouseover="this.style.background='#a8e6cf'" onmouseout="this.style.background=''">
+              Apúntate a la beta
+              <span class="grid size-11 place-items-center rounded-full transition-colors" style="background: #a8e6cf; color: #1a1815;">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" class="size-4"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
+              </span>
+            </a>
+            <span class="font-mono text-xs uppercase tracking-[0.16em] text-muted">· Android · Perú · BCP, IBK, BBVA, Scotia</span>
+          </div>
+        </div>
+        <div class="lg:col-span-4 relative hidden lg:block" aria-hidden="true">
+          <div class="absolute -top-6 -right-8 w-56 xl:w-64 rotate-[-6deg] float-mac pointer-events-none" style="filter: drop-shadow(0 18px 30px rgba(26,24,21,0.25));">
+            <img src="/mascot/mascot-hero-excited.webp" alt="" width="1200" height="1200" class="w-full h-auto select-none" draggable="false" />
+          </div>
+        </div>
+      </header>
+
+      <div class="mt-14 relative aspect-[16/9] rounded-3xl border-2 border-ink overflow-hidden shadow-[0_30px_60px_-20px_rgba(26,24,21,0.3)] bg-ink">
+        <img src="/screenshots/solvi-home.png" alt="Solvi dashboard" class="absolute inset-0 w-full h-full object-cover object-top" />
+      </div>
+
+      <section class="mt-24 md:mt-28">
+        <header class="mb-6">
+          <div class="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-ink/60"><span class="size-1.5 rounded-full" style="background: #a8e6cf;"></span>Galería</div>
+          <h2 class="mt-4 font-display font-black text-4xl md:text-5xl leading-[0.95] tracking-[-0.02em]">Un vistazo dentro</h2>
+          <p class="mt-4 text-muted leading-[1.7] max-w-lg">Los 4 flows core: dashboard, auto-captura en vivo, ranking de categorías, insights semanales.</p>
+        </header>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {slides.map((s) => (
+            <button type="button" data-slide-open={s.id} aria-label={`Abrir preview: ${s.label}`} class="group relative aspect-[3/4] rounded-2xl border-2 border-ink/20 overflow-hidden hover:-translate-y-1 hover:shadow-[0_18px_36px_-12px_rgba(26,24,21,0.45)] hover:border-ink cursor-zoom-in transition-all" style="--slide-pad: 14px; --slide-meta: 7px; --slide-title: 26px; --slide-sub: 13px; --slide-body: 6.5px; --slide-body-lg: 9px; --slide-footer: 6px; --slide-gap-sm: 3px;">
+              <SolviSlide variant={s.variant} />
+              <div class="absolute top-2 right-2 size-7 grid place-items-center rounded-full bg-secondary text-ink border-2 border-ink opacity-0 group-hover:opacity-100 transition translate-y-1 group-hover:translate-y-0"><svg viewBox="0 0 24 24" class="size-3.5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.3-4.3" /><path d="M11 8v6M8 11h6" /></svg></div>
+            </button>
+          ))}
+        </div>
+      </section>
+
+      {slides.map((s) => (
+        <dialog data-slide={s.id} class="gdd-dialog relative w-[min(92vw,720px)] max-h-[92vh] p-0 m-auto rounded-3xl border-[3px] border-ink bg-[#0f1a16] text-base-soft backdrop:bg-ink/80 backdrop:backdrop-blur-sm overflow-hidden" aria-label={`Preview: ${s.label}`}>
+          <div class="relative aspect-[3/4] w-full" style="--slide-pad: 28px; --slide-meta: 13px; --slide-title: 56px; --slide-sub: 26px; --slide-body: 13px; --slide-body-lg: 18px; --slide-footer: 11px; --slide-gap-sm: 7px;">
+            <SolviSlide variant={s.variant} />
+          </div>
+          <button type="button" data-slide-close aria-label="Cerrar preview" class="absolute top-4 right-4 grid size-11 place-items-center rounded-full bg-secondary text-ink border-2 border-ink shadow-[3px_3px_0_0_#1a1815] hover:bg-primary hover:text-base-soft transition-colors"><svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12" /></svg></button>
+        </dialog>
+      ))}
+
+      <div id="problema" class="mt-24 md:mt-28 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 scroll-mt-28">
+        <div class="lg:col-span-8 space-y-20 md:space-y-24">
+          <section>
+            <header class="mb-6"><div class="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-ink/60"><span class="size-1.5 rounded-full" style="background: #a8e6cf;"></span>§ 01 · El problema</div>
+              <h2 class="mt-3 font-display font-black text-4xl md:text-5xl leading-[0.95] tracking-[-0.02em]">Finance apps en LATAM: un desierto con mucho potencial</h2>
+            </header>
+            <div class="space-y-5 text-lg text-muted leading-[1.7] max-w-2xl">
+              <p>Mint no existe en Perú. YNAB cobra <strong class="text-ink font-semibold">$99/año</strong>. Las apps locales de los bancos son islas que no se hablan entre sí. Pero BCP, Interbank, BBVA y Scotiabank envían <strong class="text-ink font-semibold">notificaciones push cada vez que hay un movimiento</strong>.</p>
+              <p>Esa información <strong class="text-ink font-semibold">ya está en tu dispositivo</strong> — Solvi simplemente la captura, la ordena, y te la devuelve como insights. Cero scraping. Cero credenciales de banco. Solo permisos de lectura de notificaciones.</p>
+              <p>Lo construí porque yo mismo estaba cansado de anotar gastos en Notion. Si a mí me salva 30 minutos por semana, a alguien más le va a salvar horas.</p>
+            </div>
+          </section>
+
+          <section>
+            <header class="mb-8"><div class="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-ink/60"><span class="size-1.5 rounded-full bg-primary"></span>§ 02 · Qué hay adentro</div>
+              <h2 class="mt-3 font-display font-black text-4xl md:text-5xl leading-[0.95] tracking-[-0.02em]">Lo que hace Solvi</h2>
+            </header>
+            <ol class="divide-y-2 divide-secondary/20">
+              {howItWorks.map((step, i) => (
+                <li class="grid grid-cols-[auto_1fr] gap-x-3 md:gap-x-4 py-8 md:py-10 first:pt-0 last:pb-0">
+                  <div class="font-display font-black text-5xl md:text-6xl leading-[0.9] text-primary tabular-nums tracking-[-0.04em]">{String(i + 1).padStart(2, "0")}</div>
+                  <div class="pt-1"><h3 class="font-display font-bold text-xl md:text-2xl leading-tight tracking-tight">{step.title}</h3><p class="mt-2 text-base md:text-lg text-muted leading-[1.6] max-w-lg">{step.body}</p></div>
+                </li>
+              ))}
+            </ol>
+          </section>
+
+          <section>
+            <header class="mb-10 flex items-end gap-5">
+              <div class="flex-1"><div class="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-ink/60"><span class="size-1.5 rounded-full bg-pink"></span>§ 03 · Lecciones</div>
+                <h2 class="mt-3 font-display font-black text-4xl md:text-5xl leading-[0.95] tracking-[-0.02em]">Lo que aprendí <span class="relative inline-block">en beta<svg aria-hidden="true" viewBox="0 0 220 16" preserveAspectRatio="none" class="absolute -bottom-1 left-0 w-full h-3"><path d="M2 10 C 60 2, 140 14, 180 6 S 216 2, 218 12" stroke="#e8546f" stroke-width="5" stroke-linecap="round" fill="none" /></svg></span></h2>
+              </div>
+              <div class="shrink-0 hidden sm:block" aria-hidden="true"><img src="/mascot/mascot-idle.webp" alt="" width="1200" height="1200" class="w-20 md:w-24 h-auto float-mac" draggable="false" style="filter: drop-shadow(0 8px 14px rgba(26,24,21,0.22));" /></div>
+            </header>
+            <ul class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {lessons.map((lesson, i) => (
+                <li class="relative rounded-2xl border-2 border-ink/10 bg-base-soft p-6 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_-12px_rgba(26,24,21,0.25)] transition-all">
+                  <div class="flex items-start gap-5">
+                    <div class="shrink-0 grid size-11 place-items-center rounded-xl border-2 border-ink shadow-[3px_3px_0_0_#1a1815]" style="background: #a8e6cf;">
+                      {lesson.icon === "globe" && <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="#1a1815" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" fill="#ffe8d4" /><path d="M3 12h18" /><path d="M12 3c3 3 3 15 0 18" /></svg>}
+                      {lesson.icon === "signal" && <svg viewBox="0 0 24 24" class="size-5" fill="#ffe8d4" stroke="#1a1815" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 20v-6M6 20v-3M18 20v-9M6 11a6 6 0 0 1 12 0" fill="none" /></svg>}
+                      {lesson.icon === "bolt" && <svg viewBox="0 0 24 24" class="size-5" fill="#ffe8d4" stroke="#1a1815" stroke-width="2.5" stroke-linejoin="round"><path d="M14 3L5 14h6l-2 7 9-11h-6Z" /></svg>}
+                      {lesson.icon === "eye" && <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="#1a1815" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12Z" fill="#ffe8d4" /><circle cx="12" cy="12" r="3" fill="#1a1815" /></svg>}
+                      {lesson.icon === "chat" && <svg viewBox="0 0 24 24" class="size-5" fill="#ffe8d4" stroke="#1a1815" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M3 6a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2v10a2 2 0 0 1-2 2H8l-5 4Z" /></svg>}
+                    </div>
+                    <div class="flex-1 min-w-0">
+                      <div class="font-mono text-[10px] uppercase tracking-[0.2em] text-muted tabular-nums">{String(i + 1).padStart(2, "0")} / {String(lessons.length).padStart(2, "0")}</div>
+                      <p class="mt-3 text-base md:text-[17px] leading-[1.6] text-ink">{lesson.text}</p>
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </section>
+        </div>
+
+        <aside class="lg:col-span-4 lg:sticky lg:top-28 lg:self-start space-y-6">
+          <div class="rounded-3xl border-2 border-ink text-base-soft p-6 relative overflow-hidden" style="background: #0f1a16;">
+            <div aria-hidden="true" class="absolute inset-0 opacity-10" style="background-image: linear-gradient(to right, #a8e6cf 1px, transparent 1px), linear-gradient(to bottom, #a8e6cf 1px, transparent 1px); background-size: 24px 24px;"></div>
+            <div class="relative">
+              <div class="font-mono text-[10px] uppercase tracking-[0.2em]" style="color: #a8e6cf;">● Beta privada</div>
+              <div class="mt-3 font-display font-black text-6xl md:text-7xl leading-none tracking-[-0.04em]">PE</div>
+              <div class="mt-2 font-mono text-xs uppercase tracking-[0.16em] text-base-soft/70">Android · Perú first</div>
+              <div class="mt-4 pt-4 border-t border-base-soft/20 font-mono text-[10px] uppercase tracking-[0.16em] text-base-soft/60">BCP · IBK · BBVA · Scotiabank</div>
+            </div>
+          </div>
+
+          <div class="rounded-3xl border-2 border-ink/10 p-6" style="background: #f5f0e8;">
+            <div class="flex items-center gap-2 mb-4"><svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="#1a1815" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="5" rx="1" /><rect x="3" y="10" width="18" height="5" rx="1" /><rect x="3" y="16" width="18" height="5" rx="1" /></svg><h3 class="font-mono text-[11px] uppercase tracking-[0.2em] text-ink font-semibold">Stack</h3></div>
+            <ul class="flex flex-wrap gap-2">{stack.map((s) => <li class="rounded-full border border-ink/20 bg-base-soft/80 px-3 py-1 font-mono text-xs uppercase tracking-[0.14em] text-ink">{s}</li>)}</ul>
+          </div>
+
+          <div class="rounded-3xl border-2 border-ink/10 p-6" style="background: #f5f0e8;">
+            <div class="flex items-center gap-2 mb-4"><svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="#1a1815" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12l-8 8a2 2 0 0 1-3 0L3 14a2 2 0 0 1 0-3l8-8h8v8Z" /><circle cx="15" cy="9" r="1.5" fill="#1a1815" /></svg><h3 class="font-mono text-[11px] uppercase tracking-[0.2em] text-ink font-semibold">Tags</h3></div>
+            <ul class="flex flex-wrap gap-2">{data.tags.map((t) => <li class="rounded-full border border-dashed border-ink/30 px-3 py-1 font-mono text-xs uppercase tracking-[0.14em] text-ink/70">{t}</li>)}</ul>
+          </div>
+        </aside>
+      </div>
+
+      <section class="mt-24 md:mt-24 relative">
+        <div class="relative rounded-3xl border-2 border-ink text-ink overflow-hidden shadow-[8px_8px_0_0_#1a1815]" style="background: #a8e6cf;">
+          <div aria-hidden="true" class="absolute inset-0 opacity-[0.12]" style="background-image: linear-gradient(to right, #1a1815 1px, transparent 1px), linear-gradient(to bottom, #1a1815 1px, transparent 1px); background-size: 32px 32px;"></div>
+          <div class="relative grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 md:gap-10 items-center px-8 md:px-12 py-12 md:py-16">
+            <div>
+              <div class="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/70">Beta privada · Cupos limitados</div>
+              <h2 class="mt-4 font-display font-black text-5xl md:text-6xl lg:text-7xl leading-[0.92] tracking-[-0.035em]">Apúntate a la<br />beta de Solvi</h2>
+              <div class="mt-8 flex flex-wrap items-center gap-4">
+                <a href="mailto:gabriel@thonking.dev?subject=Beta%20Solvi" class="group inline-flex items-center gap-3 rounded-full bg-ink text-base-soft pl-6 pr-2 py-2.5 font-display font-bold text-lg md:text-xl hover:bg-primary transition-colors">
+                  Pedir acceso
+                  <span class="grid size-11 place-items-center rounded-full bg-primary text-ink group-hover:bg-secondary group-hover:text-ink transition-colors"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" class="size-5"><path d="M5 12h14M13 5l7 7-7 7" /></svg></span>
+                </a>
+              </div>
+              <div class="mt-5 font-mono text-xs md:text-sm uppercase tracking-[0.16em] text-ink/70">Android 10+ · Perú · BCP · IBK · BBVA · Scotia</div>
+            </div>
+            <div class="justify-self-center md:justify-self-end shrink-0" aria-hidden="true">
+              <div class="relative">
+                <img src="/mascot/mascot-hero-excited.webp" alt="" width="1200" height="1200" class="w-32 md:w-40 h-auto float-mac" draggable="false" style="filter: drop-shadow(0 18px 30px rgba(26,24,21,0.3));" />
+                <div class="absolute left-1/2 -translate-x-1/2 -bottom-1 w-[70%] h-3 rounded-[50%]" style="background: radial-gradient(ellipse, rgba(26,24,21,0.55) 0%, rgba(26,24,21,0) 70%); filter: blur(2px);"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-20 flex flex-wrap items-center justify-between gap-4">
+          <a href="/productos" class="group inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-muted hover:text-ink transition"><svg viewBox="0 0 40 32" class="size-4 transition-transform group-hover:-translate-x-0.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4 L4 16 L14 28" /><path d="M4 16 L36 16" /></svg>Más productos Thonking</a>
+          <a href="mailto:gabriel@thonking.dev" class="font-mono text-xs uppercase tracking-[0.18em] text-muted hover:text-ink transition">¿Necesitas algo similar? → gabriel@thonking.dev</a>
+        </div>
+      </section>
+    </article>
+  </main>
+  <Footer />
+  <ProductSchema product={product} />
+</Layout>
+
+<script>
+  const openers = document.querySelectorAll<HTMLButtonElement>("[data-slide-open]");
+  const closers = document.querySelectorAll<HTMLButtonElement>("[data-slide-close]");
+  let savedScrollY = 0; let lastTrigger: HTMLButtonElement | null = null;
+  const lockScroll = () => { savedScrollY = window.scrollY; const b = document.body; b.style.position = "fixed"; b.style.top = `-${savedScrollY}px`; b.style.left = "0"; b.style.right = "0"; b.style.width = "100%"; };
+  const unlockScroll = () => { const b = document.body; b.style.position = ""; b.style.top = ""; b.style.left = ""; b.style.right = ""; b.style.width = ""; window.scrollTo({ top: savedScrollY, behavior: "instant" as ScrollBehavior }); };
+  openers.forEach((btn) => btn.addEventListener("click", () => { const id = btn.dataset.slideOpen; const dlg = document.querySelector<HTMLDialogElement>(`dialog[data-slide="${id}"]`); if (dlg) { lastTrigger = btn; lockScroll(); dlg.showModal(); } }));
+  closers.forEach((btn) => btn.addEventListener("click", () => btn.closest<HTMLDialogElement>("dialog")?.close()));
+  document.querySelectorAll<HTMLDialogElement>("dialog.gdd-dialog").forEach((dlg) => { dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); }); dlg.addEventListener("close", () => { unlockScroll(); if (lastTrigger) { lastTrigger.focus({ preventScroll: true }); lastTrigger = null; } }); });
+</script>
+<style>
+  .gdd-dialog[open] { animation: gdd-dialog-in 220ms cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .gdd-dialog::backdrop { animation: gdd-backdrop-in 220ms ease-out; }
+  @keyframes gdd-dialog-in { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
+  @keyframes gdd-backdrop-in { from { opacity: 0; } to { opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) { .gdd-dialog[open], .gdd-dialog::backdrop { animation: none; } }
+</style>

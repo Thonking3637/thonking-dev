@@ -1,0 +1,154 @@
+---
+export type ElevenSlideVariant = "config" | "picker" | "progress" | "output";
+interface Props { variant: ElevenSlideVariant; }
+const { variant } = Astro.props;
+---
+
+<div
+  class="relative h-full w-full flex flex-col overflow-hidden"
+  style="padding: var(--slide-pad, 14px); background: linear-gradient(135deg, #0a0a0f 0%, #1a1815 100%); color: #ffe8d4;"
+>
+  <div class="relative flex items-center justify-between font-mono uppercase tracking-[0.22em]" style="font-size: var(--slide-meta, 7px);">
+    <span class="text-[#f4c430]">▸ ElevenLabs Batch</span>
+    {variant === "config" && <span class="text-white/60">Config · 01</span>}
+    {variant === "picker" && <span class="text-white/60">Archivos · 02</span>}
+    {variant === "progress" && <span class="text-white/60">Generando · 03</span>}
+    {variant === "output" && <span class="text-white/60">Salida · 04</span>}
+  </div>
+
+  {variant === "config" && (
+    <div class="relative flex-1 mt-[5%] flex flex-col">
+      <div class="font-pixel font-bold text-[#f4c430]" style="font-size: var(--slide-sub, 14px);">CONFIG DE VOZ</div>
+      <div class="mt-[5%] flex flex-col font-mono" style="gap: var(--slide-gap-sm, 4px); font-size: var(--slide-body, 7px);">
+        <div>
+          <div class="text-white/50 uppercase tracking-[0.14em]" style="font-size: calc(var(--slide-footer, 6px) - 0px);">API Key</div>
+          <div class="mt-[3px] rounded-[3px] border border-white/15 bg-white/5 px-[6px] py-[5px] text-white/80 flex items-center gap-[4px]">
+            <span>sk_</span><span class="flex-1 text-white/40">●●●●●●●●●●●●●●●●</span>
+            <span class="text-[#4ade80]">✓</span>
+          </div>
+        </div>
+        <div>
+          <div class="text-white/50 uppercase tracking-[0.14em]" style="font-size: calc(var(--slide-footer, 6px) - 0px);">Voice ID · Rachel</div>
+          <div class="mt-[3px] rounded-[3px] border border-[#f4c430]/40 bg-[#f4c430]/5 px-[6px] py-[5px] text-[#f4c430]">
+            21m00Tcm4TlvDq8ikWAM
+          </div>
+        </div>
+        <div class="grid grid-cols-2 gap-[6px]">
+          <div>
+            <div class="text-white/50 uppercase tracking-[0.14em]" style="font-size: calc(var(--slide-footer, 6px) - 0px);">Modelo</div>
+            <div class="mt-[3px] rounded-[3px] border border-white/15 bg-white/5 px-[6px] py-[5px] text-white/80">multilingual-v2</div>
+          </div>
+          <div>
+            <div class="text-white/50 uppercase tracking-[0.14em]" style="font-size: calc(var(--slide-footer, 6px) - 0px);">Formato</div>
+            <div class="mt-[3px] rounded-[3px] border border-white/15 bg-white/5 px-[6px] py-[5px] text-white/80">OGG · 44.1kHz</div>
+          </div>
+        </div>
+        <div>
+          <div class="text-white/50 uppercase tracking-[0.14em]" style="font-size: calc(var(--slide-footer, 6px) - 0px);">Stability · 0.52</div>
+          <div class="mt-[3px] h-[4px] rounded-full bg-white/10"><div class="h-full rounded-full" style="width: 52%; background: #f4c430;"></div></div>
+        </div>
+      </div>
+
+      <div class="mt-auto pt-[4%] font-mono text-white/50 uppercase tracking-[0.16em]" style="font-size: calc(var(--slide-footer, 6px) - 0px);">
+        Config guardada · local only
+      </div>
+    </div>
+  )}
+
+  {variant === "picker" && (
+    <div class="relative flex-1 mt-[5%] flex flex-col">
+      <div class="font-pixel font-bold text-[#f4c430]" style="font-size: var(--slide-sub, 14px);">FILE PICKER</div>
+      <div class="mt-[3%] font-mono text-white/60" style="font-size: var(--slide-body, 7px);">8 archivos · 247 líneas total</div>
+
+      <ul class="mt-[5%] flex flex-col font-mono" style="gap: var(--slide-gap-sm, 3px); font-size: var(--slide-body, 7px);">
+        {[
+          { n: "dialogue_intro.txt", l: "42 líneas", ok: true },
+          { n: "dialogue_tutorial.txt", l: "28 líneas", ok: true },
+          { n: "dialogue_boss_01.txt", l: "18 líneas", ok: true },
+          { n: "npc_village.txt", l: "64 líneas", ok: true },
+          { n: "barks_player.txt", l: "24 líneas", ok: true },
+          { n: "dialogue_ending.txt", l: "31 líneas", ok: true },
+          { n: "misc_lore.txt", l: "40 líneas", ok: false },
+        ].map((f) => (
+          <li class:list={["flex items-center justify-between border-b border-white/10 pb-[3px]", !f.ok && "opacity-50"]}>
+            <span class="flex items-center gap-[5px]">
+              <span class="text-[#f4c430]">{f.ok ? "☑" : "☐"}</span>
+              <span class="text-white/80 truncate">{f.n}</span>
+            </span>
+            <span class="text-white/50 tabular-nums">{f.l}</span>
+          </li>
+        ))}
+      </ul>
+
+      <div class="mt-auto text-center rounded-[4px] bg-[#f4c430] text-[#1a1815] font-mono font-bold uppercase tracking-[0.18em] py-[7px]" style="font-size: var(--slide-meta, 7px);">Generar → 6 archivos · 207 líneas</div>
+    </div>
+  )}
+
+  {variant === "progress" && (
+    <div class="relative flex-1 mt-[5%] flex flex-col items-center justify-center">
+      <div class="font-mono uppercase tracking-[0.22em] text-white/50" style="font-size: var(--slide-meta, 7px);">Procesando batch</div>
+      <div class="mt-[3%] flex items-end gap-[8px]">
+        <div class="font-pixel font-bold text-[#f4c430]" style="font-size: var(--slide-sub, 28px);">142</div>
+        <div class="font-mono text-white/60 pb-[3px]" style="font-size: var(--slide-body, 7px);">/ 207</div>
+      </div>
+
+      <div class="mt-[5%] w-full rounded-full bg-white/10 overflow-hidden" style="height: var(--slide-bar-h, 4px);">
+        <div class="h-full rounded-full animate-pulse" style="width: 69%; background: linear-gradient(90deg, #f4c430, #ff6b4a);"></div>
+      </div>
+
+      <!-- waveform sim -->
+      <svg aria-hidden="true" class="mt-[8%] w-full" viewBox="0 0 160 28">
+        {Array.from({ length: 40 }).map((_, i) => {
+          const h = 4 + Math.abs(Math.sin(i * 0.8)) * 20;
+          return <rect x={i * 4} y={14 - h / 2} width="2" height={h} rx="1" fill="#f4c430" opacity={0.4 + Math.abs(Math.sin(i * 0.8)) * 0.5} />;
+        })}
+      </svg>
+
+      <div class="mt-[6%] font-mono text-white/60 text-center" style="font-size: var(--slide-body, 7px);">
+        <span class="text-[#f4c430]">▸</span> "Bienvenido al pueblo de..."
+      </div>
+
+      <div class="mt-auto pt-[4%] font-mono text-white/50 uppercase tracking-[0.16em] text-center" style="font-size: calc(var(--slide-footer, 6px) - 0px);">
+        ETA · 00:38 · 65 líneas restantes
+      </div>
+    </div>
+  )}
+
+  {variant === "output" && (
+    <div class="relative flex-1 mt-[5%] flex flex-col">
+      <div class="font-pixel font-bold text-[#4ade80]" style="font-size: var(--slide-sub, 14px);">✓ LISTO</div>
+      <div class="mt-[3%] font-mono text-white/70" style="font-size: var(--slide-body, 7px);">
+        207 audios · 18.4 MB · carpeta <span class="text-[#f4c430]">./out_abr23</span>
+      </div>
+
+      <ul class="mt-[5%] flex flex-col font-mono" style="gap: var(--slide-gap-sm, 3px); font-size: var(--slide-body, 7px);">
+        {[
+          "intro_001.ogg",
+          "intro_002.ogg",
+          "tutorial_01.ogg",
+          "npc_village_012.ogg",
+          "boss_01_03.ogg",
+          "ending_final.ogg",
+        ].map((f) => (
+          <li class="flex items-center justify-between border-b border-white/10 pb-[3px] text-white/80">
+            <span class="flex items-center gap-[5px]">
+              <span class="text-[#4ade80]">♪</span>
+              <span class="truncate">{f}</span>
+            </span>
+            <span class="text-white/40 tabular-nums">128 KB</span>
+          </li>
+        ))}
+      </ul>
+
+      <div class="mt-auto pt-[4%] grid grid-cols-2 gap-[4%]">
+        <div class="text-center rounded-[4px] border border-white/15 text-white/80 font-mono uppercase tracking-[0.16em] py-[6px]" style="font-size: var(--slide-meta, 7px);">Abrir carpeta</div>
+        <div class="text-center rounded-[4px] bg-[#f4c430] text-[#1a1815] font-mono font-bold uppercase tracking-[0.16em] py-[6px]" style="font-size: var(--slide-meta, 7px);">Copiar a Unity</div>
+      </div>
+    </div>
+  )}
+
+  <div class="relative mt-auto pt-[4%] border-t border-white/10 flex items-center justify-between font-mono uppercase tracking-[0.22em] text-white/50" style="font-size: var(--slide-footer, 6px);">
+    <span>THONKING · 11L Batch</span>
+    <span class="text-[#f4c430]">v1.0</span>
+  </div>
+</div>

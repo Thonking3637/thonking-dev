@@ -1,0 +1,235 @@
+---
+interface Props {
+  image?: string;
+  placeholder?: "gdd" | "telacreiste" | "elevenlabs" | "revertpong" | "soriana";
+  title: string;
+  statusLabel?: string;
+  /** When true, renders as a huge hero (used on product detail page). */
+  hero?: boolean;
+}
+
+const {
+  image,
+  placeholder,
+  title,
+  statusLabel,
+  hero = false,
+} = Astro.props;
+---
+
+<div class="absolute inset-0 bg-ink">
+  {
+    image && (
+      <img
+        src={image}
+        alt={title}
+        loading="lazy"
+        decoding="async"
+        class="absolute inset-0 w-full h-full object-cover object-top"
+      />
+    )
+  }
+
+  {
+    placeholder === "gdd" && (
+      <div
+        class="absolute inset-0 flex items-center justify-center"
+        style="background: radial-gradient(800px 400px at 30% 20%, #2a2621, #1a1815);"
+      >
+        <div
+          class:list={[
+            "font-pixel font-bold tracking-wider text-[#f5f0e8] text-center leading-[0.95]",
+            hero ? "text-6xl md:text-8xl" : "text-4xl md:text-5xl",
+          ]}
+        >
+          GAME
+          <br />
+          DESIGN
+          <br />
+          <span class="text-secondary">DOCUMENT</span>
+        </div>
+        <div
+          aria-hidden="true"
+          class="absolute bottom-4 left-4 font-mono text-[10px] md:text-xs uppercase tracking-[0.18em] text-[#f5f0e8]/60"
+        >
+          v1.1 · 15 páginas · ES
+        </div>
+      </div>
+    )
+  }
+
+  {
+    placeholder === "telacreiste" && (
+      <div
+        class="absolute inset-0 flex flex-col items-center justify-center"
+        style="background: radial-gradient(600px 400px at 50% 40%, #c93a3a, #7a1f1f);"
+      >
+        <div
+          class:list={[
+            "font-display font-black text-[#f5f0e8] leading-none text-center",
+            hero ? "text-7xl md:text-9xl" : "text-5xl md:text-6xl",
+          ]}
+        >
+          ¿Te la
+          <br />
+          <span class="text-[#ff6b4a]">creíste?</span>
+        </div>
+        <div class="mt-6 inline-flex items-center gap-1.5 rounded-full border border-[#f5f0e8]/40 px-3 py-1 font-mono text-[10px] md:text-xs uppercase tracking-[0.2em] text-[#f5f0e8]/80">
+          <span class="size-1.5 rounded-full bg-[#f5f0e8] animate-pulse" />
+          Elecciones 12 abr 2026
+        </div>
+      </div>
+    )
+  }
+
+  {
+    placeholder === "elevenlabs" && (
+      <div
+        class="absolute inset-0 flex flex-col items-center justify-center"
+        style="background: linear-gradient(135deg, #0a0a0f 0%, #1a1815 100%);"
+      >
+        <div
+          class:list={[
+            "font-display font-black text-[#f5f0e8] text-center leading-tight",
+            hero ? "text-5xl md:text-7xl" : "text-3xl md:text-4xl",
+          ]}
+        >
+          ElevenLabs <span class="text-secondary">Batch</span>
+        </div>
+        <div class="mt-3 font-mono text-[11px] md:text-sm uppercase tracking-[0.2em] text-[#f5f0e8]/60">
+          TXT · JSON · .DOCX → OGG
+        </div>
+        <svg
+          aria-hidden="true"
+          class:list={["mt-5", hero ? "w-72" : "w-40"]}
+          viewBox="0 0 160 32"
+        >
+          {Array.from({ length: 40 }).map((_, i) => {
+            const h = 4 + Math.abs(Math.sin(i * 0.7)) * 22;
+            return (
+              <rect
+                x={i * 4}
+                y={16 - h / 2}
+                width="2"
+                height={h}
+                rx="1"
+                fill="#f4d35e"
+                opacity={0.4 + Math.abs(Math.sin(i * 0.7)) * 0.5}
+              />
+            );
+          })}
+        </svg>
+      </div>
+    )
+  }
+
+  {
+    placeholder === "revertpong" && (
+      <div
+        class="absolute inset-0 overflow-hidden"
+        style="background: radial-gradient(500px 400px at 50% 50%, #1b1040, #08051a);"
+      >
+        {Array.from({ length: 50 }).map((_, i) => {
+          const x = (i * 137) % 100;
+          const y = (i * 61) % 100;
+          const s = (i % 3) + 1;
+          return (
+            <div
+              class="absolute rounded-full bg-[#f5f0e8]"
+              style={`left: ${x}%; top: ${y}%; width: ${s}px; height: ${s}px; opacity: ${0.4 + (i % 4) * 0.15};`}
+            />
+          );
+        })}
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 flex items-center justify-center">
+          <div class="relative">
+            <div
+              class:list={[
+                "rounded-full",
+                hero ? "size-28 md:size-40" : "size-16",
+              ]}
+              style="background: radial-gradient(circle, #ff6b4a, #c93a3a 60%, #7a1f1f 100%); box-shadow: 0 0 60px #ff6b4a, -40px 0 80px #ff6b4a80;"
+            />
+            <div
+              aria-hidden="true"
+              class:list={[
+                "absolute right-full top-1/2 -translate-y-1/2 rounded-full",
+                hero ? "h-2 w-40 md:w-56" : "h-1.5 w-24",
+              ]}
+              style="background: linear-gradient(to right, transparent, #ff6b4a);"
+            />
+          </div>
+        </div>
+        <div
+          class:list={[
+            "absolute bottom-4 left-4 font-pixel font-bold text-[#f5f0e8] tracking-wider",
+            hero ? "text-3xl md:text-4xl" : "text-lg",
+          ]}
+        >
+          REVERT<span class="text-[#ff6b4a]"> PONG</span>
+        </div>
+      </div>
+    )
+  }
+
+  {
+    placeholder === "soriana" && (
+      <div
+        class="absolute inset-0 overflow-hidden"
+        style="background: linear-gradient(135deg, #1a1815 0%, #2a2621 50%, #1a1815 100%);"
+      >
+        <div
+          aria-hidden="true"
+          class="absolute inset-0 opacity-20"
+          style="background-image: linear-gradient(to right, #f4d35e22 1px, transparent 1px), linear-gradient(to bottom, #f4d35e22 1px, transparent 1px); background-size: 32px 32px;"
+        />
+        <div
+          class:list={[
+            "relative h-full flex items-center justify-between",
+            hero ? "px-10 md:px-16" : "px-8 md:px-12",
+          ]}
+        >
+          <div>
+            <div class="inline-flex items-center gap-2 rounded-full border border-secondary/60 bg-ink px-3 py-1 font-mono text-[10px] uppercase tracking-[0.2em] text-secondary">
+              🔒 NDA
+            </div>
+            <div
+              class:list={[
+                "mt-4 font-display font-black text-[#f5f0e8] leading-[0.95]",
+                hero ? "text-5xl md:text-7xl" : "text-3xl md:text-4xl",
+              ]}
+            >
+              Un videojuego para
+              <br />
+              <span class="text-secondary">20,000 empleados.</span>
+            </div>
+            <div class="mt-3 font-mono text-[11px] md:text-sm uppercase tracking-[0.2em] text-[#f5f0e8]/50">
+              Retailer top-3 de México · NDA
+            </div>
+          </div>
+          <div class="hidden md:block">
+            <img
+              src="/mascot/mascot-hero-idle.webp"
+              alt=""
+              aria-hidden="true"
+              width="1200"
+              height="1200"
+              class:list={[
+                "h-auto opacity-60 float-a",
+                hero ? "w-56 lg:w-72" : "w-40",
+              ]}
+              style="filter: grayscale(0.3);"
+            />
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  {
+    statusLabel && !hero && (
+      <div class="absolute top-3 left-3 inline-flex items-center gap-1.5 rounded-full bg-[#f5f0e8]/95 backdrop-blur-sm px-2.5 py-1 font-mono text-[10px] uppercase tracking-[0.16em] text-ink">
+        {statusLabel}
+      </div>
+    )
+  }
+</div>

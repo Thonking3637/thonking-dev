@@ -1,0 +1,887 @@
+---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Footer from "../components/Footer.astro";
+
+type Status = "wip" | "done" | "next";
+type IconName = "hammer" | "pencil" | "joystick" | "book" | "bulb";
+
+interface Thumb {
+  letter: string;
+  bg: string;
+  fg: string;
+}
+
+interface Item {
+  text: string;
+  status: Status;
+  progress?: number;
+  progressLabel?: string;
+  note?: string;
+  thumb?: Thumb;
+}
+
+interface Section {
+  id: string;
+  icon: IconName;
+  title: string;
+  accent: string;
+  accentSoft: string;
+  span: 1 | 2;
+  items: Item[];
+}
+
+const updatedAt = "22 abr 2026";
+const updatedISO = "2026-04-22";
+
+function humanizeAgo(fromISO: string): string {
+  const from = new Date(fromISO);
+  const now = new Date();
+  const diffMs = now.getTime() - from.getTime();
+  const diffDays = Math.floor(diffMs / (1000 * 60 * 60 * 24));
+  if (diffDays < 1) return "hoy";
+  if (diffDays === 1) return "hace 1 día";
+  if (diffDays < 7) return `hace ${diffDays} días`;
+  const weeks = Math.floor(diffDays / 7);
+  if (weeks === 1) return "hace 1 semana";
+  if (weeks < 4) return `hace ${weeks} semanas`;
+  const months = Math.floor(diffDays / 30);
+  if (months === 1) return "hace 1 mes";
+  return `hace ${months} meses`;
+}
+
+const updatedAgo = humanizeAgo(updatedISO);
+
+const sections: Section[] = [
+  {
+    id: "construyendo",
+    icon: "hammer",
+    title: "Construyendo",
+    accent: "#ff6b4a",
+    accentSoft: "rgba(255,107,74,0.12)",
+    span: 2,
+    items: [
+      { text: "GGleaner v1.0", status: "wip", progress: 85, note: "shipping esta semana" },
+      { text: "Solvi beta", status: "wip", progress: 60, note: "iterando con testers seleccionados" },
+      { text: "thonking.dev", status: "wip", progress: 92, note: "este sitio que estás leyendo" },
+    ],
+  },
+  {
+    id: "escribiendo",
+    icon: "pencil",
+    title: "Escribiendo",
+    accent: "#f4d35e",
+    accentSoft: "rgba(244,211,94,0.18)",
+    span: 1,
+    items: [
+      {
+        text: "“Cómo construí GGleaner con Claude Code”",
+        status: "next",
+        note: "primera nota del blog",
+      },
+      {
+        text: "Documentando proceso Transforma Wars",
+        status: "wip",
+        progress: 30,
+      },
+    ],
+  },
+  {
+    id: "jugando",
+    icon: "joystick",
+    title: "Jugando",
+    accent: "#937cff",
+    accentSoft: "rgba(147,124,255,0.15)",
+    span: 1,
+    items: [
+      {
+        text: "League of Legends",
+        status: "wip",
+        note: "el ritual nocturno",
+        thumb: { letter: "L", bg: "#091428", fg: "#c89b3c" },
+      },
+      {
+        text: "Stray",
+        status: "wip",
+        progress: 47,
+        progressLabel: "completado",
+        note: "gato + cyberpunk = debía pasar",
+        thumb: { letter: "S", bg: "#1a1815", fg: "#ff6b4a" },
+      },
+    ],
+  },
+  {
+    id: "leyendo",
+    icon: "book",
+    title: "Leyendo",
+    accent: "#e8c9a0",
+    accentSoft: "rgba(232,201,160,0.22)",
+    span: 1,
+    items: [
+      {
+        text: "Game Feel",
+        status: "wip",
+        progress: 55,
+        note: "Steve Swink",
+        thumb: { letter: "GF", bg: "#1e3a8a", fg: "#ffe8d4" },
+      },
+      {
+        text: "The Art of Game Design",
+        status: "next",
+        note: "Jesse Schell",
+        thumb: { letter: "AG", bg: "#c93a3a", fg: "#ffe8d4" },
+      },
+    ],
+  },
+  {
+    id: "aprendiendo",
+    icon: "bulb",
+    title: "Aprendiendo",
+    accent: "#ff6b4a",
+    accentSoft: "rgba(255,107,74,0.12)",
+    span: 1,
+    items: [
+      {
+        text: "Three.js",
+        status: "next",
+        note: "para integraciones 3D",
+        thumb: { letter: "3D", bg: "#1a1815", fg: "#ffffff" },
+      },
+      {
+        text: "MotionCanvas",
+        status: "next",
+        note: "para clips técnicos",
+        thumb: { letter: "MC", bg: "#937cff", fg: "#ffffff" },
+      },
+    ],
+  },
+];
+---
+
+<Layout
+  title="Ahora mismo — Thonking"
+  description="En qué estoy enfocado esta semana. Construyendo, escribiendo, jugando, leyendo y aprendiendo."
+  path="/now"
+>
+  <Navbar />
+
+  <main id="main" class="relative pt-28 md:pt-36 pb-24 md:pb-32 overflow-hidden">
+    <!-- giant faded background type -->
+    <div
+      aria-hidden="true"
+      class="pointer-events-none select-none absolute inset-x-0 top-0 flex justify-center"
+    >
+      <span
+        class="hero-stroke font-pixel text-[28vw] md:text-[20vw] leading-none tracking-tight opacity-[0.05]"
+        >AHORA</span
+      >
+    </div>
+
+    <!-- decorative grid -->
+    <div
+      aria-hidden="true"
+      class="absolute inset-0 -z-10 opacity-[0.1]"
+      style="background-image: radial-gradient(circle, #1a1815 1px, transparent 1px); background-size: 28px 28px;"
+    >
+    </div>
+
+    <div class="relative mx-auto w-full max-w-[1280px] px-6 md:px-10">
+      <!-- ===================== HERO ===================== -->
+      <header class="grid grid-cols-1 lg:grid-cols-12 gap-10 items-center mb-20 md:mb-28">
+        <div class="lg:col-span-8 order-2 lg:order-1 relative">
+          <!-- Eyebrow -->
+          <div
+            class="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-ink/60"
+          >
+            <span class="size-1.5 rounded-full bg-primary animate-pulse"></span>
+            Now page · inspirada por nownownow.com
+          </div>
+
+          <!-- Title -->
+          <h1
+            class="mt-4 font-display font-black text-6xl sm:text-7xl lg:text-8xl xl:text-[8.5rem] leading-[0.88] tracking-[-0.04em]"
+          >
+            Ahora<br />mismo<span class="text-primary">.</span>
+          </h1>
+
+          <!-- Subtitle with highlight -->
+          <p class="mt-6 text-lg md:text-xl text-muted leading-relaxed max-w-xl">
+            Esto es en lo que estoy
+            <span class="relative inline-block px-1 font-semibold text-ink">
+              enfocado
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 140 18"
+                preserveAspectRatio="none"
+                class="absolute -bottom-0.5 left-0 w-full h-3"
+              >
+                <path
+                  class="draw-line"
+                  d="M2 10 C 30 2, 70 16, 100 8 S 134 2, 138 12"
+                  stroke="#f4d35e"
+                  stroke-width="6"
+                  stroke-linecap="round"
+                  fill="none"
+                />
+              </svg>
+            </span>
+            esta semana. Se actualiza cada 1-2 semanas.
+          </p>
+
+          <!-- Date pill + dynamic "hace X tiempo" -->
+          <div class="mt-8 flex flex-wrap items-center gap-3">
+            <div
+              class="inline-flex items-center gap-2 rounded-full bg-secondary text-ink border-2 border-ink px-4 py-2 font-mono text-xs md:text-sm uppercase tracking-[0.16em] font-semibold shadow-[4px_4px_0_0_#1a1815]"
+            >
+              <svg
+                viewBox="0 0 24 24"
+                class="size-3.5"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.5"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <circle cx="12" cy="12" r="10"></circle>
+                <path d="M12 6v6l4 2"></path>
+              </svg>
+              Actualizado · {updatedAt}
+            </div>
+
+            <!-- Floating "hace X tiempo" badge -->
+            <div
+              class="inline-flex items-center gap-1.5 rounded-full border border-primary/30 bg-primary/10 px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.16em] text-primary font-semibold"
+              title={`Última actualización: ${updatedAt}`}
+            >
+              <span class="relative flex size-2">
+                <span
+                  class="absolute inline-flex h-full w-full rounded-full bg-primary opacity-60 animate-ping"
+                ></span>
+                <span class="relative inline-flex size-2 rounded-full bg-primary"
+                ></span>
+              </span>
+              {updatedAgo}
+            </div>
+
+            <span class="font-mono text-xs text-muted uppercase tracking-[0.14em]">
+              · Lima, Perú
+            </span>
+          </div>
+
+          <!-- decorative star near title -->
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 110 110"
+            class="hidden md:block absolute -top-2 -left-10 w-12 spin-slow"
+          >
+            <path
+              d="M55 10 L66 42 L100 44 L72 64 L82 96 L55 78 L28 96 L38 64 L10 44 L44 42 Z"
+              transform="translate(4 5)"
+              fill="#1a1815"
+            />
+            <path
+              d="M55 10 L66 42 L100 44 L72 64 L82 96 L55 78 L28 96 L38 64 L10 44 L44 42 Z"
+              fill="#f4d35e"
+              stroke="#1a1815"
+              stroke-width="5"
+              stroke-linejoin="round"
+            />
+          </svg>
+
+          <!-- decorative sparkle -->
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 100 100"
+            class="hidden md:block absolute bottom-8 -left-6 w-10 float-b"
+          >
+            <path
+              d="M50 8 C 52 32 68 48 92 50 C 68 52 52 68 50 92 C 48 68 32 52 8 50 C 32 48 48 32 50 8 Z"
+              transform="translate(4 4)"
+              fill="#1a1815"
+            />
+            <path
+              d="M50 8 C 52 32 68 48 92 50 C 68 52 52 68 50 92 C 48 68 32 52 8 50 C 32 48 48 32 50 8 Z"
+              fill="#ffe8d4"
+              stroke="#1a1815"
+              stroke-width="5"
+              stroke-linejoin="round"
+            />
+          </svg>
+        </div>
+
+        <!-- Mascot excited -->
+        <div
+          class="lg:col-span-4 order-1 lg:order-2 relative mx-auto w-full max-w-[360px]"
+          aria-hidden="true"
+        >
+          <div class="relative">
+            <!-- Mascot with float animation -->
+            <div class="relative float-mac">
+              <img
+                src="/mascot/mascot-hero-excited.webp"
+                alt="Mascot Thonking entusiasmado"
+                width="1200"
+                height="1200"
+                class="w-full h-auto select-none"
+                draggable="false"
+              />
+              <!-- Pixel sparkle (cruz estilo 8-bit) floating top-right -->
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 32 32"
+                class="absolute -top-2 -right-1 w-12 float-a"
+              >
+                <g fill="#f4d35e" stroke="#1a1815" stroke-width="1.8">
+                  <rect x="14" y="2" width="4" height="4" />
+                  <rect x="14" y="26" width="4" height="4" />
+                  <rect x="2" y="14" width="4" height="4" />
+                  <rect x="26" y="14" width="4" height="4" />
+                  <rect x="12" y="12" width="8" height="8" fill="#ffe8d4" />
+                </g>
+              </svg>
+              <!-- Second mini pixel sparkle bottom-left -->
+              <svg
+                aria-hidden="true"
+                viewBox="0 0 24 24"
+                class="absolute bottom-12 -left-2 w-7 float-c"
+              >
+                <g fill="#ff6b4a" stroke="#1a1815" stroke-width="1.5">
+                  <rect x="10" y="1" width="4" height="4" />
+                  <rect x="10" y="19" width="4" height="4" />
+                  <rect x="1" y="10" width="4" height="4" />
+                  <rect x="19" y="10" width="4" height="4" />
+                </g>
+              </svg>
+            </div>
+
+            <!-- Flat ground shadow (aterrizada) — static, doesn't animate with mascot -->
+            <div
+              class="absolute left-1/2 -translate-x-1/2 bottom-[-12px] w-[70%] h-5 rounded-[50%]"
+              style="background: radial-gradient(ellipse, rgba(26,24,21,0.35) 0%, rgba(26,24,21,0) 70%); filter: blur(2px);"
+            >
+            </div>
+          </div>
+        </div>
+      </header>
+
+      <!-- ===================== CARDS GRID ===================== -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-5 md:gap-6">
+        {
+          sections.map((section) => (
+            <section
+              class:list={[
+                "group relative rounded-3xl border-2 border-ink/10 bg-base-soft overflow-hidden shadow-[0_14px_40px_-20px_rgba(26,24,21,0.25)] transition-all duration-300 hover:-translate-y-0.5 hover:shadow-[0_22px_50px_-20px_rgba(26,24,21,0.3)] p-7 md:p-9",
+                section.span === 2 && "md:col-span-2",
+              ]}
+              style={`--accent: ${section.accent}; --accent-soft: ${section.accentSoft};`}
+            >
+              {/* top accent bar */}
+              <div
+                class="absolute top-0 inset-x-0 h-1.5"
+                style={`background: ${section.accent}`}
+              />
+
+              {/* Header: icon + title */}
+              <div class="flex items-start gap-5">
+                {/* Custom SVG icon per section, with flat offset shadow */}
+                <div
+                  class="shrink-0 grid size-14 md:size-16 place-items-center rounded-2xl border-2 border-ink"
+                  style={`background: ${section.accentSoft}; box-shadow: 4px 4px 0 0 #1a1815;`}
+                >
+                  {section.icon === "hammer" && (
+                    <svg viewBox="0 0 48 48" class="size-9 md:size-10">
+                      <g
+                        fill={section.accent}
+                        stroke="#1a1815"
+                        stroke-width="3"
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                      >
+                        <path d="M8 8 L26 8 L30 16 L12 16 Z" />
+                        <rect x="18" y="16" width="6" height="26" rx="2" />
+                      </g>
+                      {/* sparks */}
+                      <g fill="#f4d35e" stroke="#1a1815" stroke-width="1.6">
+                        <path d="M35 12 l2 4 l4 -2 l-3 4 l3 3 l-5 -1 l-1 4 l-2 -4 l-3 1 l2 -3 l-3 -3 l4 0 Z" />
+                      </g>
+                    </svg>
+                  )}
+                  {section.icon === "pencil" && (
+                    <svg viewBox="0 0 48 48" class="size-9 md:size-10">
+                      <g
+                        stroke="#1a1815"
+                        stroke-width="3"
+                        stroke-linejoin="round"
+                        stroke-linecap="round"
+                      >
+                        <path
+                          d="M10 38 L34 14 L38 18 L14 42 Z"
+                          fill={section.accent}
+                        />
+                        <path d="M34 14 L38 10 L42 14 L38 18 Z" fill="#ffe8d4" />
+                        <path d="M10 38 L6 44 L14 42 Z" fill="#1a1815" />
+                      </g>
+                      <circle cx="42" cy="8" r="2" fill="#f4d35e" />
+                      <circle cx="38" cy="4" r="1.5" fill="#ff6b4a" />
+                    </svg>
+                  )}
+                  {section.icon === "joystick" && (
+                    <svg viewBox="0 0 48 48" class="size-9 md:size-10">
+                      <g
+                        stroke="#1a1815"
+                        stroke-width="3"
+                        stroke-linejoin="round"
+                      >
+                        <rect
+                          x="6"
+                          y="28"
+                          width="36"
+                          height="14"
+                          rx="5"
+                          fill={section.accent}
+                        />
+                        <rect
+                          x="22"
+                          y="14"
+                          width="4"
+                          height="14"
+                          fill="#1a1815"
+                        />
+                        <circle cx="24" cy="12" r="6" fill="#ffe8d4" />
+                      </g>
+                      <circle cx="14" cy="35" r="2" fill="#f4d35e" />
+                      <circle cx="20" cy="35" r="2" fill="#ff6b4a" />
+                      <circle cx="34" cy="35" r="2" fill="#1a1815" />
+                    </svg>
+                  )}
+                  {section.icon === "book" && (
+                    <svg viewBox="0 0 48 48" class="size-9 md:size-10">
+                      <g stroke="#1a1815" stroke-width="3" stroke-linejoin="round">
+                        <path
+                          d="M6 10 C 14 10 22 12 24 16 L 24 42 C 22 38 14 36 6 36 Z"
+                          fill={section.accent}
+                        />
+                        <path
+                          d="M42 10 C 34 10 26 12 24 16 L 24 42 C 26 38 34 36 42 36 Z"
+                          fill="#ffe8d4"
+                        />
+                      </g>
+                      <g stroke="#1a1815" stroke-width="1.5" stroke-linecap="round">
+                        <path d="M10 18 l10 1.5" />
+                        <path d="M10 24 l10 1.5" />
+                        <path d="M28 19.5 l10 -1.5" />
+                        <path d="M28 25.5 l10 -1.5" />
+                      </g>
+                    </svg>
+                  )}
+                  {section.icon === "bulb" && (
+                    <svg viewBox="0 0 48 48" class="size-9 md:size-10">
+                      <g stroke="#1a1815" stroke-width="3" stroke-linejoin="round" stroke-linecap="round">
+                        <path
+                          d="M24 6 C 16 6 11 12 11 18 C 11 22 14 25 16 28 L 16 32 L 32 32 L 32 28 C 34 25 37 22 37 18 C 37 12 32 6 24 6 Z"
+                          fill={section.accent}
+                        />
+                        <rect x="17" y="32" width="14" height="5" fill="#1a1815" />
+                        <rect x="19" y="37" width="10" height="4" rx="1" fill="#1a1815" />
+                      </g>
+                      {/* rays */}
+                      <g stroke="#f4d35e" stroke-width="2.5" stroke-linecap="round">
+                        <path d="M24 2 v3" />
+                        <path d="M40 10 l-2 2" />
+                        <path d="M44 22 h-3" />
+                        <path d="M8 10 l2 2" />
+                        <path d="M4 22 h3" />
+                      </g>
+                    </svg>
+                  )}
+                </div>
+
+                <div class="flex-1 pt-1">
+                  <div
+                    class="font-mono text-[10px] uppercase tracking-[0.2em] text-ink/50"
+                  >
+                    <span
+                      class="font-bold"
+                      style={`color: ${section.accent}`}>§</span
+                    >
+                    &nbsp;{section.id}
+                  </div>
+                  <h2 class="mt-1 font-display font-black text-3xl md:text-4xl leading-none tracking-[-0.02em]">
+                    {section.title}
+                  </h2>
+                </div>
+              </div>
+
+              {/* Items list */}
+              <ul class="mt-7 flex flex-col">
+                {section.items.map((item, i) => (
+                  <li
+                    class:list={[
+                      "flex items-start gap-4 py-4",
+                      i !== 0 && "border-t",
+                    ]}
+                    style={`border-color: ${section.accentSoft}`}
+                  >
+                    {item.thumb ? (
+                      <div
+                        class="shrink-0 grid size-11 place-items-center rounded-lg border-2 border-ink font-display font-black text-sm"
+                        style={`background: ${item.thumb.bg}; color: ${item.thumb.fg};`}
+                      >
+                        {item.thumb.letter}
+                      </div>
+                    ) : (
+                      <div
+                        class="shrink-0 grid size-11 place-items-center rounded-lg border-2 border-dashed border-ink/15 bg-base"
+                      >
+                        <span
+                          class="size-2 rounded-full"
+                          style={`background: ${section.accent}`}
+                        />
+                      </div>
+                    )}
+
+                    <div class="flex-1 min-w-0">
+                      <div class="flex items-center gap-2 font-mono text-[10px] uppercase tracking-[0.18em]">
+                        {item.status === "wip" && (
+                          <span
+                            class="inline-flex items-center gap-1 font-semibold"
+                            style={`color: ${section.accent}`}
+                          >
+                            <span
+                              class="size-1.5 rounded-full animate-pulse"
+                              style={`background: ${section.accent}`}
+                            />
+                            En progreso
+                          </span>
+                        )}
+                        {item.status === "next" && (
+                          <span class="inline-flex items-center gap-1 font-semibold text-pink">
+                            <svg
+                              viewBox="0 0 24 24"
+                              class="size-3"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="2.5"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              aria-hidden="true"
+                            >
+                              <circle cx="12" cy="12" r="10" />
+                              <path d="M12 6v6l4 2" />
+                            </svg>
+                            Próximo
+                          </span>
+                        )}
+                        {item.status === "done" && (
+                          <span class="inline-flex items-center gap-1 font-semibold text-[#2d9e4f]">
+                            <svg
+                              viewBox="0 0 24 24"
+                              class="size-3.5"
+                              fill="none"
+                              stroke="currentColor"
+                              stroke-width="3"
+                              stroke-linecap="round"
+                              stroke-linejoin="round"
+                              aria-hidden="true"
+                            >
+                              <path d="M5 12l5 5 9-11" />
+                            </svg>
+                            Completado
+                          </span>
+                        )}
+                      </div>
+                      <div class="mt-1 font-display font-bold text-base md:text-lg leading-snug text-ink">
+                        {item.text}
+                      </div>
+                      {item.note && (
+                        <div class="mt-0.5 text-sm text-muted italic">
+                          — {item.note}
+                        </div>
+                      )}
+                      {item.status === "wip" && item.progress != null && (
+                        <div class="mt-3 flex items-center gap-3">
+                          <div
+                            class="relative h-1 flex-1 rounded-full bg-ink/10 overflow-hidden"
+                          >
+                            <div
+                              class="progress-bar absolute inset-y-0 left-0 h-full rounded-full"
+                              data-progress={item.progress}
+                              style={`width: 0%; background: linear-gradient(90deg, ${section.accent}, #f4d35e);`}
+                            />
+                          </div>
+                          <span
+                            class="font-mono text-[10px] tabular-nums font-semibold whitespace-nowrap"
+                            style={`color: ${section.accent}`}
+                          >
+                            {item.progress}%
+                            {item.progressLabel && (
+                              <span class="text-ink/50 font-normal ml-1">
+                                {item.progressLabel}
+                              </span>
+                            )}
+                          </span>
+                        </div>
+                      )}
+                    </div>
+                  </li>
+                ))}
+              </ul>
+            </section>
+          ))
+        }
+      </div>
+
+      <!-- ===================== FOOTER TIMESTAMP + ARCHIVE ===================== -->
+      <footer class="mt-20 md:mt-24">
+        <div class="rounded-3xl border-2 border-ink/10 bg-base-soft p-8 md:p-10 flex flex-col md:flex-row md:items-end md:justify-between gap-6">
+          <div>
+            <div class="font-mono text-[10px] uppercase tracking-[0.2em] text-muted">
+              Última actualización
+            </div>
+            <div
+              class="mt-2 font-display font-black text-4xl md:text-6xl leading-none tracking-[-0.03em] tabular-nums"
+            >
+              {updatedAt}
+            </div>
+            <div
+              class="mt-3 font-mono text-xs uppercase tracking-[0.16em] text-muted"
+            >
+              Próxima actualización en 1-2 semanas
+            </div>
+          </div>
+          <a
+            href="#"
+            class="group inline-flex items-center gap-2 rounded-full border-2 border-ink/15 bg-base px-5 py-3 font-mono text-xs uppercase tracking-[0.14em] font-semibold hover:bg-secondary hover:border-ink transition"
+            title="Archivo histórico — próximamente"
+            aria-disabled="true"
+          >
+            Ver archivo histórico
+            <span class="rounded-full bg-ink/10 px-1.5 py-0.5 text-[9px] text-ink/70">
+              próximamente
+            </span>
+            <svg
+              class="size-3.5 transition-transform group-hover:translate-x-0.5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M5 12h14M13 5l7 7-7 7"></path>
+            </svg>
+          </a>
+        </div>
+
+        <p class="mt-8 font-mono text-xs uppercase tracking-[0.16em] text-muted text-center">
+          Esta página es honesta. Si algo de arriba te interesa,
+          <a
+            href="mailto:gabriel@thonking.dev"
+            class="text-ink underline decoration-dotted underline-offset-4 hover:decoration-primary"
+            >escríbeme</a
+          >.
+        </p>
+      </footer>
+
+      <!-- ===================== NEWSLETTER CTA ===================== -->
+      <section class="mt-24 md:mt-28">
+        <div
+          class="relative rounded-3xl border-2 border-ink bg-ink text-base-soft p-8 md:p-12 overflow-hidden shadow-[8px_8px_0_0_#f4d35e]"
+        >
+          <!-- decorative grid bg -->
+          <div
+            aria-hidden="true"
+            class="absolute inset-0 opacity-[0.08]"
+            style="background-image: linear-gradient(to right, #f4d35e 1px, transparent 1px), linear-gradient(to bottom, #f4d35e 1px, transparent 1px); background-size: 32px 32px;"
+          >
+          </div>
+
+          <!-- corner sparkle -->
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 32 32"
+            class="absolute top-6 right-6 w-10 float-b"
+          >
+            <g fill="#f4d35e" stroke="#1a1815" stroke-width="1.5">
+              <rect x="14" y="2" width="4" height="4" />
+              <rect x="14" y="26" width="4" height="4" />
+              <rect x="2" y="14" width="4" height="4" />
+              <rect x="26" y="14" width="4" height="4" />
+              <rect x="12" y="12" width="8" height="8" fill="#ffe8d4" />
+            </g>
+          </svg>
+
+          <div class="relative grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 md:gap-10 items-end">
+            <div>
+              <div
+                class="font-mono text-[11px] uppercase tracking-[0.2em] text-secondary"
+              >
+                Newsletter · ~1 email / mes
+              </div>
+              <h2
+                class="mt-3 font-display font-black text-4xl md:text-5xl lg:text-6xl leading-[0.95] tracking-[-0.03em]"
+              >
+                Te aviso cuando<br />
+                <span class="relative inline-block">
+                  actualice
+                  <svg
+                    aria-hidden="true"
+                    viewBox="0 0 260 18"
+                    preserveAspectRatio="none"
+                    class="absolute -bottom-1 left-0 w-full h-3"
+                  >
+                    <path
+                      d="M2 10 C 50 2, 130 18, 190 8 S 254 2, 258 12"
+                      stroke="#f4d35e"
+                      stroke-width="6"
+                      stroke-linecap="round"
+                      fill="none"
+                    />
+                  </svg>
+                </span>
+              </h2>
+              <p class="mt-4 text-base-soft/70 max-w-md leading-relaxed">
+                1 email al mes con lo que estoy construyendo. Cero spam, cero
+                pitch de cursos. Solo devlogs, herramientas y notas honestas.
+              </p>
+            </div>
+
+            <!-- Mascot idle next to form, chilling -->
+            <div
+              class="hidden md:block justify-self-end"
+              aria-hidden="true"
+            >
+              <div class="relative">
+                <img
+                  src="/mascot/mascot-idle.webp"
+                  alt=""
+                  width="1200"
+                  height="1200"
+                  class="w-32 lg:w-40 h-auto float-mac"
+                  draggable="false"
+                  style="filter: drop-shadow(0 14px 20px rgba(0,0,0,0.4));"
+                />
+                <div
+                  class="absolute left-1/2 -translate-x-1/2 -bottom-2 w-[70%] h-3 rounded-[50%]"
+                  style="background: radial-gradient(ellipse, rgba(0,0,0,0.55) 0%, rgba(0,0,0,0) 70%); filter: blur(2px);"
+                >
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Form -->
+          <form
+            class="relative mt-8 flex flex-col sm:flex-row gap-3 max-w-lg"
+            data-newsletter
+            novalidate
+          >
+            <label for="newsletter-email" class="sr-only">Tu email</label>
+            <input
+              id="newsletter-email"
+              name="email"
+              type="email"
+              required
+              placeholder="tu@email.com"
+              class="flex-1 rounded-full border-2 border-base-soft/20 bg-ink-soft text-base-soft px-5 py-3.5 font-mono text-sm placeholder:text-base-soft/40 focus:outline-none focus:border-secondary transition-colors"
+            />
+            <button
+              type="submit"
+              class="group inline-flex items-center justify-center gap-2 rounded-full bg-primary text-ink px-6 py-3.5 font-display font-bold text-base hover:bg-secondary hover:text-ink transition-colors"
+            >
+              Suscribirme
+              <svg
+                class="size-4 transition-transform group-hover:translate-x-0.5"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M5 12h14M13 5l7 7-7 7"></path>
+              </svg>
+            </button>
+          </form>
+
+          <!-- Success message (hidden by default) -->
+          <p
+            class="relative mt-4 font-mono text-xs uppercase tracking-[0.16em] text-secondary hidden"
+            data-newsletter-success
+          >
+            ✓ Registrado. Te escribo pronto.
+          </p>
+
+          <p
+            class="relative mt-4 font-mono text-[10px] uppercase tracking-[0.16em] text-base-soft/40"
+          >
+            · Backend del newsletter en setup. Por ahora guardo tu email a
+            mano.
+          </p>
+        </div>
+      </section>
+    </div>
+  </main>
+
+  <Footer />
+</Layout>
+
+<style>
+  .progress-bar {
+    transition: width 1400ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+</style>
+
+<script>
+  const bars = document.querySelectorAll<HTMLElement>(".progress-bar");
+  const prefersReduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          const bar = entry.target as HTMLElement;
+          const target = bar.dataset.progress ?? "0";
+          if (prefersReduced) {
+            bar.style.width = `${target}%`;
+          } else {
+            requestAnimationFrame(() => {
+              bar.style.width = `${target}%`;
+            });
+          }
+          observer.unobserve(bar);
+        }
+      });
+    },
+    { threshold: 0.3 }
+  );
+
+  bars.forEach((b) => observer.observe(b));
+
+  // Newsletter form — visual-only submission until backend is connected.
+  const form = document.querySelector<HTMLFormElement>("[data-newsletter]");
+  const successMsg = document.querySelector<HTMLElement>("[data-newsletter-success]");
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      const input = form.querySelector<HTMLInputElement>('input[type="email"]');
+      if (!input || !input.value || !input.checkValidity()) {
+        input?.focus();
+        return;
+      }
+      // Persist client-side for now (backend pending)
+      try {
+        const emails = JSON.parse(
+          localStorage.getItem("thonking.newsletter") || "[]"
+        );
+        emails.push({ email: input.value, ts: new Date().toISOString() });
+        localStorage.setItem("thonking.newsletter", JSON.stringify(emails));
+      } catch {}
+      form.reset();
+      if (successMsg) successMsg.classList.remove("hidden");
+    });
+  }
+</script>

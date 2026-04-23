@@ -1,0 +1,324 @@
+---
+import { getEntry } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import ProductSchema from "../../components/ProductSchema.astro";
+import GgleanerSlide from "../../components/GgleanerSlide.astro";
+
+const product = await getEntry("products", "ggleaner");
+if (!product) throw new Error("ggleaner product entry not found");
+const { data } = product;
+
+type GgSlideVariant = "dashboard" | "preview" | "scan" | "backup";
+const slides: Array<{ id: string; variant: GgSlideVariant; label: string }> = [
+  { id: "dashboard", variant: "dashboard", label: "Dashboard principal" },
+  { id: "preview", variant: "preview", label: "Preview antes de borrar" },
+  { id: "scan", variant: "scan", label: "Scan en vivo" },
+  { id: "backup", variant: "backup", label: "Confirmación de backup" },
+];
+
+const stack = ["C#", "WinForms", ".NET 6", "Open Source"];
+const tags = data.tags;
+
+const howItWorks = [
+  {
+    title: "Dev Tools module real",
+    body: "Entiende Unity Library, Unreal Intermediate, Godot cache, Docker overlay2, node_modules huérfanos. No borra nada que un dev necesite.",
+  },
+  {
+    title: "Preview obligatorio antes de cada eliminación",
+    body: "Cero confirmaciones en modales confusos. Ves exactamente qué archivos, qué tamaño y qué riesgo tiene cada operación antes de tocarlos.",
+  },
+  {
+    title: "Backup automático del registro de Windows",
+    body: "Cada operación que toca HKLM o HKCU genera un .reg restaurable. Si algo sale mal, rollback en 1 click.",
+  },
+  {
+    title: "Cero telemetría, cero ads, cero upsells",
+    body: "Los cleaners mainstream viven de vender. GGleaner vive de ser útil. MIT licensed, sin cuenta, sin tracking.",
+  },
+  {
+    title: "Open source (MIT) público en GitHub",
+    body: "El código está ahí. Contribuciones bienvenidas. Issues = roadmap. Forks = nuevas features que no pensé.",
+  },
+];
+
+const lessons = [
+  {
+    icon: "wrench",
+    text: "Construir tu propia tool te ahorra más de lo que parece. 48 horas de dev salvan 2h/semana por el resto del año.",
+  },
+  {
+    icon: "globe",
+    text: "Open source es un multiplicador de confianza. 'Mira el código' > 'confía en mí'. Especialmente para tools de sistema.",
+  },
+  {
+    icon: "shield",
+    text: "'No hace nada por default' se subestima. Preview obligatorio + backup automático = sueño tranquilo del usuario.",
+  },
+  {
+    icon: "archive",
+    text: "WinForms vive aunque nadie quiera admitirlo. Para tools de desktop Windows, sigue siendo el path menos resistente.",
+  },
+  {
+    icon: "target",
+    text: "El nicho dev es sub-atendido por tools mainstream. CCleaner no va a construir módulos para Unity. Alguien tenía que hacerlo.",
+  },
+];
+
+const pageTitle = `${data.title} — Thonking`;
+---
+
+<Layout title={pageTitle} description={data.tagline} path={`/productos/${product.id}`}>
+  <Navbar />
+  <main id="main" class="relative pt-24 md:pt-28 pb-24 overflow-hidden">
+    <div aria-hidden="true" class="absolute inset-0 -z-10 opacity-[0.08]" style="background-image: radial-gradient(circle, #1a1815 1px, transparent 1px); background-size: 28px 28px;"></div>
+    <div aria-hidden="true" class="pointer-events-none select-none absolute inset-x-0 top-28 flex justify-center">
+      <span class="hero-stroke font-pixel text-[24vw] md:text-[14vw] leading-none tracking-tight opacity-[0.05]">GGleaner</span>
+    </div>
+
+    <article class="relative mx-auto w-full max-w-[1200px] px-6 md:px-10">
+      <a href="/productos" class="group inline-flex items-center gap-2 rounded-full border-2 border-ink/15 bg-base-soft px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-ink/80 hover:bg-secondary hover:border-ink hover:text-ink transition">
+        <svg viewBox="0 0 40 32" class="size-5 transition-transform group-hover:-translate-x-0.5" fill="none" stroke="#1a1815" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4 L4 16 L14 28"></path><path d="M4 16 L36 16"></path><circle cx="4" cy="16" r="1.5" fill="#1a1815"></circle></svg>
+        Volver a productos
+      </a>
+
+      <header class="mt-10 md:mt-12 relative grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div class="lg:col-span-8 relative">
+          <div class="inline-flex items-center gap-1.5 rounded-full border-2 border-ink bg-[#937cff] text-base-soft px-3 py-1 font-mono text-[11px] uppercase tracking-[0.18em] font-semibold shadow-[3px_3px_0_0_#1a1815]">
+            <span class="size-1.5 rounded-full bg-secondary animate-pulse"></span>
+            Shipping v1.0
+          </div>
+          <h1 class="relative mt-6 font-display font-black text-6xl sm:text-7xl lg:text-[7.5rem] xl:text-[8.5rem] leading-[0.88] tracking-[-0.04em]">
+            GG<span class="relative inline-block pr-2">
+              <span class="relative z-10 text-secondary">leaner</span>
+              <svg aria-hidden="true" viewBox="0 0 110 110" class="absolute -top-6 md:-top-8 -right-10 md:-right-12 w-10 md:w-12 spin-slow rotate-[12deg]">
+                <path d="M55 10 L66 42 L100 44 L72 64 L82 96 L55 78 L28 96 L38 64 L10 44 L44 42 Z" transform="translate(3 4)" fill="#1a1815" />
+                <path d="M55 10 L66 42 L100 44 L72 64 L82 96 L55 78 L28 96 L38 64 L10 44 L44 42 Z" fill="#f4d35e" stroke="#1a1815" stroke-width="5" stroke-linejoin="round" />
+              </svg>
+              <svg aria-hidden="true" viewBox="0 0 480 40" class="absolute -bottom-2 left-0 w-full h-8 overflow-visible" preserveAspectRatio="none">
+                <path class="draw-line" d="M4 22 C 100 6, 200 34, 280 18 S 440 6, 476 22" stroke="#f4d35e" stroke-width="14" stroke-linecap="round" fill="none" />
+              </svg>
+            </span>
+          </h1>
+          <p class="mt-8 text-lg md:text-xl text-muted leading-[1.7] max-w-2xl">
+            Mi PC siempre llena, pero CCleaner es
+            <span class="px-1 rounded text-ink font-semibold" style="background: rgba(147,124,255,0.2);">demasiado invasivo</span>
+            y sus upsells son agresivos. Así que escribí el cleaner que quiero usar: entiende mi stack
+            <span class="bg-primary/15 px-1 rounded text-ink font-semibold">Unity, Unreal, Godot, Docker</span>,
+            pregunta antes de borrar nada, y es 100% open source.
+          </p>
+          <div class="mt-8 flex flex-wrap items-center gap-4">
+            <a href="https://github.com/Thonking3637" target="_blank" rel="noopener" class="group inline-flex items-center gap-3 rounded-full bg-ink text-base-soft pl-7 pr-2.5 py-3 font-semibold text-lg md:text-xl hover:bg-primary transition-colors">
+              Descargar en GitHub
+              <span class="grid size-11 place-items-center rounded-full bg-primary text-ink group-hover:bg-ink transition-colors">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" class="size-4"><path d="M7 17L17 7M9 7h8v8" /></svg>
+              </span>
+            </a>
+            <span class="font-mono text-xs uppercase tracking-[0.16em] text-muted">· MIT licensed · Windows</span>
+          </div>
+        </div>
+        <div class="lg:col-span-4 relative hidden lg:block" aria-hidden="true">
+          <div class="absolute -top-6 -right-8 w-56 xl:w-64 rotate-[-6deg] float-mac pointer-events-none" style="filter: drop-shadow(0 18px 30px rgba(26,24,21,0.25));">
+            <img src="/mascot/mascot-hero-happy.webp" alt="" width="1200" height="1200" class="w-full h-auto select-none" draggable="false" />
+          </div>
+        </div>
+      </header>
+
+      <!-- Hero visual: real screenshot -->
+      <div class="mt-14 relative aspect-[16/9] rounded-3xl border-2 border-ink overflow-hidden shadow-[0_30px_60px_-20px_rgba(26,24,21,0.3)] bg-[#1a1815]">
+        <img src="/screenshots/ggleaner.png" alt="GGleaner dashboard" class="absolute inset-0 w-full h-full object-cover object-top" />
+      </div>
+
+      <!-- Gallery -->
+      <section class="mt-24 md:mt-28">
+        <header class="mb-6">
+          <div class="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-ink/60">
+            <span class="size-1.5 rounded-full" style="background: #937cff;"></span>
+            Galería
+          </div>
+          <h2 class="mt-4 font-display font-black text-4xl md:text-5xl leading-[0.95] tracking-[-0.02em]">Un vistazo dentro</h2>
+          <p class="mt-4 text-muted leading-[1.7] max-w-lg">4 flows clave: dashboard, preview obligatorio, scan en vivo y backup.</p>
+        </header>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {slides.map((s) => (
+            <button type="button" data-slide-open={s.id} aria-label={`Abrir preview: ${s.label}`} class="group relative aspect-[3/4] rounded-2xl border-2 border-ink/20 overflow-hidden hover:-translate-y-1 hover:shadow-[0_18px_36px_-12px_rgba(26,24,21,0.45)] hover:border-ink cursor-zoom-in transition-all" style="--slide-pad: 12px; --slide-meta: 7px; --slide-sub: 12px; --slide-sub-sm: 10px; --slide-body: 6.5px; --slide-footer: 5.5px; --slide-dot: 5px; --slide-bar-h: 3px; --slide-ring: 40px;">
+              <GgleanerSlide variant={s.variant} />
+              <div class="absolute top-2 right-2 size-7 grid place-items-center rounded-full bg-secondary text-ink border-2 border-ink opacity-0 group-hover:opacity-100 transition translate-y-1 group-hover:translate-y-0">
+                <svg viewBox="0 0 24 24" class="size-3.5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.3-4.3" /><path d="M11 8v6M8 11h6" /></svg>
+              </div>
+            </button>
+          ))}
+        </div>
+      </section>
+
+      {slides.map((s) => (
+        <dialog data-slide={s.id} class="gdd-dialog relative w-[min(92vw,720px)] max-h-[92vh] p-0 m-auto rounded-3xl border-[3px] border-ink bg-[#0f0d0b] text-base-soft backdrop:bg-ink/80 backdrop:backdrop-blur-sm overflow-hidden" aria-label={`Preview: ${s.label}`}>
+          <div class="relative aspect-[3/4] w-full" style="--slide-pad: 28px; --slide-meta: 13px; --slide-sub: 28px; --slide-sub-sm: 22px; --slide-body: 13px; --slide-footer: 11px; --slide-dot: 11px; --slide-bar-h: 8px; --slide-ring: 100px;">
+            <GgleanerSlide variant={s.variant} />
+          </div>
+          <button type="button" data-slide-close aria-label="Cerrar preview" class="absolute top-4 right-4 grid size-11 place-items-center rounded-full bg-secondary text-ink border-2 border-ink shadow-[3px_3px_0_0_#1a1815] hover:bg-primary hover:text-base-soft transition-colors">
+            <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12" /></svg>
+          </button>
+        </dialog>
+      ))}
+
+      <div id="problema" class="mt-24 md:mt-28 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 scroll-mt-28">
+        <div class="lg:col-span-8 space-y-20 md:space-y-24">
+          <section>
+            <header class="mb-6">
+              <div class="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-ink/60">
+                <span class="size-1.5 rounded-full bg-primary"></span>
+                § 01 · El problema
+              </div>
+              <h2 class="mt-3 font-display font-black text-4xl md:text-5xl leading-[0.95] tracking-[-0.02em]">Por qué los devs odian los system cleaners</h2>
+            </header>
+            <div class="space-y-5 text-lg text-muted leading-[1.7] max-w-2xl">
+              <p>
+                Los cleaners tradicionales fueron
+                <strong class="text-ink font-semibold">diseñados para tu mamá</strong>. Borrar "archivos temporales" en un entorno dev significa tirar la caché de Unity (30 min de re-importación), el DerivedDataCache de Unreal (2+ horas de shader rebuild), o los node_modules que tu pipeline necesita.
+              </p>
+              <p>
+                GGleaner entiende que
+                <strong class="text-ink font-semibold">la 'basura' de un dev no es la misma que la basura de un usuario común</strong>. Tiene módulos específicos para Unity, Unreal, Godot, Docker, npm. Preview obligatorio. Backup automático. Cero telemetría.
+              </p>
+              <p>
+                Lo construí porque CCleaner me borró mi Unity Library tres veces. Tres. Veces.
+              </p>
+            </div>
+          </section>
+
+          <section>
+            <header class="mb-8">
+              <div class="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-ink/60">
+                <span class="size-1.5 rounded-full" style="background: #937cff;"></span>
+                § 02 · Qué hay adentro
+              </div>
+              <h2 class="mt-3 font-display font-black text-4xl md:text-5xl leading-[0.95] tracking-[-0.02em]">Lo que trae v1.0</h2>
+            </header>
+            <ol class="divide-y-2 divide-secondary/20">
+              {howItWorks.map((step, i) => (
+                <li class="grid grid-cols-[auto_1fr] gap-x-3 md:gap-x-4 py-8 md:py-10 first:pt-0 last:pb-0">
+                  <div class="font-display font-black text-5xl md:text-6xl leading-[0.9] text-primary tabular-nums tracking-[-0.04em]">{String(i + 1).padStart(2, "0")}</div>
+                  <div class="pt-1">
+                    <h3 class="font-display font-bold text-xl md:text-2xl leading-tight tracking-tight">{step.title}</h3>
+                    <p class="mt-2 text-base md:text-lg text-muted leading-[1.6] max-w-lg">{step.body}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </section>
+
+          <section>
+            <header class="mb-10 flex items-end gap-5">
+              <div class="flex-1">
+                <div class="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-ink/60">
+                  <span class="size-1.5 rounded-full bg-pink"></span>
+                  § 03 · Lecciones
+                </div>
+                <h2 class="mt-3 font-display font-black text-4xl md:text-5xl leading-[0.95] tracking-[-0.02em]">Lo que aprendí <span class="relative inline-block">construyéndolo<svg aria-hidden="true" viewBox="0 0 300 16" preserveAspectRatio="none" class="absolute -bottom-1 left-0 w-full h-3"><path d="M2 10 C 60 2, 140 14, 220 6 S 296 2, 298 12" stroke="#e8546f" stroke-width="5" stroke-linecap="round" fill="none" /></svg></span></h2>
+              </div>
+              <div class="shrink-0 hidden sm:block" aria-hidden="true">
+                <img src="/mascot/mascot-idle.webp" alt="" width="1200" height="1200" class="w-20 md:w-24 h-auto float-mac" draggable="false" style="filter: drop-shadow(0 8px 14px rgba(26,24,21,0.22));" />
+              </div>
+            </header>
+            <ul class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {lessons.map((lesson, i) => (
+                <li class="relative rounded-2xl border-2 border-ink/10 bg-base-soft p-6 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_-12px_rgba(26,24,21,0.25)] transition-all">
+                  <div class="flex items-start gap-5">
+                    <div class="shrink-0 grid size-11 place-items-center rounded-xl border-2 border-ink shadow-[3px_3px_0_0_#1a1815]" style="background: #937cff;">
+                      {lesson.icon === "wrench" && <svg viewBox="0 0 24 24" class="size-5" fill="#f4d35e" stroke="#1a1815" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M14 4a4 4 0 0 1 6 5l-9 9-4 1 1-4 9-9-3-2Z" /></svg>}
+                      {lesson.icon === "globe" && <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="#1a1815" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" fill="#f4d35e" /><path d="M3 12h18" /><path d="M12 3c3 3 3 15 0 18" /></svg>}
+                      {lesson.icon === "shield" && <svg viewBox="0 0 24 24" class="size-5" fill="#f4d35e" stroke="#1a1815" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 3l9 3v5c0 5-4 9-9 10-5-1-9-5-9-10V6Z" /><path d="M8 12l3 3 5-6" fill="none" /></svg>}
+                      {lesson.icon === "archive" && <svg viewBox="0 0 24 24" class="size-5" fill="#f4d35e" stroke="#1a1815" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="5" rx="1" /><rect x="5" y="9" width="14" height="11" rx="1" /><path d="M10 13h4" fill="none" /></svg>}
+                      {lesson.icon === "target" && <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="#1a1815" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9" fill="#f4d35e" /><circle cx="12" cy="12" r="5" fill="#937cff" /><circle cx="12" cy="12" r="1.5" fill="#1a1815" stroke="none" /></svg>}
+                    </div>
+                    <div class="flex-1 min-w-0">
+                      <div class="font-mono text-[10px] uppercase tracking-[0.2em] text-muted tabular-nums">{String(i + 1).padStart(2, "0")} / {String(lessons.length).padStart(2, "0")}</div>
+                      <p class="mt-3 text-base md:text-[17px] leading-[1.6] text-ink">{lesson.text}</p>
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </section>
+        </div>
+
+        <aside class="lg:col-span-4 lg:sticky lg:top-28 lg:self-start space-y-6">
+          <div class="rounded-3xl border-2 border-ink bg-ink text-base-soft p-6 relative overflow-hidden">
+            <div aria-hidden="true" class="absolute inset-0 opacity-10" style="background-image: linear-gradient(to right, #937cff 1px, transparent 1px), linear-gradient(to bottom, #937cff 1px, transparent 1px); background-size: 24px 24px;"></div>
+            <div class="relative">
+              <div class="font-mono text-[10px] uppercase tracking-[0.2em]" style="color: #937cff;">● Shipping · v1.0</div>
+              <div class="mt-3 font-display font-black text-6xl md:text-7xl leading-none tracking-[-0.04em]">MIT</div>
+              <div class="mt-2 font-mono text-xs uppercase tracking-[0.16em] text-base-soft/70">Open source · GitHub</div>
+              <div class="mt-4 pt-4 border-t border-base-soft/20 font-mono text-[10px] uppercase tracking-[0.16em] text-base-soft/60">Windows 10 / 11 · .NET 6</div>
+            </div>
+          </div>
+
+          <div class="rounded-3xl border-2 border-ink/10 p-6" style="background: #f5f0e8;">
+            <div class="flex items-center gap-2 mb-4"><svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="#1a1815" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="5" rx="1" /><rect x="3" y="10" width="18" height="5" rx="1" /><rect x="3" y="16" width="18" height="5" rx="1" /></svg><h3 class="font-mono text-[11px] uppercase tracking-[0.2em] text-ink font-semibold">Stack</h3></div>
+            <ul class="flex flex-wrap gap-2">{stack.map((s) => <li class="rounded-full border border-ink/20 bg-base-soft/80 px-3 py-1 font-mono text-xs uppercase tracking-[0.14em] text-ink">{s}</li>)}</ul>
+          </div>
+
+          <div class="rounded-3xl border-2 border-ink/10 p-6" style="background: #f5f0e8;">
+            <div class="flex items-center gap-2 mb-4"><svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="#1a1815" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12l-8 8a2 2 0 0 1-3 0L3 14a2 2 0 0 1 0-3l8-8h8v8Z" /><circle cx="15" cy="9" r="1.5" fill="#1a1815" /></svg><h3 class="font-mono text-[11px] uppercase tracking-[0.2em] text-ink font-semibold">Tags</h3></div>
+            <ul class="flex flex-wrap gap-2">{tags.map((t) => <li class="rounded-full border border-dashed border-ink/30 px-3 py-1 font-mono text-xs uppercase tracking-[0.14em] text-ink/70">{t}</li>)}</ul>
+          </div>
+        </aside>
+      </div>
+
+      <section class="mt-24 md:mt-24 relative">
+        <div class="relative rounded-3xl border-2 border-ink text-base-soft overflow-hidden shadow-[8px_8px_0_0_#937cff]" style="background: #1a1815;">
+          <div aria-hidden="true" class="absolute inset-0 opacity-[0.1]" style="background-image: linear-gradient(to right, #937cff 1px, transparent 1px), linear-gradient(to bottom, #937cff 1px, transparent 1px); background-size: 32px 32px;"></div>
+          <div class="relative grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 md:gap-10 items-center px-8 md:px-12 py-12 md:py-16">
+            <div>
+              <div class="font-mono text-[11px] uppercase tracking-[0.2em]" style="color: #937cff;">Gratis · Open Source · MIT</div>
+              <h2 class="mt-4 font-display font-black text-5xl md:text-6xl lg:text-7xl leading-[0.92] tracking-[-0.035em]">Descarga GGleaner<br />gratis en GitHub</h2>
+              <div class="mt-8 flex flex-wrap items-center gap-4">
+                <a href="https://github.com/Thonking3637" target="_blank" rel="noopener" class="group inline-flex items-center gap-3 rounded-full bg-primary text-ink pl-6 pr-2 py-2.5 font-display font-bold text-lg md:text-xl hover:bg-secondary hover:text-ink transition-colors">
+                  Ver en GitHub
+                  <span class="grid size-11 place-items-center rounded-full bg-ink text-primary group-hover:bg-ink group-hover:text-secondary transition-colors">
+                    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" class="size-5"><path d="M12 5v14M5 12l7 7 7-7" /></svg>
+                  </span>
+                </a>
+              </div>
+              <div class="mt-5 font-mono text-xs md:text-sm uppercase tracking-[0.16em] text-base-soft/70">Windows 10 / 11 · Cero telemetría</div>
+            </div>
+            <div class="justify-self-center md:justify-self-end shrink-0" aria-hidden="true">
+              <div class="relative">
+                <img src="/mascot/mascot-hero-happy.webp" alt="" width="1200" height="1200" class="w-32 md:w-40 h-auto float-mac" draggable="false" style="filter: drop-shadow(0 18px 30px rgba(147,124,255,0.5));" />
+                <div class="absolute left-1/2 -translate-x-1/2 -bottom-1 w-[70%] h-3 rounded-[50%]" style="background: radial-gradient(ellipse, rgba(0,0,0,0.6) 0%, rgba(0,0,0,0) 70%); filter: blur(2px);"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="mt-20 flex flex-wrap items-center justify-between gap-4">
+          <a href="/productos" class="group inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-muted hover:text-ink transition"><svg viewBox="0 0 40 32" class="size-4 transition-transform group-hover:-translate-x-0.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4 L4 16 L14 28" /><path d="M4 16 L36 16" /></svg>Más productos Thonking</a>
+          <a href="mailto:gabriel@thonking.dev" class="font-mono text-xs uppercase tracking-[0.18em] text-muted hover:text-ink transition">¿Necesitas algo similar? → gabriel@thonking.dev</a>
+        </div>
+      </section>
+    </article>
+  </main>
+  <Footer />
+  <ProductSchema product={product} />
+</Layout>
+
+<script>
+  const openers = document.querySelectorAll<HTMLButtonElement>("[data-slide-open]");
+  const closers = document.querySelectorAll<HTMLButtonElement>("[data-slide-close]");
+  let savedScrollY = 0; let lastTrigger: HTMLButtonElement | null = null;
+  const lockScroll = () => { savedScrollY = window.scrollY; const b = document.body; b.style.position = "fixed"; b.style.top = `-${savedScrollY}px`; b.style.left = "0"; b.style.right = "0"; b.style.width = "100%"; };
+  const unlockScroll = () => { const b = document.body; b.style.position = ""; b.style.top = ""; b.style.left = ""; b.style.right = ""; b.style.width = ""; window.scrollTo({ top: savedScrollY, behavior: "instant" as ScrollBehavior }); };
+  openers.forEach((btn) => btn.addEventListener("click", () => { const id = btn.dataset.slideOpen; const dlg = document.querySelector<HTMLDialogElement>(`dialog[data-slide="${id}"]`); if (dlg) { lastTrigger = btn; lockScroll(); dlg.showModal(); } }));
+  closers.forEach((btn) => btn.addEventListener("click", () => btn.closest<HTMLDialogElement>("dialog")?.close()));
+  document.querySelectorAll<HTMLDialogElement>("dialog.gdd-dialog").forEach((dlg) => { dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); }); dlg.addEventListener("close", () => { unlockScroll(); if (lastTrigger) { lastTrigger.focus({ preventScroll: true }); lastTrigger = null; } }); });
+</script>
+
+<style>
+  .gdd-dialog[open] { animation: gdd-dialog-in 220ms cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .gdd-dialog::backdrop { animation: gdd-backdrop-in 220ms ease-out; }
+  @keyframes gdd-dialog-in { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
+  @keyframes gdd-backdrop-in { from { opacity: 0; } to { opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) { .gdd-dialog[open], .gdd-dialog::backdrop { animation: none; } }
+</style>

@@ -1,0 +1,225 @@
+---
+const timeline = [
+  { year: "2020", label: "Primer rol en gamedev (Tester · 3S Design · MINEDU)", tone: "ink" },
+  { year: "2021", label: "Freelance Unity + preventa 3D/AR (Lima)", tone: "ink" },
+  { year: "2021", label: "GDD Template publicado en itch.io", tone: "primary" },
+  { year: "2024", label: "Entro a gamificación enterprise (Soriana · MX)", tone: "ink" },
+  { year: "2025", label: "Herramientas internas (ElevenLabs Batch, Unity tools)", tone: "ink" },
+  { year: "2025", label: "Proyecto VR enterprise (cancelado, con avances)", tone: "pink" },
+  { year: "2026", label: "thonking.dev + GGleaner v1.0 + apps indie", tone: "secondary" },
+];
+
+const mainStack = [
+  "Unity",
+  "C#",
+  "Game Design",
+  "VR · MetaQuest 3",
+  "Kotlin",
+  "Firebase",
+  "Android",
+];
+
+const alsoWith = ["Astro", "Tailwind", "TypeScript", "HTML/CSS"];
+---
+
+<section id="sobre" class="relative isolate py-24 md:py-32 overflow-hidden">
+  <!-- decorative background type -->
+  <div
+    aria-hidden="true"
+    class="pointer-events-none select-none absolute inset-x-0 top-8 flex justify-center"
+  >
+    <span
+      class="hero-stroke font-pixel text-[22vw] md:text-[16vw] leading-none tracking-tight opacity-[0.05]"
+      >EL HUMANO</span
+    >
+  </div>
+
+  <div class="relative mx-auto w-full max-w-[1280px] px-6 md:px-10">
+    <!-- Section header -->
+    <header class="mb-14 md:mb-20">
+      <div
+        class="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-ink/60"
+      >
+        <span class="size-1.5 rounded-full bg-pink"></span>
+        Sobre
+      </div>
+      <h2
+        class="mt-3 font-display font-black text-6xl md:text-7xl lg:text-8xl leading-[0.9] tracking-[-0.03em] max-w-4xl"
+      >
+        6 años haciendo que <span class="relative inline-block">
+          aprender
+          <svg
+            aria-hidden="true"
+            viewBox="0 0 360 28"
+            preserveAspectRatio="none"
+            class="absolute -bottom-1.5 left-0 w-full h-5"
+          >
+            <path
+              d="M4 16 C 80 4, 180 24, 260 12 S 354 4, 356 18"
+              stroke="#e8546f"
+              stroke-width="8"
+              stroke-linecap="round"
+              fill="none"
+            />
+          </svg>
+        </span> no se sienta como tarea.
+      </h2>
+    </header>
+
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-16">
+      <!-- LEFT: Mascot + stats -->
+      <div class="lg:col-span-4 space-y-8">
+        <div class="relative">
+          <div
+            class="relative aspect-square w-full max-w-xs mx-auto rounded-3xl bg-base-soft border border-ink/10 overflow-hidden p-8 shadow-[0_20px_50px_-20px_rgba(26,24,21,0.25)]"
+          >
+            <div
+              aria-hidden="true"
+              class="absolute inset-0 opacity-[0.1]"
+              style="background-image: radial-gradient(circle, #1a1815 1px, transparent 1px); background-size: 22px 22px;"
+            >
+            </div>
+            <img
+              src="/mascot/mascot-idle.webp"
+              alt="Mascot Thonking"
+              width="1200"
+              height="1200"
+              loading="lazy"
+              class="relative w-full h-auto float-mac"
+              style="filter: drop-shadow(0 18px 30px rgba(26,24,21,0.25));"
+            />
+          </div>
+
+          <!-- signature-ish badge -->
+          <div
+            class="absolute -top-3 -right-2 rotate-[8deg] rounded-2xl border-2 border-ink bg-base px-3 py-1.5 font-pixel text-sm leading-none shadow-[3px_3px_0_0_#1a1815]"
+            aria-hidden="true"
+          >
+            hi 👋
+          </div>
+        </div>
+
+        <!-- Mini stats -->
+        <div class="grid grid-cols-3 gap-3">
+          <div class="rounded-2xl border border-ink/10 bg-base-soft p-3 text-center">
+            <div class="font-display font-black text-2xl md:text-3xl leading-none tracking-tight">6</div>
+            <div class="mt-1 font-mono text-[9px] uppercase tracking-[0.14em] text-muted">años gamedev</div>
+          </div>
+          <div class="rounded-2xl border border-ink/10 bg-base-soft p-3 text-center">
+            <div class="font-display font-black text-2xl md:text-3xl leading-none tracking-tight tabular-nums">6,221<span class="text-primary">+</span></div>
+            <div class="mt-1 font-mono text-[9px] uppercase tracking-[0.14em] text-muted">descargas</div>
+          </div>
+          <div class="rounded-2xl border border-ink/10 bg-base-soft p-3 text-center">
+            <div class="font-display font-black text-2xl md:text-3xl leading-none tracking-tight">7</div>
+            <div class="mt-1 font-mono text-[9px] uppercase tracking-[0.14em] text-muted">productos</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- RIGHT: Bio + philosophy + timeline + stack -->
+      <div class="lg:col-span-8 space-y-10">
+        <!-- Bio -->
+        <div class="space-y-5 text-lg md:text-xl leading-relaxed max-w-2xl">
+          <p>
+            Me llamo <strong class="font-semibold">Gabriel Ramírez</strong>,
+            tengo 28 y opero desde Lima como
+            <span class="font-mono text-ink">thonking</span>.
+          </p>
+          <p class="text-muted">
+            Llevo 6 años construyendo videojuegos y sistemas gamificados con
+            Unity y C# — empecé como tester en <strong class="font-semibold text-ink">3S Design</strong> en 2020,
+            luego freelance y preventa 3D/AR en Lima, y desde 2024 lidero
+            gamificación enterprise para <strong class="font-semibold text-ink">Soriana</strong>
+            (retailer top-3 de México) vía <strong class="font-semibold text-ink">ZinT3CH</strong>.
+          </p>
+          <p class="text-muted">
+            En paralelo publico herramientas, apps y experimentos bajo la marca
+            thonking. Todos los productos pasan por mis manos antes de salir —
+            los juego, los uso y los reviso. Si no me sirve a mí, no llega a la
+            tienda.
+          </p>
+        </div>
+
+        <!-- Philosophy pull quote -->
+        <figure
+          class="relative rounded-2xl border-l-4 border-primary bg-base-soft/80 backdrop-blur px-6 py-5 max-w-2xl"
+        >
+          <blockquote
+            class="font-display font-bold text-2xl md:text-3xl leading-tight tracking-tight"
+          >
+            El mejor training no se llama training. Los mejores docs no se
+            llaman docs.
+          </blockquote>
+          <figcaption class="mt-3 font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
+            — filosofía thonking
+          </figcaption>
+        </figure>
+
+        <!-- Timeline -->
+        <div>
+          <h3
+            class="font-mono text-[11px] uppercase tracking-[0.2em] text-muted mb-5"
+          >
+            Cronología
+          </h3>
+          <ol class="relative border-l-2 border-ink/10 pl-6 space-y-5">
+            {
+              timeline.map((item) => (
+                <li class="relative">
+                  <span
+                    class:list={[
+                      "absolute -left-[31px] top-1.5 size-4 rounded-full border-[3px] border-base",
+                      item.tone === "primary" && "bg-primary",
+                      item.tone === "pink" && "bg-pink",
+                      item.tone === "secondary" && "bg-secondary",
+                      item.tone === "ink" && "bg-ink",
+                    ]}
+                  />
+                  <div class="flex flex-wrap items-baseline gap-x-3 gap-y-1">
+                    <span class="font-mono text-sm font-semibold text-ink tabular-nums">
+                      {item.year}
+                    </span>
+                    <span class="text-muted">{item.label}</span>
+                  </div>
+                </li>
+              ))
+            }
+          </ol>
+        </div>
+
+        <!-- Stack -->
+        <div>
+          <h3
+            class="font-mono text-[11px] uppercase tracking-[0.2em] text-muted mb-4"
+          >
+            Stack principal
+          </h3>
+          <ul class="flex flex-wrap gap-2">
+            {
+              mainStack.map((t) => (
+                <li class="rounded-full border border-ink/15 bg-base-soft/70 px-3 py-1.5 font-mono text-xs uppercase tracking-[0.12em] text-ink">
+                  {t}
+                </li>
+              ))
+            }
+          </ul>
+
+          <h3
+            class="font-mono text-[11px] uppercase tracking-[0.2em] text-muted mt-6 mb-4"
+          >
+            También construyo con
+          </h3>
+          <ul class="flex flex-wrap gap-2">
+            {
+              alsoWith.map((t) => (
+                <li class="rounded-full border border-dashed border-ink/20 px-3 py-1.5 font-mono text-xs uppercase tracking-[0.12em] text-ink/70">
+                  {t}
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>

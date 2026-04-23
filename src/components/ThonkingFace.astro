@@ -1,0 +1,42 @@
+---
+interface Props {
+  class?: string;
+  alt?: string;
+  loading?: "eager" | "lazy";
+}
+const {
+  class: className = "",
+  alt = "Mascot Thonking — gato astronauta",
+  loading = "eager",
+} = Astro.props;
+---
+
+<div
+  class:list={["group relative block", className]}
+  role="img"
+  aria-label={alt}
+>
+  <img
+    src="/mascot/mascot-hero-idle.webp"
+    alt=""
+    aria-hidden="true"
+    width="1200"
+    height="1200"
+    loading={loading}
+    decoding="async"
+    fetchpriority={loading === "eager" ? "high" : "auto"}
+    draggable="false"
+    class="block w-full h-auto select-none transition-opacity duration-300 ease-out group-hover:opacity-0"
+  />
+  <img
+    src="/mascot/mascot-hero-happy.webp"
+    alt=""
+    aria-hidden="true"
+    width="1200"
+    height="1200"
+    loading="eager"
+    decoding="async"
+    draggable="false"
+    class="absolute inset-0 block w-full h-auto select-none opacity-0 transition-opacity duration-300 ease-out group-hover:opacity-100"
+  />
+</div>

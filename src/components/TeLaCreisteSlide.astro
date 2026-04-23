@@ -1,0 +1,221 @@
+---
+export type TLCSlideVariant = "title" | "question" | "reveal" | "stats";
+
+interface Props {
+  variant: TLCSlideVariant;
+}
+const { variant } = Astro.props;
+---
+
+<div
+  class="relative h-full w-full flex flex-col overflow-hidden"
+  style="padding: var(--slide-pad, 14px); background: radial-gradient(120% 90% at 50% 0%, #c93a3a 0%, #7a1f1f 100%); color: #ffe8d4;"
+>
+  <!-- Header meta -->
+  <div
+    class="relative flex items-center justify-between font-mono uppercase tracking-[0.22em] text-white/60"
+    style="font-size: var(--slide-meta, 7px);"
+  >
+    {variant === "title" && <span>Inicio · Pág 01</span>}
+    {variant === "question" && <span>Pág 02 · Quiz</span>}
+    {variant === "reveal" && <span>Pág 03 · Análisis</span>}
+    {variant === "stats" && <span>Pág 04 · Resumen</span>}
+    <span aria-hidden="true">▲ JNE</span>
+  </div>
+
+  {
+    variant === "title" && (
+      <div class="relative flex-1 flex flex-col items-center justify-center text-center">
+        <div
+          class="font-display font-black leading-[0.9] text-white"
+          style="font-size: var(--slide-title, 26px);"
+        >
+          ¿Te la
+          <br />
+          <span class="text-[#f4d35e]">creíste?</span>
+        </div>
+        <div
+          class="mt-[8%] font-mono text-white/80 uppercase tracking-[0.2em]"
+          style="font-size: var(--slide-meta, 7px);"
+        >
+          Elecciones · 12 abr 2026
+        </div>
+        <div
+          class="mt-[10%] flex items-center gap-[6%] font-mono text-white/70"
+          style="font-size: var(--slide-body, 7px);"
+        >
+          <div class="flex flex-col items-center gap-[3px]">
+            <span class="text-[#f4d35e] font-bold" style="font-size: var(--slide-sub, 14px);">35</span>
+            <span class="uppercase tracking-[0.16em]">Candidatos</span>
+          </div>
+          <span class="opacity-40" aria-hidden="true">|</span>
+          <div class="flex flex-col items-center gap-[3px]">
+            <span class="text-[#f4d35e] font-bold" style="font-size: var(--slide-sub, 14px);">169</span>
+            <span class="uppercase tracking-[0.16em]">Propuestas</span>
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  {
+    variant === "question" && (
+      <div class="relative flex-1 mt-[6%] flex flex-col">
+        <div
+          class="font-mono text-white/70 uppercase tracking-[0.18em]"
+          style="font-size: var(--slide-meta, 7px);"
+        >
+          Propuesta 047 · 169
+        </div>
+        <div
+          class="mt-[4%] font-display font-bold text-white leading-[1.25]"
+          style="font-size: var(--slide-sub, 11px);"
+        >
+          "Eliminaremos el IGV a los productos de primera necesidad
+          durante los próximos 5 años."
+        </div>
+        <div
+          class="mt-[5%] font-mono text-white/60 uppercase tracking-[0.14em]"
+          style="font-size: calc(var(--slide-meta, 7px) - 0.5px);"
+        >
+          Candidato · J. Pérez · Partido X
+        </div>
+
+        <div
+          class="mt-auto flex flex-col"
+          style="gap: var(--slide-gap-sm, 3px);"
+        >
+          {["Viable", "Exagerada", "Imposible", "Floro"].map((opt, i) => (
+            <div
+              class:list={[
+                "w-full text-left px-[8%] py-[5%] rounded-[4px] border font-mono uppercase tracking-[0.14em] flex items-center justify-between",
+                i === 3
+                  ? "bg-[#f4d35e] text-[#7a1f1f] border-[#f4d35e] font-bold"
+                  : "bg-white/5 text-white/80 border-white/15",
+              ]}
+              style="font-size: var(--slide-body, 7px);"
+            >
+              <span>{opt}</span>
+              {i === 3 && <span aria-hidden="true">←</span>}
+            </div>
+          ))}
+        </div>
+      </div>
+    )
+  }
+
+  {
+    variant === "reveal" && (
+      <div class="relative flex-1 mt-[6%] flex flex-col">
+        <div
+          class="font-pixel font-bold text-[#f4d35e]"
+          style="font-size: var(--slide-sub, 14px);"
+        >
+          FLORO SCORE
+        </div>
+        <div
+          class="font-display font-black leading-none text-white"
+          style="font-size: var(--slide-title, 32px);"
+        >
+          87<span class="text-[#f4d35e]">%</span>
+        </div>
+        <div
+          class="mt-[3%] font-mono text-white/60 uppercase tracking-[0.16em]"
+          style="font-size: var(--slide-meta, 7px);"
+        >
+          Propuesta no implementable con normativa actual
+        </div>
+
+        {/* Progress bar */}
+        <div class="mt-[6%] h-[3px] bg-white/10 rounded-full overflow-hidden">
+          <div class="h-full rounded-full" style="width: 87%; background: linear-gradient(90deg, #f4d35e, #ff6b4a);" />
+        </div>
+
+        <div
+          class="mt-[8%] flex flex-col"
+          style="gap: var(--slide-gap-sm, 4px); font-size: var(--slide-body, 7px);"
+        >
+          <div class="font-mono text-white/80">
+            <span class="text-[#f4d35e]">▸</span> Presupuesto actual IGV: 80B PEN
+          </div>
+          <div class="font-mono text-white/80">
+            <span class="text-[#f4d35e]">▸</span> Déficit resultante: imposible de absorber
+          </div>
+          <div class="font-mono text-white/80">
+            <span class="text-[#f4d35e]">▸</span> Plazo ofrecido sin mecanismo claro
+          </div>
+        </div>
+
+        <div
+          class="mt-auto pt-[6%] font-mono text-white/50 uppercase tracking-[0.16em]"
+          style="font-size: calc(var(--slide-meta, 7px) - 0.5px);"
+        >
+          Fuente: JNE · Planes de gobierno 2026
+        </div>
+      </div>
+    )
+  }
+
+  {
+    variant === "stats" && (
+      <div class="relative flex-1 mt-[6%] flex flex-col">
+        <div
+          class="font-pixel font-bold text-[#f4d35e]"
+          style="font-size: var(--slide-sub, 12px);"
+        >
+          TU RONDA
+        </div>
+        <div
+          class="font-display font-black leading-none text-white tabular-nums"
+          style="font-size: var(--slide-title, 30px);"
+        >
+          14<span class="text-white/40">/20</span>
+        </div>
+        <div
+          class="mt-[2%] font-mono text-white/60 uppercase tracking-[0.16em]"
+          style="font-size: var(--slide-meta, 7px);"
+        >
+          Distinguiste 14 de 20 propuestas
+        </div>
+
+        <ul
+          class="mt-[8%] flex flex-col font-mono"
+          style="gap: var(--slide-gap-sm, 4px); font-size: var(--slide-body, 7px);"
+        >
+          <li class="flex items-center justify-between text-white/80">
+            <span>Viable</span>
+            <span class="tabular-nums text-[#f4d35e] font-semibold">5</span>
+          </li>
+          <li class="flex items-center justify-between text-white/80">
+            <span>Exagerada</span>
+            <span class="tabular-nums text-[#f4d35e] font-semibold">4</span>
+          </li>
+          <li class="flex items-center justify-between text-white/80">
+            <span>Imposible</span>
+            <span class="tabular-nums text-[#f4d35e] font-semibold">3</span>
+          </li>
+          <li class="flex items-center justify-between text-white/80">
+            <span>Floro</span>
+            <span class="tabular-nums text-[#f4d35e] font-semibold">2</span>
+          </li>
+        </ul>
+
+        <div
+          class="mt-auto pt-[6%] font-mono text-white/50 uppercase tracking-[0.14em]"
+          style="font-size: calc(var(--slide-meta, 7px) - 0.5px);"
+        >
+          Mejor que el 62% de jugadores
+        </div>
+      </div>
+    )
+  }
+
+  <!-- Footer -->
+  <div
+    class="relative mt-auto pt-[4%] border-t border-white/10 flex items-center justify-between font-mono uppercase tracking-[0.22em] text-white/50"
+    style="font-size: var(--slide-footer, 6px);"
+  >
+    <span>THONKING · ¿Te la creíste?</span>
+    <span class="text-[#f4d35e]">v1.0</span>
+  </div>
+</div>

@@ -1,17 +1,41 @@
 ---
+import Layout from "../layouts/Layout.astro";
+import Navbar from "../components/Navbar.astro";
+import Hero from "../components/Hero.astro";
+import Stats from "../components/Stats.astro";
+import Products from "../components/Products.astro";
+import About from "../components/About.astro";
+import Contact from "../components/Contact.astro";
+import Footer from "../components/Footer.astro";
 
+const websiteSchema = {
+  "@context": "https://schema.org",
+  "@type": "WebSite",
+  name: "Thonking",
+  url: "https://thonking.dev",
+  description: "Unity Developer · Gamificación & Tools",
+  inLanguage: "es-PE",
+  author: {
+    "@type": "Person",
+    name: "Gabriel Ramírez González",
+    email: "gabriel@thonking.dev",
+    url: "https://thonking.dev",
+  },
+};
 ---
 
-<html lang="en">
-	<head>
-		<meta charset="utf-8" />
-		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
-		<link rel="icon" href="/favicon.ico" />
-		<meta name="viewport" content="width=device-width" />
-		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
-	</head>
-	<body>
-		<h1>Astro</h1>
-	</body>
-</html>
+<Layout>
+  <Navbar />
+  <main id="main">
+    <Hero />
+    <Stats />
+    <Products />
+    <About />
+    <Contact />
+  </main>
+  <Footer />
+  <script
+    type="application/ld+json"
+    set:html={JSON.stringify(websiteSchema)}
+  />
+</Layout>

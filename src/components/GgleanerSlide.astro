@@ -1,0 +1,170 @@
+---
+export type GgSlideVariant = "dashboard" | "preview" | "scan" | "backup";
+interface Props { variant: GgSlideVariant; }
+const { variant } = Astro.props;
+---
+
+<div
+  class="relative h-full w-full flex flex-col overflow-hidden"
+  style="padding: var(--slide-pad, 14px); background: linear-gradient(160deg, #0f0d0b 0%, #1a1815 100%); color: #ffe8d4;"
+>
+  <!-- Top titlebar like a macOS window -->
+  <div class="relative flex items-center gap-[4px]" style="padding-bottom: var(--slide-pad, 6px);">
+    <span class="inline-block rounded-full bg-[#ff6b4a]" style="width: var(--slide-dot, 6px); height: var(--slide-dot, 6px);"></span>
+    <span class="inline-block rounded-full bg-[#f4d35e]" style="width: var(--slide-dot, 6px); height: var(--slide-dot, 6px);"></span>
+    <span class="inline-block rounded-full bg-[#937cff]" style="width: var(--slide-dot, 6px); height: var(--slide-dot, 6px);"></span>
+    <span class="ml-auto font-mono uppercase tracking-[0.2em] text-white/50" style="font-size: var(--slide-meta, 7px);">GGleaner · v1.0</span>
+  </div>
+
+  {variant === "dashboard" && (
+    <div class="relative flex-1 grid grid-cols-[30%_1fr] gap-[4%]">
+      <!-- sidebar -->
+      <div class="flex flex-col gap-[6px] font-mono text-white/70" style="font-size: calc(var(--slide-meta, 7px) - 0.5px);">
+        {["Inicio", "Sistema", "Navegadores", "Dev Tools", "Inicio auto", "Análisis"].map((item, i) => (
+          <div class:list={[
+            "flex items-center gap-[4px] rounded-[3px]",
+            i === 3 && "bg-[#937cff]/15 text-[#937cff] font-semibold"
+          ]} style="padding: 3px 5px;">
+            <span aria-hidden="true">●</span>
+            <span>{item}</span>
+          </div>
+        ))}
+      </div>
+      <!-- main content -->
+      <div class="flex flex-col">
+        <div class="font-mono uppercase tracking-[0.2em] text-white/50" style="font-size: var(--slide-meta, 7px);">Módulo · Dev Tools</div>
+        <div class="mt-[3%] font-pixel font-bold text-[#ff6b4a]" style="font-size: var(--slide-sub, 13px);">Limpieza de Devs</div>
+        <div class="mt-[2%] font-mono text-white/60" style="font-size: var(--slide-body, 7px);">Unity, Unreal, Godot, Docker, npm</div>
+
+        <!-- 3 stat cards -->
+        <div class="mt-[6%] grid grid-cols-3 gap-[4%]">
+          {[
+            { n: "1,847", l: "Archivos", c: "#f4d35e" },
+            { n: "2.4 GB", l: "Liberable", c: "#ff6b4a" },
+            { n: "23", l: "Registros", c: "#937cff" },
+          ].map((s) => (
+            <div class="rounded-[4px] bg-white/5 border border-white/10 px-[6%] py-[8%]">
+              <div class="font-display font-black tabular-nums" style={`font-size: var(--slide-sub-sm, 11px); color: ${s.c}`}>{s.n}</div>
+              <div class="font-mono uppercase tracking-[0.14em] text-white/50" style="font-size: calc(var(--slide-footer, 6px) - 0px);">{s.l}</div>
+            </div>
+          ))}
+        </div>
+
+        <!-- file list preview -->
+        <ul class="mt-[6%] flex flex-col gap-[3px] font-mono text-white/80" style="font-size: var(--slide-body, 7px);">
+          {["Unity Library", "Unreal Intermediate", "Docker overlay2"].map((f) => (
+            <li class="flex items-center justify-between border-b border-white/10 pb-[3px]">
+              <span class="flex items-center gap-[4px]"><span class="text-[#f4d35e]">☐</span>{f}</span>
+              <span class="text-[#937cff] tabular-nums">847 MB</span>
+            </li>
+          ))}
+        </ul>
+      </div>
+    </div>
+  )}
+
+  {variant === "preview" && (
+    <div class="relative flex-1 mt-[3%] flex flex-col">
+      <div class="font-mono uppercase tracking-[0.2em] text-white/50" style="font-size: var(--slide-meta, 7px);">Preview · Antes de borrar</div>
+      <div class="mt-[3%] font-pixel font-bold text-[#ff6b4a]" style="font-size: var(--slide-sub, 13px);">Confirma la limpieza</div>
+      <div class="mt-[4%] rounded-[4px] border border-[#ff6b4a]/40 bg-[#ff6b4a]/5 p-[4%] font-mono text-white/80" style="font-size: var(--slide-body, 7px);">
+        <div class="flex items-start gap-[4px]">
+          <span class="text-[#ff6b4a] font-bold">⚠</span>
+          <span>Se eliminarán 1,847 archivos (~2.4 GB). Backup automático del registro creado en D:\Backup\</span>
+        </div>
+      </div>
+
+      <ul class="mt-[5%] flex flex-col gap-[4px] font-mono" style="font-size: var(--slide-body, 7px);">
+        {[
+          { n: "Windows Temp", s: "847 MB", r: "Seguro" },
+          { n: "User Temp", s: "612 MB", r: "Seguro" },
+          { n: "Update Cache", s: "743 MB", r: "Precaución" },
+          { n: "Papelera", s: "124 MB", r: "Precaución" },
+        ].map((f) => (
+          <li class="flex items-center justify-between border-b border-white/10 pb-[4px]">
+            <span class="flex items-center gap-[5px] text-white/80">
+              <span class="text-[#f4d35e]">✓</span>
+              <span>{f.n}</span>
+            </span>
+            <div class="flex items-center gap-[8px]">
+              <span class="text-white/50 tabular-nums">{f.s}</span>
+              <span class:list={[
+                "rounded-full px-[5px] py-[1px] uppercase tracking-[0.14em]",
+                f.r === "Seguro" ? "bg-[#4ade80]/20 text-[#86efac]" : "bg-[#ff6b4a]/20 text-[#ffb59e]"
+              ]} style="font-size: calc(var(--slide-footer, 6px) - 0.5px);">{f.r}</span>
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      <div class="mt-auto pt-[4%] flex items-center gap-[4%]">
+        <div class="flex-1 text-center rounded-[4px] border border-white/15 text-white/70 font-mono uppercase tracking-[0.16em] py-[6px]" style="font-size: var(--slide-meta, 7px);">Cancelar</div>
+        <div class="flex-1 text-center rounded-[4px] bg-[#ff6b4a] text-[#1a1815] font-mono font-bold uppercase tracking-[0.16em] py-[6px]" style="font-size: var(--slide-meta, 7px);">Limpiar · 2.4 GB</div>
+      </div>
+    </div>
+  )}
+
+  {variant === "scan" && (
+    <div class="relative flex-1 mt-[4%] flex flex-col items-center justify-center">
+      <div class="font-mono uppercase tracking-[0.2em] text-white/50" style="font-size: var(--slide-meta, 7px);">Escaneando disco</div>
+      <div class="mt-[4%] font-pixel font-bold text-[#937cff]" style="font-size: var(--slide-sub, 14px);">SCAN · 67%</div>
+
+      <div class="mt-[5%] w-full rounded-full overflow-hidden bg-white/10" style="height: var(--slide-bar-h, 4px);">
+        <div class="h-full rounded-full" style="width: 67%; background: linear-gradient(90deg, #ff6b4a, #937cff);"></div>
+      </div>
+
+      <ul class="mt-[8%] w-full flex flex-col gap-[3px] font-mono text-white/70 text-left" style="font-size: var(--slide-body, 7px);">
+        {[
+          { s: "✓", t: "C:\\Windows\\Temp", d: "done" },
+          { s: "✓", t: "C:\\Users\\G\\AppData\\Local\\Temp", d: "done" },
+          { s: "◐", t: "C:\\Users\\G\\Projects\\Unity\\Library", d: "active" },
+          { s: "○", t: "C:\\Docker\\overlay2", d: "pending" },
+          { s: "○", t: "C:\\Program Files\\Epic\\DDC", d: "pending" },
+        ].map((row) => (
+          <li class:list={[
+            "flex items-center gap-[5px] truncate",
+            row.d === "done" && "text-white/50",
+            row.d === "active" && "text-[#937cff]",
+            row.d === "pending" && "text-white/30",
+          ]}>
+            <span class:list={[row.d === "active" && "animate-pulse"]}>{row.s}</span>
+            <span class="truncate">{row.t}</span>
+          </li>
+        ))}
+      </ul>
+
+      <div class="mt-auto pt-[4%] font-mono text-white/50 uppercase tracking-[0.16em]" style="font-size: calc(var(--slide-footer, 6px) - 0px);">
+        ETA · 12s · 4,312 archivos procesados
+      </div>
+    </div>
+  )}
+
+  {variant === "backup" && (
+    <div class="relative flex-1 mt-[6%] flex flex-col items-center justify-center text-center">
+      <div class="grid place-items-center rounded-full bg-[#4ade80]/15 border-2 border-[#4ade80]" style="width: var(--slide-ring, 48px); height: var(--slide-ring, 48px);">
+        <span class="text-[#4ade80] font-bold" style="font-size: var(--slide-sub, 20px);">✓</span>
+      </div>
+      <div class="mt-[5%] font-pixel font-bold text-[#4ade80]" style="font-size: var(--slide-sub, 14px);">BACKUP LISTO</div>
+      <div class="mt-[3%] font-mono text-white/70 text-center" style="font-size: var(--slide-body, 7px);">
+        Registro de Windows guardado en<br/>
+        <span class="text-[#f4d35e]">D:\Backup\2026-04-23_1243.reg</span>
+      </div>
+
+      <div class="mt-[8%] grid grid-cols-2 gap-[6%] w-full font-mono" style="font-size: var(--slide-body, 7px);">
+        <div class="rounded-[4px] border border-white/10 p-[5%] text-left">
+          <div class="text-white/50 uppercase tracking-[0.14em]" style="font-size: calc(var(--slide-footer, 6px) - 0px);">Liberado</div>
+          <div class="mt-[4px] text-[#f4d35e] font-bold tabular-nums" style="font-size: var(--slide-sub-sm, 12px);">2.4 GB</div>
+        </div>
+        <div class="rounded-[4px] border border-white/10 p-[5%] text-left">
+          <div class="text-white/50 uppercase tracking-[0.14em]" style="font-size: calc(var(--slide-footer, 6px) - 0px);">Tiempo</div>
+          <div class="mt-[4px] text-[#ff6b4a] font-bold tabular-nums" style="font-size: var(--slide-sub-sm, 12px);">1m 48s</div>
+        </div>
+      </div>
+    </div>
+  )}
+
+  <div class="relative mt-auto pt-[4%] border-t border-white/10 flex items-center justify-between font-mono uppercase tracking-[0.22em] text-white/50" style="font-size: var(--slide-footer, 6px);">
+    <span>THONKING · GGleaner</span>
+    <span class="text-[#ff6b4a]">open source</span>
+  </div>
+</div>

@@ -1,0 +1,124 @@
+---
+import "../styles/global.css";
+
+interface Props {
+  title?: string;
+  description?: string;
+  ogImage?: string;
+  path?: string;
+  noindex?: boolean;
+}
+
+const {
+  title = "Thonking — Gabriel Ramírez, Unity developer desde Lima",
+  description = "Hago que la gente aprenda jugando. 6 años haciendo videojuegos y sistemas gamificados con Unity y C#. Portfolio de Gabriel Ramírez, Lima, Perú.",
+  ogImage = "/og-image.png",
+  path = "/",
+  noindex = false,
+} = Astro.props;
+
+const canonical = `https://thonking.dev${path}`;
+---
+
+<!doctype html>
+<html lang="es">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <meta name="generator" content={Astro.generator} />
+
+    <title>{title}</title>
+    <meta name="description" content={description} />
+    <link rel="canonical" href={canonical} />
+    {noindex && <meta name="robots" content="noindex" />}
+    <meta name="theme-color" content="#FF6B4A" />
+    <meta name="theme-color" content="#edebe6" media="(prefers-color-scheme: light)" />
+    <meta name="theme-color" content="#0f0d0b" media="(prefers-color-scheme: dark)" />
+    <meta name="color-scheme" content="light dark" />
+
+    <!-- Theme init (runs BEFORE body paints — no FOUC) -->
+    <script is:inline>
+      (function () {
+        try {
+          var stored = localStorage.getItem("theme");
+          var prefersDark = window.matchMedia(
+            "(prefers-color-scheme: dark)"
+          ).matches;
+          var theme = stored || (prefersDark ? "dark" : "light");
+          if (theme === "dark")
+            document.documentElement.classList.add("dark");
+        } catch (_) {}
+      })();
+    </script>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/x-icon" href="/favicon.ico" />
+    <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+    <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png" />
+    <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content={canonical} />
+    <meta property="og:title" content={title} />
+    <meta property="og:description" content={description} />
+    <meta property="og:image" content={ogImage} />
+    <meta property="og:locale" content="es_PE" />
+    <meta property="og:site_name" content="Thonking" />
+
+    <!-- Twitter -->
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content={title} />
+    <meta name="twitter:description" content={description} />
+    <meta name="twitter:image" content={ogImage} />
+
+    <!-- Author -->
+    <meta name="author" content="Gabriel Ramírez González" />
+    <meta
+      name="keywords"
+      content="Unity developer, game developer Perú, gamificación, VR, MetaQuest, Lima, Thonking, Gabriel Ramírez"
+    />
+
+    <!-- Fonts: Geist + JetBrains Mono + Pixelify Sans -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;700&family=Pixelify+Sans:wght@400;700&display=swap"
+    />
+
+    <!-- JSON-LD (Person schema) -->
+    <script
+      type="application/ld+json"
+      set:html={JSON.stringify({
+        "@context": "https://schema.org",
+        "@type": "Person",
+        name: "Gabriel Ramírez González",
+        alternateName: "Thonking",
+        url: "https://thonking.dev",
+        image: "https://thonking.dev/og-image.png",
+        jobTitle: "Unity Developer",
+        sameAs: [
+          "https://github.com/Thonking3637",
+          "https://thonking.itch.io",
+          "https://www.linkedin.com/in/gabrielramirezgonzalez/",
+        ],
+        address: {
+          "@type": "PostalAddress",
+          addressLocality: "Lima",
+          addressCountry: "PE",
+        },
+      })}
+    />
+  </head>
+  <body class="grain antialiased overflow-x-hidden">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-4 focus:left-4 focus:z-[100] focus:px-4 focus:py-2 focus:bg-ink focus:text-base-soft focus:rounded-md focus:font-mono focus:text-sm focus:font-semibold focus:shadow-lg"
+    >
+      Saltar al contenido
+    </a>
+    <slot />
+  </body>
+</html>

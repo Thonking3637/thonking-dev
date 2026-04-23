@@ -1,0 +1,345 @@
+---
+import ThonkingFace from "./ThonkingFace.astro";
+---
+
+<section
+  id="top"
+  class="relative isolate overflow-hidden pt-32 pb-20 md:pt-40 md:pb-24"
+>
+  <!-- giant outlined background type -->
+  <div
+    aria-hidden="true"
+    class="pointer-events-none select-none absolute inset-x-0 top-[18%] flex justify-center"
+  >
+    <span
+      class="hero-stroke font-pixel text-[22vw] md:text-[18vw] leading-none tracking-tight opacity-[0.08]"
+      >THONKING STUDIO</span
+    >
+  </div>
+
+  <!-- decorative grid dots -->
+  <div
+    aria-hidden="true"
+    class="absolute inset-0 -z-10 opacity-[0.12]"
+    style="background-image: radial-gradient(circle, #1a1815 1px, transparent 1px); background-size: 28px 28px;"
+  >
+  </div>
+
+  <div class="relative mx-auto w-full max-w-[1280px] px-6 md:px-10">
+    <!-- TOP BADGE STRIP -->
+    <div class="flex items-center justify-center">
+      <div
+        class="rise rise-1 inline-flex items-center gap-2 rounded-full border border-ink/15 bg-base-soft/80 backdrop-blur px-3.5 py-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-ink/75"
+      >
+        <span class="relative flex size-2">
+          <span
+            class="absolute inline-flex h-full w-full rounded-full bg-primary/60 animate-ping"
+          ></span>
+          <span class="relative inline-flex size-2 rounded-full bg-primary"></span>
+        </span>
+        Lima, Perú
+      </div>
+    </div>
+
+    <!-- MAIN GRID -->
+    <div
+      class="mt-10 md:mt-14 grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-10 items-center"
+    >
+      <!-- LEFT: HEADLINE (3 lines) -->
+      <div class="lg:col-span-5 order-2 lg:order-1 relative z-10">
+        <h1
+          class="font-display font-black leading-[0.9] tracking-[-0.04em] text-5xl sm:text-6xl md:text-7xl lg:text-[5rem]"
+        >
+          <span class="rise rise-2 block">HAGO QUE</span>
+          <span class="rise rise-3 block">LA GENTE APRENDA</span>
+          <span class="rise rise-4 relative inline-block pr-2 mt-1">
+            <span class="relative z-10 text-secondary">JUGANDO</span>
+            <!-- hand-drawn underline -->
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 460 40"
+              class="absolute -bottom-2 left-0 w-full h-8 overflow-visible"
+              preserveAspectRatio="none"
+            >
+              <path
+                class="draw-line"
+                d="M4 22 C 80 6, 170 34, 256 18 S 420 6, 456 22"
+                stroke="#f4d35e"
+                stroke-width="12"
+                stroke-linecap="round"
+                fill="none"
+              />
+            </svg>
+          </span>
+        </h1>
+
+        <p
+          class="rise rise-6 mt-8 max-w-lg text-base md:text-lg text-muted leading-relaxed"
+        >
+          Hago videojuegos y sistemas gamificados con
+          <em class="not-italic font-semibold text-ink">Unity y C#</em> desde
+          hace 6 años. También envío herramientas e indie apps bajo la marca
+          <span class="font-mono text-ink">thonking</span> — cada una la juego,
+          la uso y la reviso yo mismo antes de que salga.
+        </p>
+
+        <div class="rise rise-6 mt-8 flex flex-wrap items-center gap-3">
+          <a
+            href="#trabajo"
+            class="group inline-flex items-center gap-2 rounded-full bg-primary px-5 py-3 text-base font-semibold text-base-soft transition-transform hover:scale-[1.03] hover:shadow-[0_0_0_6px_rgba(255,107,74,0.18)]"
+          >
+            Ver proyectos
+            <svg
+              class="size-4 transition-transform group-hover:translate-x-0.5"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="2.5"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              aria-hidden="true"
+            >
+              <path d="M5 12h14M13 5l7 7-7 7" />
+            </svg>
+          </a>
+          <a
+            href="#contacto"
+            class="inline-flex items-center gap-2 rounded-full border border-ink/20 bg-base-soft/60 backdrop-blur px-5 py-3 text-base font-semibold text-ink hover:bg-base transition"
+          >
+            <span class="size-2 rounded-full bg-pink"></span>
+            Hablemos
+          </a>
+        </div>
+
+        <!-- stack chips -->
+        <ul
+          class="rise rise-6 mt-10 flex flex-wrap gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-ink/70"
+        >
+          {
+            ["Unity", "C#", "Kotlin", "Firebase", "Astro", "TypeScript"].map(
+              (t) => (
+                <li class="rounded-full border border-ink/15 bg-base-soft/70 px-2.5 py-1">
+                  {t}
+                </li>
+              )
+            )
+          }
+        </ul>
+      </div>
+
+      <!-- CENTER-RIGHT: MASCOT + FLOATING DECOR -->
+      <div
+        class="lg:col-span-5 order-1 lg:order-2 relative mx-auto w-full max-w-[560px] aspect-square"
+      >
+        <!-- Cat astronaut mascot (hero visual, with hover-swap) -->
+        <div
+          class="absolute inset-0 grid place-items-center float-mac"
+          style="filter: drop-shadow(0 30px 50px rgba(26,24,21,0.22));"
+        >
+          <ThonkingFace class="w-[94%]" />
+        </div>
+
+        <!-- Decoratives — cartoon/cat-style: thick ink outlines + flat offset shadows -->
+
+        <!-- 1) STAR (5-point, mostaza with flat ink shadow + crema highlight) -->
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 110 110"
+          class="absolute top-0 left-2 w-16 float-b"
+        >
+          <!-- flat offset shadow -->
+          <path
+            d="M55 10 L66 42 L100 44 L72 64 L82 96 L55 78 L28 96 L38 64 L10 44 L44 42 Z"
+            transform="translate(4 5)"
+            fill="#1a1815"
+          />
+          <!-- main star -->
+          <path
+            d="M55 10 L66 42 L100 44 L72 64 L82 96 L55 78 L28 96 L38 64 L10 44 L44 42 Z"
+            fill="#f4d35e"
+            stroke="#1a1815"
+            stroke-width="5"
+            stroke-linejoin="round"
+          />
+          <!-- highlight -->
+          <path
+            d="M 40 28 Q 50 22 58 26"
+            stroke="#ffe8d4"
+            stroke-width="4"
+            stroke-linecap="round"
+            fill="none"
+          />
+        </svg>
+
+        <!-- 2) XP BADGE (pixel-ish pill, mostaza + thick ink stroke + flat shadow) -->
+        <div
+          class="absolute top-[44%] -right-3 -translate-y-1/2 float-a"
+          aria-hidden="true"
+        >
+          <div
+            class="rotate-[12deg] rounded-xl border-[3px] border-ink bg-secondary px-3 py-1.5 font-pixel text-lg leading-none shadow-[5px_5px_0_0_#1a1815]"
+          >
+            <span class="flex items-center gap-1">
+              <span class="text-ink">+100</span>
+              <span class="text-primary">XP</span>
+            </span>
+          </div>
+        </div>
+
+        <!-- 3) SPARKLE (Kirby-style 4-point twinkle, crema with ink outline) -->
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 100 100"
+          class="absolute top-6 right-6 w-12 float-c"
+        >
+          <!-- flat offset shadow -->
+          <path
+            d="M50 8 C 52 32 68 48 92 50 C 68 52 52 68 50 92 C 48 68 32 52 8 50 C 32 48 48 32 50 8 Z"
+            transform="translate(4 4)"
+            fill="#1a1815"
+          />
+          <!-- main sparkle -->
+          <path
+            d="M50 8 C 52 32 68 48 92 50 C 68 52 52 68 50 92 C 48 68 32 52 8 50 C 32 48 48 32 50 8 Z"
+            fill="#ffe8d4"
+            stroke="#1a1815"
+            stroke-width="5"
+            stroke-linejoin="round"
+          />
+          <!-- highlight dot -->
+          <circle cx="38" cy="38" r="4" fill="#ffffff" />
+        </svg>
+      </div>
+
+      <!-- RIGHT: STATS + GGLEANER CARD + CHIPS -->
+      <aside class="lg:col-span-2 order-3 flex flex-col gap-5 lg:pl-2">
+        <a
+          href="https://thonking.itch.io"
+          target="_blank"
+          rel="noopener"
+          class="rise rise-4 block group"
+        >
+          <div class="font-mono text-[11px] uppercase tracking-[0.18em] text-muted">
+            GDD Template · itch.io
+          </div>
+          <div class="mt-1 flex items-baseline gap-2">
+            <span
+              class="font-display font-black leading-none text-5xl md:text-6xl tracking-tight"
+              >6,221<span class="text-primary">+</span></span
+            >
+          </div>
+          <div class="mt-1 font-mono text-xs text-muted group-hover:text-ink transition">
+            descargas · pay-what-you-want →
+          </div>
+        </a>
+
+        <!-- ¿Te la creíste? mini card (timely - elecciones 12 abr 2026) -->
+        <a
+          href="https://thonking.itch.io"
+          target="_blank"
+          rel="noopener"
+          class="rise rise-5 group relative block rounded-2xl border border-ink/15 bg-base-soft/90 p-4 shadow-[0_12px_40px_-16px_rgba(26,24,21,0.35)] hover:-translate-y-1 transition"
+        >
+          <div class="flex items-center justify-between">
+            <div class="flex items-center gap-2">
+              <span class="grid size-8 place-items-center rounded-lg bg-[#c93a3a] text-white font-pixel text-sm">
+                ¿?
+              </span>
+              <div>
+                <div class="font-display font-bold text-sm leading-none">¿Te la creíste?</div>
+                <div class="mt-1 font-mono text-[10px] uppercase tracking-[0.16em] text-pink">
+                  ● live · elecciones 2026
+                </div>
+              </div>
+            </div>
+          </div>
+          <p class="mt-3 text-xs text-muted leading-snug">
+            35 candidatos, 169 propuestas reales del JNE. Juega y distingue lo
+            viable del puro floro político.
+          </p>
+        </a>
+
+        <!-- Socials -->
+        <ul class="rise rise-6 flex flex-col gap-1.5 font-mono text-[11px] uppercase tracking-[0.14em]">
+          <li>
+            <a
+              href="https://github.com/Thonking3637"
+              target="_blank"
+              rel="noopener"
+              class="group flex items-center gap-2 text-muted hover:text-ink transition"
+            >
+              <span class="inline-block w-3 text-ink/40 group-hover:text-primary transition">→</span>
+              github
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://thonking.itch.io"
+              target="_blank"
+              rel="noopener"
+              class="group flex items-center gap-2 text-muted hover:text-ink transition"
+            >
+              <span class="inline-block w-3 text-ink/40 group-hover:text-primary transition">→</span>
+              itch.io
+            </a>
+          </li>
+          <li>
+            <a
+              href="https://www.linkedin.com/in/gabrielramirezgonzalez/"
+              target="_blank"
+              rel="noopener"
+              class="group flex items-center gap-2 text-muted hover:text-ink transition"
+            >
+              <span class="inline-block w-3 text-ink/40 group-hover:text-primary transition">→</span>
+              linkedin
+            </a>
+          </li>
+        </ul>
+      </aside>
+    </div>
+
+    <!-- MARQUEE -->
+    <div
+      class="rise rise-6 pointer-events-none mt-16 md:mt-20 overflow-hidden border-y border-ink/10 py-3"
+      aria-hidden="true"
+    >
+      <div class="marquee-track flex w-max font-pixel text-2xl text-ink/70 whitespace-nowrap">
+        {
+          /* 4 copies + per-copy leading padding = seamless -25% loop at any viewport */
+          Array.from({ length: 4 }).map(() => (
+            <div class="flex items-center gap-10 pl-10 shrink-0">
+              <span>THONKING</span>
+              <span class="text-primary">★</span>
+              <span>APRENDE JUGANDO</span>
+              <span class="text-secondary">●</span>
+              <span>UNITY</span>
+              <span class="text-ink/30">·</span>
+              <span>C#</span>
+              <span class="text-ink/30">·</span>
+              <span>KOTLIN</span>
+              <span class="text-ink/30">·</span>
+              <span>FIREBASE</span>
+              <span class="text-ink/30">·</span>
+              <span>ASTRO</span>
+              <span class="text-pink">♥</span>
+              <span>DESDE LIMA PERÚ</span>
+              <span class="text-secondary">+100 XP</span>
+              <span class="text-primary">★</span>
+            </div>
+          ))
+        }
+      </div>
+    </div>
+  </div>
+
+  <!-- scroll indicator -->
+  <div
+    class="absolute bottom-6 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 text-muted"
+    aria-hidden="true"
+  >
+    <span class="font-mono text-[10px] uppercase tracking-[0.3em]">Scroll</span>
+    <span class="relative flex h-8 w-5 items-start justify-center rounded-full border border-ink/30 pt-1.5">
+      <span class="size-1.5 rounded-full bg-ink/60 scroll-dot"></span>
+    </span>
+  </div>
+</section>

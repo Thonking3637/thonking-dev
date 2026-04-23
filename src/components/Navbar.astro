@@ -1,0 +1,241 @@
+---
+import { getCollection } from "astro:content";
+import ThemeToggle from "./ThemeToggle.astro";
+
+const products = (await getCollection("products")).sort(
+  (a, b) => a.data.order - b.data.order
+);
+
+/**
+ * Sistema de colores del dropdown — consistente con los badges
+ * de cada página individual de producto.
+ *   verde   #22c55e · LIVE / SHIPPING (publicado y activo)
+ *   mostaza #f4d35e · BETA / WIP (en proceso)
+ *   coral   #ff6b4a · PRÓXIMO (planeando)
+ *   gris    #8b7e6a · NDA / ARCHIVADO / COMPLETADO
+ */
+const statusColor: Record<string, string> = {
+  live: "#22c55e",
+  wip: "#f4d35e",
+  beta: "#f4d35e",
+  locked: "#8b7e6a",
+  commercial: "#8b7e6a",
+};
+
+const statusShort: Record<string, string> = {
+  live: "LIVE",
+  wip: "WIP",
+  beta: "BETA",
+  locked: "NDA",
+  commercial: "COMERCIAL",
+};
+
+// Overrides por-producto cuando el label genérico no cuenta la historia real.
+const labelOverride: Record<string, string> = {
+  ggleaner: "SHIPPING V1.0",
+  "revert-pong": "VENDIDO 2017",
+};
+
+function labelFor(id: string, status: string): string {
+  return labelOverride[id] ?? statusShort[status] ?? status.toUpperCase();
+}
+---
+
+<header class="fixed top-5 inset-x-0 z-50 flex justify-center px-4 pointer-events-none">
+  <nav
+    class="pointer-events-auto rise rise-1 flex items-center gap-1 rounded-full border border-ink/10 bg-base/70 backdrop-blur-xl shadow-[0_10px_40px_-12px_rgba(26,24,21,0.22)] pl-2.5 pr-1.5 py-1.5"
+    aria-label="Navegación principal"
+  >
+    <a
+      href="/"
+      class="group flex items-center gap-1.5 px-2.5 py-1 font-display font-black text-xl leading-none tracking-tight"
+      aria-label="Thonking — inicio"
+    >
+      <span class="text-ink">t</span>
+      <span
+        class="mt-2 size-1.5 rounded-full bg-secondary shadow-[0_0_12px_rgba(244,211,94,0.9)] transition group-hover:scale-125"
+        aria-hidden="true"></span>
+    </a>
+
+    <span class="h-5 w-px bg-ink/10 mx-1" aria-hidden="true"></span>
+
+    <!-- TRABAJO con dropdown -->
+    <div class="group relative">
+      <a
+        href="/#trabajo"
+        class="rounded-full px-3 py-1.5 text-sm font-medium text-ink/75 hover:text-ink hover:bg-ink/5 transition inline-flex items-center gap-1"
+        aria-haspopup="true"
+      >
+        Trabajo
+        <svg
+          viewBox="0 0 12 12"
+          class="size-2.5 text-ink/40 transition-transform duration-200 group-hover:rotate-180 group-focus-within:rotate-180"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M3 4.5L6 7.5L9 4.5"></path>
+        </svg>
+      </a>
+
+      <!-- Dropdown panel -->
+      <div
+        class="invisible opacity-0 translate-y-1 group-hover:visible group-hover:opacity-100 group-hover:translate-y-0 group-focus-within:visible group-focus-within:opacity-100 group-focus-within:translate-y-0 absolute top-full left-1/2 -translate-x-1/2 pt-3 transition-all duration-200 z-50"
+        role="menu"
+      >
+        <div
+          class="w-[360px] rounded-2xl border border-ink/10 bg-base-soft/95 backdrop-blur-xl shadow-[0_20px_50px_-16px_rgba(26,24,21,0.28)] overflow-hidden"
+        >
+          <!-- header -->
+          <div
+            class="flex items-center justify-between px-4 pt-3.5 pb-2.5 font-mono text-[10px] uppercase tracking-[0.2em]"
+          >
+            <span class="text-ink/50">
+              <span class="text-primary font-bold">§</span>&nbsp;Productos
+            </span>
+            <a
+              href="/productos"
+              class="text-ink/70 hover:text-ink transition"
+              >Ver todos →</a
+            >
+          </div>
+
+          <!-- items con más aire entre sí -->
+          <ul class="px-1.5 pb-1.5 space-y-1">
+            {
+              products.map((p) => (
+                <li>
+                  <a
+                    href={`/productos/${p.id}`}
+                    class="group/item flex items-center gap-3 rounded-xl px-3 py-2.5 hover:bg-black/[0.04] transition-colors duration-200"
+                  >
+                    <span
+                      class="shrink-0 size-2 rounded-full"
+                      style={`background: ${statusColor[p.data.status]};`}
+                      aria-hidden="true"
+                    />
+                    <span class="flex-1 font-display font-semibold text-sm text-ink leading-none">
+                      {p.data.title}
+                    </span>
+                    <span
+                      class="font-mono text-[9px] uppercase tracking-[0.16em] tabular-nums shrink-0"
+                      style={`color: ${statusColor[p.data.status]};`}
+                    >
+                      {labelFor(p.id, p.data.status)}
+                    </span>
+                    <svg
+                      class="size-3 text-ink/25 group-hover/item:text-ink transition-all duration-200 group-hover/item:translate-x-1"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M5 12h14M13 5l7 7-7 7" />
+                    </svg>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+
+          <!-- footer con 2 líneas para respirar -->
+          <div
+            class="flex flex-col gap-2 px-4 py-3 border-t border-ink/10 bg-ink/[0.02]"
+          >
+            <span
+              class="font-mono text-[10px] uppercase tracking-[0.2em] text-muted"
+            >
+              7 productos · abril 2026
+            </span>
+            <a
+              href="/#trabajo"
+              class="group/footer inline-flex items-center gap-1.5 font-mono text-[11px] uppercase tracking-[0.18em] font-semibold text-ink hover:text-primary transition"
+            >
+              Ir a la grilla
+              <svg
+                viewBox="0 0 24 24"
+                class="size-3 transition-transform duration-200 group-hover/footer:translate-y-0.5"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="2.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                aria-hidden="true"
+              >
+                <path d="M12 5v14M5 12l7 7 7-7"></path>
+              </svg>
+            </a>
+          </div>
+
+          <!-- leyenda discreta de colores -->
+          <div
+            class="flex items-center justify-center gap-3 px-4 pb-3 font-mono text-[9px] uppercase tracking-[0.16em] text-ink/40"
+          >
+            <span class="inline-flex items-center gap-1">
+              <span
+                class="size-1.5 rounded-full"
+                style="background: #22c55e;"
+                aria-hidden="true"
+              />
+              LIVE
+            </span>
+            <span class="inline-flex items-center gap-1">
+              <span
+                class="size-1.5 rounded-full"
+                style="background: #f4d35e;"
+                aria-hidden="true"
+              />
+              WIP
+            </span>
+            <span class="inline-flex items-center gap-1">
+              <span
+                class="size-1.5 rounded-full"
+                style="background: #8b7e6a;"
+                aria-hidden="true"
+              />
+              NDA
+            </span>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <a
+      href="/#sobre"
+      class="rounded-full px-3 py-1.5 text-sm font-medium text-ink/75 hover:text-ink hover:bg-ink/5 transition"
+      >Sobre</a
+    >
+    <a
+      href="/now"
+      class="group rounded-full px-3 py-1.5 text-sm font-medium text-ink/75 hover:text-ink hover:bg-ink/5 transition inline-flex items-center gap-1.5"
+    >
+      Ahora
+      <span
+        class="size-1.5 rounded-full bg-primary animate-pulse"
+        aria-hidden="true"></span>
+    </a>
+    <a
+      href="/#contacto"
+      class="rounded-full px-3 py-1.5 text-sm font-medium text-ink/75 hover:text-ink hover:bg-ink/5 transition"
+      >Contacto</a
+    >
+
+    <!-- Theme toggle -->
+    <span class="mx-1 h-5 w-px bg-ink/10" aria-hidden="true"></span>
+    <ThemeToggle />
+
+    <a
+      href="mailto:gabriel@thonking.dev"
+      class="ml-1 inline-flex items-center gap-1.5 rounded-full bg-ink text-base px-3.5 py-1.5 text-sm font-semibold hover:bg-primary transition"
+    >
+      <span class="size-1.5 rounded-full bg-secondary" aria-hidden="true"></span>
+      Colabora
+    </a>
+  </nav>
+</header>

@@ -1,0 +1,31 @@
+---
+import type { CollectionEntry } from "astro:content";
+
+interface Props {
+  product: CollectionEntry<"products">;
+  /** Optional dateCreated (ISO year or full date) */
+  year?: string;
+}
+
+const { product, year } = Astro.props;
+const { data } = product;
+
+const schema = {
+  "@context": "https://schema.org",
+  "@type": "CreativeWork",
+  name: data.title,
+  description: data.tagline,
+  url: `https://thonking.dev/productos/${product.id}`,
+  image: "https://thonking.dev/og-image.png",
+  inLanguage: "es-PE",
+  ...(year ? { dateCreated: year } : {}),
+  author: {
+    "@type": "Person",
+    name: "Gabriel Ramírez González",
+    url: "https://thonking.dev",
+  },
+  keywords: data.tags.join(", "),
+};
+---
+
+<script type="application/ld+json" set:html={JSON.stringify(schema)} />

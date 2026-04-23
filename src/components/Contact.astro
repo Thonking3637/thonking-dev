@@ -1,0 +1,185 @@
+---
+const socials = [
+  {
+    label: "GitHub",
+    handle: "@Thonking3637",
+    url: "https://github.com/Thonking3637",
+    icon: "github",
+  },
+  {
+    label: "itch.io",
+    handle: "@thonking",
+    url: "https://thonking.itch.io",
+    icon: "itch",
+  },
+  {
+    label: "LinkedIn",
+    handle: "/gabrielramirezgonzalez",
+    url: "https://www.linkedin.com/in/gabrielramirezgonzalez/",
+    icon: "linkedin",
+  },
+];
+---
+
+<section
+  id="contacto"
+  class="relative isolate py-24 md:py-32 overflow-hidden"
+>
+  <!-- background accent -->
+  <div
+    aria-hidden="true"
+    class="pointer-events-none absolute inset-0 -z-10"
+    style="background: radial-gradient(800px 400px at 20% 50%, rgba(255,107,74,0.1), transparent 60%), radial-gradient(900px 500px at 100% 100%, rgba(244,211,94,0.12), transparent 60%);"
+  >
+  </div>
+
+  <div class="relative mx-auto w-full max-w-[1280px] px-6 md:px-10">
+    <div class="grid grid-cols-1 lg:grid-cols-12 gap-10 lg:gap-14 items-start">
+      <!-- LEFT: Big CTA -->
+      <div class="lg:col-span-7">
+        <div
+          class="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-ink/60"
+        >
+          <span class="size-1.5 rounded-full bg-secondary"></span>
+          Contacto
+        </div>
+
+        <h2
+          class="mt-3 font-display font-black text-5xl sm:text-6xl md:text-7xl lg:text-8xl leading-[0.88] tracking-[-0.035em]"
+        >
+          ¿Construimos<br />algo <span class="relative inline-block">
+            juntos?
+            <svg
+              aria-hidden="true"
+              viewBox="0 0 340 28"
+              preserveAspectRatio="none"
+              class="absolute -bottom-1.5 left-0 w-full h-5"
+            >
+              <path
+                d="M4 14 C 60 4, 180 28, 260 10 S 330 4, 336 20"
+                stroke="#f4d35e"
+                stroke-width="9"
+                stroke-linecap="round"
+                fill="none"
+              />
+            </svg>
+          </span>
+        </h2>
+
+        <p class="mt-8 max-w-lg text-lg text-muted leading-relaxed">
+          Estoy disponible para proyectos enterprise de gamificación, trabajo
+          con studios gamedev y colaboraciones indie donde pueda meter las
+          manos en Unity y C#. Escríbeme directo — leo y respondo.
+        </p>
+
+        <!-- Big email -->
+        <a
+          href="mailto:gabriel@thonking.dev"
+          class="group mt-10 inline-flex items-center gap-4 rounded-full bg-ink text-base-soft px-6 md:px-8 py-4 md:py-5 font-display font-bold text-xl md:text-3xl tracking-tight hover:bg-primary transition-colors"
+        >
+          <span class="flex size-3 relative" aria-hidden="true">
+            <span class="absolute inline-flex h-full w-full rounded-full bg-primary opacity-60 animate-ping"></span>
+            <span class="relative inline-flex size-3 rounded-full bg-primary"></span>
+          </span>
+          gabriel@thonking.dev
+          <svg
+            class="size-5 md:size-6 transition-transform group-hover:translate-x-1"
+            viewBox="0 0 24 24"
+            fill="none"
+            stroke="currentColor"
+            stroke-width="2.5"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+            aria-hidden="true"
+          >
+            <path d="M5 12h14M13 5l7 7-7 7" />
+          </svg>
+        </a>
+
+        <!-- Response time micro-copy -->
+        <div
+          class="mt-5 inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.16em] text-muted"
+        >
+          <span class="size-1.5 rounded-full bg-primary"></span>
+          Respondo en 24-48h · Lima, Perú (GMT-5)
+        </div>
+      </div>
+
+      <!-- RIGHT: Socials + decoration -->
+      <aside class="lg:col-span-5">
+        <div class="rounded-3xl border border-ink/10 bg-base-soft p-6 md:p-8 shadow-[0_20px_50px_-20px_rgba(26,24,21,0.25)]">
+          <h3
+            class="font-mono text-[11px] uppercase tracking-[0.2em] text-muted"
+          >
+            O en redes
+          </h3>
+          <ul class="mt-4 divide-y divide-ink/10">
+            {
+              socials.map((s) => (
+                <li>
+                  <a
+                    href={s.url}
+                    target="_blank"
+                    rel="noopener"
+                    class="group flex items-center gap-4 py-4 hover:bg-base/40 -mx-2 px-2 rounded-lg transition-colors"
+                  >
+                    <span class="grid size-11 place-items-center rounded-xl bg-ink text-base-soft transition-transform group-hover:scale-110">
+                      {s.icon === "github" && (
+                        <svg viewBox="0 0 24 24" fill="currentColor" class="size-5">
+                          <path d="M12 .297c-6.63 0-12 5.373-12 12 0 5.303 3.438 9.8 8.205 11.385.6.113.82-.258.82-.577 0-.285-.01-1.04-.015-2.04-3.338.724-4.042-1.61-4.042-1.61-.546-1.385-1.335-1.755-1.335-1.755-1.087-.744.084-.729.084-.729 1.205.084 1.838 1.236 1.838 1.236 1.07 1.835 2.809 1.305 3.495.998.108-.776.417-1.305.76-1.605-2.665-.3-5.466-1.332-5.466-5.93 0-1.31.465-2.38 1.235-3.22-.135-.303-.54-1.523.105-3.176 0 0 1.005-.322 3.3 1.23.96-.267 1.98-.4 3-.405 1.02.005 2.04.138 3 .405 2.28-1.552 3.285-1.23 3.285-1.23.645 1.653.24 2.873.12 3.176.765.84 1.23 1.91 1.23 3.22 0 4.61-2.805 5.625-5.475 5.92.42.36.81 1.096.81 2.22 0 1.606-.015 2.896-.015 3.286 0 .315.21.69.825.57C20.565 22.092 24 17.592 24 12.297c0-6.627-5.373-12-12-12"/>
+                        </svg>
+                      )}
+                      {s.icon === "itch" && (
+                        <svg viewBox="0 0 24 24" fill="currentColor" class="size-5">
+                          <path d="M3.13 1.338C2.08 1.96.02 4.328 0 4.95v1.03c0 1.303 1.22 2.45 2.325 2.45 1.33 0 2.44-1.102 2.44-2.41 0 1.308 1.07 2.41 2.4 2.41 1.328 0 2.37-1.102 2.37-2.41 0 1.308 1.132 2.41 2.46 2.41h.024c1.328 0 2.46-1.102 2.46-2.41 0 1.308 1.042 2.41 2.37 2.41 1.33 0 2.4-1.102 2.4-2.41 0 1.308 1.11 2.41 2.44 2.41 1.104 0 2.325-1.147 2.325-2.45v-1.03c-.02-.62-2.08-2.99-3.13-3.612C19.51 1.18 16.24 1.045 12 1.045c-4.24 0-7.588.135-8.87.293zm6.954 7.174c-.603.004-1.19.22-1.65.628-.52.456-.85 1.12-.83 1.874v.02c.003 1.77 1.35 3.23 3.06 3.36.07.004.14.006.21.006h3.94c.07 0 .14-.002.21-.006 1.71-.13 3.057-1.59 3.06-3.36v-.02c.02-.754-.31-1.418-.83-1.874-.46-.408-1.047-.624-1.65-.628-.636-.004-1.25.225-1.72.644-.366.326-.62.754-.73 1.236-.11-.482-.363-.91-.73-1.236-.47-.42-1.084-.648-1.72-.644h-.02zM2.415 8.92c-1.18 0-1.942 1.148-1.942 2.47 0 2.148.15 5.48.513 7.14.23 1.05.853 1.722 1.85 1.847 2.113.263 5.23.395 7.915.395 2.686 0 5.803-.132 7.916-.395.997-.125 1.62-.797 1.85-1.846.363-1.66.513-4.993.513-7.14 0-1.323-.762-2.47-1.942-2.47-.76 0-1.24.46-1.64.97-.447.57-.71 1.26-1.07 1.79-.363.536-.73 1.016-1.25 1.357-.533.35-1.254.533-1.947.533-.694 0-1.414-.182-1.947-.533-.52-.34-.887-.82-1.25-1.357-.36-.53-.624-1.22-1.07-1.79-.4-.51-.88-.97-1.64-.97z"/>
+                        </svg>
+                      )}
+                      {s.icon === "linkedin" && (
+                        <svg viewBox="0 0 24 24" fill="currentColor" class="size-5">
+                          <path d="M20.447 20.452h-3.554v-5.569c0-1.328-.027-3.037-1.852-3.037-1.853 0-2.136 1.445-2.136 2.939v5.667H9.351V9h3.414v1.561h.046c.477-.9 1.637-1.85 3.37-1.85 3.601 0 4.267 2.37 4.267 5.455v6.286zM5.337 7.433a2.062 2.062 0 01-2.063-2.065 2.063 2.063 0 112.063 2.065zm1.782 13.019H3.555V9h3.564v11.452zM22.225 0H1.771C.792 0 0 .774 0 1.729v20.542C0 23.227.792 24 1.771 24h20.451C23.2 24 24 23.227 24 22.271V1.729C24 .774 23.2 0 22.222 0h.003z"/>
+                        </svg>
+                      )}
+                    </span>
+                    <div class="flex-1 min-w-0">
+                      <div class="font-display font-bold text-base text-ink leading-none">
+                        {s.label}
+                      </div>
+                      <div class="mt-1 font-mono text-xs text-muted truncate">
+                        {s.handle}
+                      </div>
+                    </div>
+                    <svg
+                      class="size-4 text-ink/40 transition-all group-hover:text-ink group-hover:translate-x-0.5 group-hover:-translate-y-0.5"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="2.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d="M7 17L17 7M9 7h8v8" />
+                    </svg>
+                  </a>
+                </li>
+              ))
+            }
+          </ul>
+        </div>
+
+        <!-- Decorative disponibilidad tag — se adapta en dark mode para no ser chillón -->
+        <div
+          class="mt-6 rounded-2xl border-2 border-ink bg-secondary px-5 py-4 shadow-[4px_4px_0_0_#1a1815]
+                 dark:bg-[#1a1815] dark:border-secondary/60 dark:shadow-[4px_4px_0_0_rgba(244,211,94,0.35)]"
+        >
+          <div class="font-mono text-[10px] uppercase tracking-[0.2em] text-[#1a1815]/70 dark:text-secondary/80">
+            Estado
+          </div>
+          <div class="mt-1 font-display font-black text-xl leading-tight text-[#1a1815] dark:text-secondary">
+            Abierto a proyectos<br />y colaboraciones
+          </div>
+        </div>
+      </aside>
+    </div>
+  </div>
+</section>

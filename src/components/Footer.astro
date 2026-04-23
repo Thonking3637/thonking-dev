@@ -1,0 +1,127 @@
+---
+const year = new Date().getFullYear();
+const sections = [
+  { label: "Trabajo", href: "/#trabajo" },
+  { label: "Sobre", href: "/#sobre" },
+  { label: "Ahora", href: "/now" },
+  { label: "Contacto", href: "/#contacto" },
+];
+
+const socials = [
+  { label: "GitHub", url: "https://github.com/Thonking3637" },
+  { label: "itch.io", url: "https://thonking.itch.io" },
+  { label: "LinkedIn", url: "https://www.linkedin.com/in/gabrielramirezgonzalez/" },
+];
+---
+
+<footer class="relative border-t border-ink/10 bg-base-soft/60">
+  <div class="mx-auto w-full max-w-[1280px] px-6 md:px-10 py-14 md:py-16">
+    <!-- top row -->
+    <div class="grid grid-cols-1 md:grid-cols-12 gap-10 md:gap-8">
+      <!-- Brand -->
+      <div class="md:col-span-5">
+        <a
+          href="/"
+          class="inline-flex items-center gap-2 font-display font-black text-3xl tracking-tight"
+        >
+          <span>thonking</span>
+          <span class="mt-3 size-2 rounded-full bg-secondary shadow-[0_0_10px_#f4d35e]" aria-hidden="true"></span>
+        </a>
+        <p class="mt-4 max-w-sm text-sm text-muted leading-relaxed">
+          Videojuegos, sistemas gamificados y herramientas indie hechas desde
+          Lima, Perú. Por Gabriel Ramírez.
+        </p>
+        <a
+          href="mailto:gabriel@thonking.dev"
+          class="mt-5 inline-flex items-center gap-2 font-mono text-sm text-ink hover:text-primary transition-colors"
+        >
+          <span class="size-1.5 rounded-full bg-primary"></span>
+          gabriel@thonking.dev
+        </a>
+      </div>
+
+      <!-- Sitemap -->
+      <div class="md:col-span-3">
+        <h4 class="font-mono text-[10px] uppercase tracking-[0.2em] text-muted">
+          Secciones
+        </h4>
+        <ul class="mt-4 space-y-2 text-sm">
+          {
+            sections.map((s) => (
+              <li>
+                <a
+                  href={s.href}
+                  class="text-ink/80 hover:text-ink transition-colors"
+                >
+                  {s.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+
+      <!-- Socials -->
+      <div class="md:col-span-4">
+        <h4 class="font-mono text-[10px] uppercase tracking-[0.2em] text-muted">
+          Redes
+        </h4>
+        <ul class="mt-4 space-y-2 text-sm">
+          {
+            socials.map((s) => (
+              <li>
+                <a
+                  href={s.url}
+                  target="_blank"
+                  rel="noopener"
+                  class="group inline-flex items-center gap-2 text-ink/80 hover:text-ink transition-colors"
+                >
+                  <span class="inline-block w-3 text-ink/30 group-hover:text-primary transition-colors">
+                    →
+                  </span>
+                  {s.label}
+                </a>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </div>
+
+    <!-- giant signature mark -->
+    <div
+      aria-hidden="true"
+      class="pointer-events-none select-none mt-16 md:mt-20 flex justify-center overflow-hidden"
+    >
+      <span
+        class="hero-stroke font-pixel text-[18vw] md:text-[14vw] leading-[0.85] tracking-tight opacity-[0.1]"
+        >THONKING</span
+      >
+    </div>
+
+    <!-- bottom row -->
+    <div
+      class="mt-10 flex flex-col md:flex-row md:items-center md:justify-between gap-4 pt-6 border-t border-ink/10 font-mono text-[10px] uppercase tracking-[0.16em] text-muted"
+    >
+      <div>
+        © {year} Gabriel Ramírez González · Thonking
+      </div>
+      <div class="flex flex-wrap items-center gap-x-4 gap-y-1">
+        <span>Hecho con Astro + Tailwind</span>
+        <span class="text-ink/30">·</span>
+        <span>
+          Mascot ilustrado por
+          <a
+            href="https://instagram.com/floruwu_art"
+            target="_blank"
+            rel="noopener"
+            class="underline decoration-dotted underline-offset-2 hover:text-ink"
+          >
+            @floruwu_art
+          </a>
+          · Hecho con cariño desde Lima
+        </span>
+      </div>
+    </div>
+  </div>
+</footer>

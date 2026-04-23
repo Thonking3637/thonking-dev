@@ -1,0 +1,103 @@
+---
+interface Stat {
+  value: number;
+  suffix?: string;
+  label: string;
+  sub: string;
+}
+
+const stats: Stat[] = [
+  { value: 6221, suffix: "+", label: "Descargas", sub: "GDD Template" },
+  { value: 1, label: "Retailer", sub: "Fortune 500 · Soriana MX" },
+  { value: 6, label: "Años", sub: "en gamedev" },
+  { value: 20000, suffix: "+", label: "Empleados", sub: "entrenados vía Soriana" },
+  { value: 7, label: "Productos", sub: "publicados" },
+];
+---
+
+<section
+  id="stats"
+  class="relative isolate py-20 md:py-24"
+  aria-labelledby="stats-title"
+>
+  <div class="relative mx-auto w-full max-w-[1280px] px-6 md:px-10">
+    <!-- Eyebrow + subtitle -->
+    <header class="mb-10 md:mb-12">
+      <div
+        id="stats-title"
+        class="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-ink/60"
+      >
+        <span class="size-1.5 rounded-full bg-primary"></span>
+        § 02 · Números que importan
+      </div>
+      <p class="mt-2 text-sm md:text-base text-muted">
+        Tracción real, no vanity metrics.
+      </p>
+    </header>
+
+    <!-- Stats band -->
+    <div
+      class="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-5 gap-y-10 lg:gap-0 lg:divide-x lg:divide-ink/10 border-y-2 border-ink/10 py-10 md:py-12"
+    >
+      {
+        stats.map((s, i) => (
+          <div
+            class:list={[
+              "px-4 lg:px-6 flex flex-col items-start text-left",
+              i === stats.length - 1 && "max-md:col-span-2 max-md:items-center max-md:text-center",
+            ]}
+          >
+            <div class="font-display font-black text-5xl md:text-6xl lg:text-7xl leading-none tracking-[-0.03em] text-ink tabular-nums">
+              <span data-count data-target={s.value}>0</span>
+              {s.suffix && <span class="text-primary">{s.suffix}</span>}
+            </div>
+            <div class="mt-3 font-mono text-[11px] md:text-xs uppercase tracking-[0.18em] font-semibold text-[#b89a3d]">
+              {s.label}
+            </div>
+            <div class="mt-1 font-mono text-[10px] uppercase tracking-[0.14em] text-muted">
+              {s.sub}
+            </div>
+          </div>
+        ))
+      }
+    </div>
+  </div>
+</section>
+
+<script>
+  const animate = (el: HTMLElement, target: number) => {
+    const duration = 1400;
+    const start = performance.now();
+    const ease = (t: number) => 1 - Math.pow(1 - t, 3);
+    const tick = (now: number) => {
+      const p = Math.min((now - start) / duration, 1);
+      const v = Math.floor(ease(p) * target);
+      el.textContent = v.toLocaleString("es-PE");
+      if (p < 1) requestAnimationFrame(tick);
+      else el.textContent = target.toLocaleString("es-PE");
+    };
+    requestAnimationFrame(tick);
+  };
+
+  const observer = new IntersectionObserver(
+    (entries) => {
+      entries.forEach((entry) => {
+        const el = entry.target as HTMLElement;
+        if (entry.isIntersecting && !el.dataset.done) {
+          el.dataset.done = "1";
+          const target = parseInt(el.dataset.target ?? "0", 10);
+          if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
+            el.textContent = target.toLocaleString("es-PE");
+          } else {
+            animate(el, target);
+          }
+        }
+      });
+    },
+    { threshold: 0.4 }
+  );
+
+  document
+    .querySelectorAll<HTMLElement>("[data-count]")
+    .forEach((el) => observer.observe(el));
+</script>

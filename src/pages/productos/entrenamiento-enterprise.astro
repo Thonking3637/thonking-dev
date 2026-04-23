@@ -1,0 +1,306 @@
+---
+import { getEntry } from "astro:content";
+import Layout from "../../layouts/Layout.astro";
+import Navbar from "../../components/Navbar.astro";
+import Footer from "../../components/Footer.astro";
+import ProductSchema from "../../components/ProductSchema.astro";
+import EnterpriseSlide from "../../components/EnterpriseSlide.astro";
+
+const product = await getEntry("products", "entrenamiento-enterprise");
+if (!product) throw new Error("entrenamiento-enterprise product entry not found");
+const { data } = product;
+
+type EnterpriseSlideVariant = "module" | "puzzle" | "progression" | "signoff";
+const slides: Array<{ id: string; variant: EnterpriseSlideVariant; label: string }> = [
+  { id: "module", variant: "module", label: "Splash módulo 01" },
+  { id: "puzzle", variant: "puzzle", label: "Reto de decisión" },
+  { id: "progression", variant: "progression", label: "Sistema de progresión" },
+  { id: "signoff", variant: "signoff", label: "Sign-off de módulo" },
+];
+
+const stack = ["Unity", "C#", "Android", "Firebase", "MetaQuest 3"];
+
+const howItWorks = [
+  {
+    title: "4 módulos temáticos independientes pero narrativamente conectados",
+    body: "Cada módulo ataca un área crítica (stock, atención, manejo de equipo, seguridad). Se puede jugar en cualquier orden pero hay progresión narrativa si los completas en secuencia.",
+  },
+  {
+    title: "Sistema de progresión con XP, logros y rankings internos",
+    body: "Empleados suben de rol (operario → supervisor → gerente). RR.HH. ve métricas reales de adopción y retención. Gamificación de verdad, no layer cosmético.",
+  },
+  {
+    title: "Narrativa conductual integrada con políticas reales de la empresa",
+    body: "Las decisiones dentro del juego reflejan casos que realmente suceden en piso. Si eliges la opción incorrecta, el juego te muestra el impacto operativo.",
+  },
+  {
+    title: "Versión VR enterprise desarrollada y probada en MetaQuest 3",
+    body: "Capacitación inmersiva de alto impacto. Probada con usuarios reales. El shipping a producción VR depende de decisiones de infraestructura del cliente.",
+  },
+  {
+    title: "Backend analytics para reportes a RR.HH.",
+    body: "Dashboard con tasas de completación por módulo, tiempo promedio, puntos débiles detectados. El valor para la empresa está en la data, no en el juego.",
+  },
+];
+
+const lessons = [
+  {
+    icon: "play",
+    text: "\"Se ve divertido\" es un feature, no un nice-to-have. Cuando el training se siente como juego, la completación sube del 40% al 90%.",
+  },
+  {
+    icon: "lock",
+    text: "NDA ≠ no puedes presumir la experiencia técnica. Puedes contar el problema, el approach, la escala — sin revelar al cliente ni la IP específica.",
+  },
+  {
+    icon: "vr",
+    text: "VR enterprise existe pero la decisión de shippear no depende del dev. Depende de logística de headsets, espacio físico y presupuesto de HW.",
+  },
+  {
+    icon: "scale",
+    text: "Trabajar con 20,000 usuarios objetivo cambia tu arquitectura. Firebase barato en 100 usuarios = caro en 20k. Offline-first desde día uno.",
+  },
+  {
+    icon: "handshake",
+    text: "Los stakeholders valoran pilotos pequeños más que pitches enormes. 50 empleados probando por 2 semanas > presentación de 40 slides.",
+  },
+];
+
+const pageTitle = `${data.title} — Thonking`;
+---
+
+<Layout title={pageTitle} description={data.tagline} path={`/productos/${product.id}`}>
+  <Navbar />
+  <main id="main" class="relative pt-24 md:pt-28 pb-24 overflow-hidden">
+    <div aria-hidden="true" class="absolute inset-0 -z-10 opacity-[0.08]" style="background-image: radial-gradient(circle, #1a1815 1px, transparent 1px); background-size: 28px 28px;"></div>
+    <div aria-hidden="true" class="pointer-events-none select-none absolute inset-x-0 top-28 flex justify-center">
+      <span class="hero-stroke font-pixel text-[22vw] md:text-[14vw] leading-none tracking-tight opacity-[0.05]">NDA</span>
+    </div>
+
+    <article class="relative mx-auto w-full max-w-[1200px] px-6 md:px-10">
+      <a href="/productos" class="group inline-flex items-center gap-2 rounded-full border-2 border-ink/15 bg-base-soft px-3 py-1.5 font-mono text-[11px] uppercase tracking-[0.18em] text-ink/80 hover:bg-secondary hover:border-ink hover:text-ink transition">
+        <svg viewBox="0 0 40 32" class="size-5 transition-transform group-hover:-translate-x-0.5" fill="none" stroke="#1a1815" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4 L4 16 L14 28"></path><path d="M4 16 L36 16"></path><circle cx="4" cy="16" r="1.5" fill="#1a1815"></circle></svg>
+        Volver a productos
+      </a>
+
+      <header class="mt-10 md:mt-12 relative grid grid-cols-1 lg:grid-cols-12 gap-8 items-start">
+        <div class="lg:col-span-8 relative">
+          <div class="inline-flex items-center gap-1.5 rounded-full border-2 border-secondary bg-ink text-secondary px-3 py-1 font-mono text-[11px] uppercase tracking-[0.18em] font-semibold shadow-[3px_3px_0_0_#1a1815]">
+            <span>🔒</span>
+            Enterprise · NDA
+          </div>
+          <h1 class="relative mt-6 font-display font-black text-5xl sm:text-6xl lg:text-8xl xl:text-[7rem] leading-[0.9] tracking-[-0.04em]">
+            Entrenamiento<br />
+            <span class="relative inline-block pr-2">
+              <span class="relative z-10 text-secondary">Enterprise</span>
+              <svg aria-hidden="true" viewBox="0 0 110 110" class="absolute -top-6 md:-top-8 -right-10 md:-right-12 w-10 md:w-12 spin-slow rotate-[12deg]">
+                <path d="M55 10 L66 42 L100 44 L72 64 L82 96 L55 78 L28 96 L38 64 L10 44 L44 42 Z" transform="translate(3 4)" fill="#1a1815" />
+                <path d="M55 10 L66 42 L100 44 L72 64 L82 96 L55 78 L28 96 L38 64 L10 44 L44 42 Z" fill="#f4d35e" stroke="#1a1815" stroke-width="5" stroke-linejoin="round" />
+              </svg>
+              <svg aria-hidden="true" viewBox="0 0 480 40" class="absolute -bottom-2 left-0 w-full h-8 overflow-visible" preserveAspectRatio="none">
+                <path class="draw-line" d="M4 22 C 100 6, 200 34, 280 18 S 440 6, 476 22" stroke="#f4d35e" stroke-width="14" stroke-linecap="round" fill="none" />
+              </svg>
+            </span>
+          </h1>
+          <p class="mt-8 text-lg md:text-xl text-muted leading-[1.7] max-w-2xl">
+            Un <span class="bg-secondary/25 px-1 rounded text-ink font-semibold">retailer top-3 de México</span>
+            necesitaba entrenar <span class="bg-primary/15 px-1 rounded text-ink font-semibold">20,000 empleados</span>
+            en 4 áreas críticas. En vez de otro video aburrido de capacitación, construí un videojuego completo en Unity — con narrativa, puzzles y sistema de progresión. Shipeado a Android y con desarrollo probado en VR (MetaQuest 3).
+          </p>
+          <div class="mt-8 flex flex-wrap items-center gap-4">
+            <a href="mailto:gabriel@thonking.dev?subject=Proyecto%20Enterprise%20Gamificado" class="group inline-flex items-center gap-3 rounded-full bg-ink text-base-soft pl-7 pr-2.5 py-3 font-semibold text-lg md:text-xl hover:bg-secondary hover:text-ink transition-colors">
+              Hablemos de tu caso
+              <span class="grid size-11 place-items-center rounded-full bg-secondary text-ink group-hover:bg-ink group-hover:text-secondary transition-colors">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" class="size-4"><path d="M5 12h14M13 5l7 7-7 7" /></svg>
+              </span>
+            </a>
+            <span class="font-mono text-xs uppercase tracking-[0.16em] text-muted">· Demo privada bajo NDA mutua</span>
+          </div>
+        </div>
+        <div class="lg:col-span-4 relative hidden lg:block" aria-hidden="true">
+          <div class="absolute -top-6 -right-8 w-56 xl:w-64 rotate-[-4deg] float-mac pointer-events-none" style="filter: drop-shadow(0 18px 30px rgba(26,24,21,0.25));">
+            <img src="/mascot/mascot-hero-idle.webp" alt="" width="1200" height="1200" class="w-full h-auto select-none" draggable="false" />
+          </div>
+        </div>
+      </header>
+
+      <div class="mt-14 relative aspect-[16/9] rounded-3xl border-2 border-ink overflow-hidden shadow-[0_30px_60px_-20px_rgba(26,24,21,0.3)] bg-ink">
+        <div class="absolute inset-0" style="background: linear-gradient(135deg, #1a1815 0%, #2a2621 50%, #1a1815 100%);"></div>
+        <div aria-hidden="true" class="absolute inset-0 opacity-20" style="background-image: linear-gradient(to right, #f4d35e22 1px, transparent 1px), linear-gradient(to bottom, #f4d35e22 1px, transparent 1px); background-size: 48px 48px;"></div>
+        <div class="relative h-full flex items-center justify-between px-10 md:px-16">
+          <div>
+            <div class="inline-flex items-center gap-2 rounded-full border border-secondary/60 bg-ink px-3 py-1 font-mono text-xs uppercase tracking-[0.2em] text-secondary">🔒 NDA</div>
+            <div class="mt-4 font-display font-black text-base-soft leading-[0.95] text-5xl md:text-7xl">Un videojuego para<br /><span class="text-secondary">20,000 empleados.</span></div>
+            <div class="mt-3 font-mono text-sm uppercase tracking-[0.2em] text-base-soft/50">Retailer top-3 de México · NDA</div>
+          </div>
+          <div class="hidden md:block">
+            <img src="/mascot/mascot-hero-idle.webp" alt="" aria-hidden="true" width="1200" height="1200" class="w-48 lg:w-64 h-auto opacity-80 float-a" />
+          </div>
+        </div>
+      </div>
+
+      <section class="mt-24 md:mt-28">
+        <header class="mb-6">
+          <div class="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-ink/60">
+            <span class="size-1.5 rounded-full bg-secondary"></span>
+            Galería
+          </div>
+          <h2 class="mt-4 font-display font-black text-4xl md:text-5xl leading-[0.95] tracking-[-0.02em]">Un vistazo dentro</h2>
+          <p class="mt-4 text-muted leading-[1.7] max-w-lg">Reconstrucciones visuales respetando NDA. Arte final y copy específicos del cliente redactados.</p>
+        </header>
+        <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6">
+          {slides.map((s) => (
+            <button type="button" data-slide-open={s.id} aria-label={`Abrir preview: ${s.label}`} class="group relative aspect-[3/4] rounded-2xl border-2 border-ink/20 overflow-hidden hover:-translate-y-1 hover:shadow-[0_18px_36px_-12px_rgba(26,24,21,0.45)] hover:border-ink cursor-zoom-in transition-all" style="--slide-pad: 14px; --slide-meta: 7px; --slide-title: 42px; --slide-sub: 12px; --slide-sub-sm: 12px; --slide-body: 7px; --slide-body-lg: 9px; --slide-footer: 6px; --slide-gap-sm: 3px; --slide-ring: 44px;">
+              <EnterpriseSlide variant={s.variant} />
+              <div class="absolute top-2 right-2 size-7 grid place-items-center rounded-full bg-secondary text-ink border-2 border-ink opacity-0 group-hover:opacity-100 transition translate-y-1 group-hover:translate-y-0"><svg viewBox="0 0 24 24" class="size-3.5" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><circle cx="11" cy="11" r="7" /><path d="M21 21l-4.3-4.3" /><path d="M11 8v6M8 11h6" /></svg></div>
+            </button>
+          ))}
+        </div>
+      </section>
+
+      {slides.map((s) => (
+        <dialog data-slide={s.id} class="gdd-dialog relative w-[min(92vw,720px)] max-h-[92vh] p-0 m-auto rounded-3xl border-[3px] border-ink bg-ink text-base-soft backdrop:bg-ink/80 backdrop:backdrop-blur-sm overflow-hidden" aria-label={`Preview: ${s.label}`}>
+          <div class="relative aspect-[3/4] w-full" style="--slide-pad: 30px; --slide-meta: 13px; --slide-title: 96px; --slide-sub: 26px; --slide-sub-sm: 26px; --slide-body: 14px; --slide-body-lg: 18px; --slide-footer: 11px; --slide-gap-sm: 7px; --slide-ring: 100px;">
+            <EnterpriseSlide variant={s.variant} />
+          </div>
+          <button type="button" data-slide-close aria-label="Cerrar preview" class="absolute top-4 right-4 grid size-11 place-items-center rounded-full bg-secondary text-ink border-2 border-ink shadow-[3px_3px_0_0_#1a1815] hover:bg-primary hover:text-base-soft transition-colors"><svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12" /></svg></button>
+        </dialog>
+      ))}
+
+      <div id="problema" class="mt-24 md:mt-28 grid grid-cols-1 lg:grid-cols-12 gap-12 lg:gap-16 scroll-mt-28">
+        <div class="lg:col-span-8 space-y-20 md:space-y-24">
+          <section>
+            <header class="mb-6">
+              <div class="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-ink/60"><span class="size-1.5 rounded-full bg-secondary"></span>§ 01 · El problema</div>
+              <h2 class="mt-3 font-display font-black text-4xl md:text-5xl leading-[0.95] tracking-[-0.02em]">Por qué los videos de capacitación fallan</h2>
+            </header>
+            <div class="space-y-5 text-lg text-muted leading-[1.7] max-w-2xl">
+              <p>El training corporativo tradicional tiene una <strong class="text-ink font-semibold">tasa de retención de información menor al 20%</strong>. La gente lo ve como obligación, no como aprendizaje.</p>
+              <p>Las empresas gastan millones en producir videos que nadie termina de ver. Cuando un stakeholder me dijo <strong class="text-ink font-semibold">"queremos algo que la gente realmente quiera hacer"</strong>, la respuesta obvia era: hazlo juego.</p>
+              <p>Resultado: tasas de completación arriba del 90% en pilotos. No porque el contenido sea más fácil, sino porque el formato no pelea contra tu atención — la invita.</p>
+            </div>
+          </section>
+
+          <section>
+            <header class="mb-8">
+              <div class="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-ink/60"><span class="size-1.5 rounded-full bg-primary"></span>§ 02 · Qué hay adentro</div>
+              <h2 class="mt-3 font-display font-black text-4xl md:text-5xl leading-[0.95] tracking-[-0.02em]">Arquitectura del producto</h2>
+            </header>
+            <ol class="divide-y-2 divide-secondary/20">
+              {howItWorks.map((step, i) => (
+                <li class="grid grid-cols-[auto_1fr] gap-x-3 md:gap-x-4 py-8 md:py-10 first:pt-0 last:pb-0">
+                  <div class="font-display font-black text-5xl md:text-6xl leading-[0.9] text-primary tabular-nums tracking-[-0.04em]">{String(i + 1).padStart(2, "0")}</div>
+                  <div class="pt-1">
+                    <h3 class="font-display font-bold text-xl md:text-2xl leading-tight tracking-tight">{step.title}</h3>
+                    <p class="mt-2 text-base md:text-lg text-muted leading-[1.6] max-w-lg">{step.body}</p>
+                  </div>
+                </li>
+              ))}
+            </ol>
+          </section>
+
+          <section>
+            <header class="mb-10 flex items-end gap-5">
+              <div class="flex-1">
+                <div class="inline-flex items-center gap-2 font-mono text-[11px] uppercase tracking-[0.18em] text-ink/60"><span class="size-1.5 rounded-full bg-pink"></span>§ 03 · Lecciones</div>
+                <h2 class="mt-3 font-display font-black text-4xl md:text-5xl leading-[0.95] tracking-[-0.02em]">Lo que aprendí <span class="relative inline-block">con enterprise<svg aria-hidden="true" viewBox="0 0 300 16" preserveAspectRatio="none" class="absolute -bottom-1 left-0 w-full h-3"><path d="M2 10 C 60 2, 140 14, 220 6 S 296 2, 298 12" stroke="#e8546f" stroke-width="5" stroke-linecap="round" fill="none" /></svg></span></h2>
+              </div>
+              <div class="shrink-0 hidden sm:block" aria-hidden="true"><img src="/mascot/mascot-idle.webp" alt="" width="1200" height="1200" class="w-20 md:w-24 h-auto float-mac" draggable="false" style="filter: drop-shadow(0 8px 14px rgba(26,24,21,0.22));" /></div>
+            </header>
+            <ul class="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {lessons.map((lesson, i) => (
+                <li class="relative rounded-2xl border-2 border-ink/10 bg-base-soft p-6 hover:-translate-y-0.5 hover:shadow-[0_14px_30px_-12px_rgba(26,24,21,0.25)] transition-all">
+                  <div class="flex items-start gap-5">
+                    <div class="shrink-0 grid size-11 place-items-center rounded-xl border-2 border-ink bg-secondary shadow-[3px_3px_0_0_#1a1815]">
+                      {lesson.icon === "play" && <svg viewBox="0 0 24 24" class="size-5" fill="#ff6b4a" stroke="#1a1815" stroke-width="2.5" stroke-linejoin="round"><path d="M7 4l13 8-13 8Z" /></svg>}
+                      {lesson.icon === "lock" && <svg viewBox="0 0 24 24" class="size-5" fill="#ff6b4a" stroke="#1a1815" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect x="4" y="10" width="16" height="11" rx="2" /><path d="M8 10V7a4 4 0 0 1 8 0v3" fill="none" /></svg>}
+                      {lesson.icon === "vr" && <svg viewBox="0 0 24 24" class="size-5" fill="#ff6b4a" stroke="#1a1815" stroke-width="2.5" stroke-linejoin="round"><rect x="2" y="7" width="20" height="10" rx="3" /><circle cx="8" cy="12" r="1.5" fill="#1a1815" stroke="none" /><circle cx="16" cy="12" r="1.5" fill="#1a1815" stroke="none" /></svg>}
+                      {lesson.icon === "scale" && <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="#1a1815" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 4v16" /><path d="M4 8h16" /><path d="M7 8l-3 5h6Z" fill="#ff6b4a" /><path d="M17 8l-3 5h6Z" fill="#ff6b4a" /></svg>}
+                      {lesson.icon === "handshake" && <svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="#1a1815" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><path d="M4 11l4-4 4 4-4 4Z" fill="#ff6b4a" /><path d="M12 11l4-4 4 4-4 4Z" fill="#ff6b4a" /><path d="M8 11l4 4 4-4" /></svg>}
+                    </div>
+                    <div class="flex-1 min-w-0">
+                      <div class="font-mono text-[10px] uppercase tracking-[0.2em] text-muted tabular-nums">{String(i + 1).padStart(2, "0")} / {String(lessons.length).padStart(2, "0")}</div>
+                      <p class="mt-3 text-base md:text-[17px] leading-[1.6] text-ink">{lesson.text}</p>
+                    </div>
+                  </div>
+                </li>
+              ))}
+            </ul>
+          </section>
+        </div>
+
+        <aside class="lg:col-span-4 lg:sticky lg:top-28 lg:self-start space-y-6">
+          <div class="rounded-3xl border-2 border-ink bg-ink text-base-soft p-6 relative overflow-hidden">
+            <div aria-hidden="true" class="absolute inset-0 opacity-10" style="background-image: linear-gradient(to right, #f4d35e 1px, transparent 1px), linear-gradient(to bottom, #f4d35e 1px, transparent 1px); background-size: 24px 24px;"></div>
+            <div class="relative">
+              <div class="font-mono text-[10px] uppercase tracking-[0.2em] text-secondary">● Enterprise · Objetivo</div>
+              <div class="mt-3 font-display font-black text-6xl md:text-7xl leading-none tracking-[-0.04em] tabular-nums">20k<span class="text-primary">+</span></div>
+              <div class="mt-2 font-mono text-xs uppercase tracking-[0.16em] text-base-soft/70">empleados objetivo</div>
+              <div class="mt-4 pt-4 border-t border-base-soft/20 font-mono text-[10px] uppercase tracking-[0.16em] text-base-soft/60">Retail top 3 · México · 2024-2026</div>
+            </div>
+          </div>
+
+          <div class="rounded-3xl border-2 border-ink/10 p-6" style="background: #f5f0e8;">
+            <div class="flex items-center gap-2 mb-4"><svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="#1a1815" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><rect x="3" y="4" width="18" height="5" rx="1" /><rect x="3" y="10" width="18" height="5" rx="1" /><rect x="3" y="16" width="18" height="5" rx="1" /></svg><h3 class="font-mono text-[11px] uppercase tracking-[0.2em] text-ink font-semibold">Stack</h3></div>
+            <ul class="flex flex-wrap gap-2">{stack.map((s) => <li class="rounded-full border border-ink/20 bg-base-soft/80 px-3 py-1 font-mono text-xs uppercase tracking-[0.14em] text-ink">{s}</li>)}</ul>
+          </div>
+
+          <div class="rounded-3xl border-2 border-ink/10 p-6" style="background: #f5f0e8;">
+            <div class="flex items-center gap-2 mb-4"><svg viewBox="0 0 24 24" class="size-4" fill="none" stroke="#1a1815" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M20 12l-8 8a2 2 0 0 1-3 0L3 14a2 2 0 0 1 0-3l8-8h8v8Z" /><circle cx="15" cy="9" r="1.5" fill="#1a1815" /></svg><h3 class="font-mono text-[11px] uppercase tracking-[0.2em] text-ink font-semibold">Tags</h3></div>
+            <ul class="flex flex-wrap gap-2">{data.tags.map((t) => <li class="rounded-full border border-dashed border-ink/30 px-3 py-1 font-mono text-xs uppercase tracking-[0.14em] text-ink/70">{t}</li>)}</ul>
+          </div>
+        </aside>
+      </div>
+
+      <section class="mt-24 md:mt-24 relative">
+        <div class="relative rounded-3xl border-2 border-ink bg-secondary overflow-hidden shadow-[8px_8px_0_0_#1a1815]">
+          <div aria-hidden="true" class="absolute inset-0 opacity-[0.14]" style="background-image: linear-gradient(to right, #1a1815 1px, transparent 1px), linear-gradient(to bottom, #1a1815 1px, transparent 1px); background-size: 32px 32px;"></div>
+          <div class="relative grid grid-cols-1 md:grid-cols-[1fr_auto] gap-8 md:gap-10 items-center px-8 md:px-12 py-12 md:py-16">
+            <div>
+              <div class="font-mono text-[11px] uppercase tracking-[0.2em] text-ink/70">B2B · Gamificación enterprise</div>
+              <h2 class="mt-4 font-display font-black text-4xl md:text-5xl lg:text-6xl leading-[0.92] tracking-[-0.035em]">¿Tu empresa necesita<br />gamificación real?</h2>
+              <div class="mt-8 flex flex-wrap items-center gap-4">
+                <a href="mailto:gabriel@thonking.dev?subject=Proyecto%20Enterprise" class="group inline-flex items-center gap-3 rounded-full bg-ink text-base-soft pl-6 pr-2 py-2.5 font-display font-bold text-lg md:text-xl hover:bg-primary transition-colors">
+                  Hablemos
+                  <span class="grid size-11 place-items-center rounded-full bg-primary text-ink group-hover:bg-ink group-hover:text-secondary transition-colors"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" class="size-5"><path d="M5 12h14M13 5l7 7-7 7" /></svg></span>
+                </a>
+              </div>
+              <div class="mt-5 font-mono text-xs md:text-sm uppercase tracking-[0.16em] text-ink/70">Piloto en 4-6 semanas · Demo privada bajo NDA</div>
+            </div>
+            <div class="justify-self-center md:justify-self-end shrink-0" aria-hidden="true">
+              <div class="relative">
+                <img src="/mascot/mascot-idle.webp" alt="" width="1200" height="1200" class="w-32 md:w-40 h-auto float-mac" draggable="false" style="filter: drop-shadow(0 18px 30px rgba(26,24,21,0.3));" />
+                <div class="absolute left-1/2 -translate-x-1/2 -bottom-1 w-[70%] h-3 rounded-[50%]" style="background: radial-gradient(ellipse, rgba(26,24,21,0.55) 0%, rgba(26,24,21,0) 70%); filter: blur(2px);"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <div class="mt-20 flex flex-wrap items-center justify-between gap-4">
+          <a href="/productos" class="group inline-flex items-center gap-2 font-mono text-xs uppercase tracking-[0.18em] text-muted hover:text-ink transition"><svg viewBox="0 0 40 32" class="size-4 transition-transform group-hover:-translate-x-0.5" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M14 4 L4 16 L14 28" /><path d="M4 16 L36 16" /></svg>Más productos Thonking</a>
+          <a href="mailto:gabriel@thonking.dev" class="font-mono text-xs uppercase tracking-[0.18em] text-muted hover:text-ink transition">¿Necesitas algo similar? → gabriel@thonking.dev</a>
+        </div>
+      </section>
+    </article>
+  </main>
+  <Footer />
+  <ProductSchema product={product} />
+</Layout>
+
+<script>
+  const openers = document.querySelectorAll<HTMLButtonElement>("[data-slide-open]");
+  const closers = document.querySelectorAll<HTMLButtonElement>("[data-slide-close]");
+  let savedScrollY = 0; let lastTrigger: HTMLButtonElement | null = null;
+  const lockScroll = () => { savedScrollY = window.scrollY; const b = document.body; b.style.position = "fixed"; b.style.top = `-${savedScrollY}px`; b.style.left = "0"; b.style.right = "0"; b.style.width = "100%"; };
+  const unlockScroll = () => { const b = document.body; b.style.position = ""; b.style.top = ""; b.style.left = ""; b.style.right = ""; b.style.width = ""; window.scrollTo({ top: savedScrollY, behavior: "instant" as ScrollBehavior }); };
+  openers.forEach((btn) => btn.addEventListener("click", () => { const id = btn.dataset.slideOpen; const dlg = document.querySelector<HTMLDialogElement>(`dialog[data-slide="${id}"]`); if (dlg) { lastTrigger = btn; lockScroll(); dlg.showModal(); } }));
+  closers.forEach((btn) => btn.addEventListener("click", () => btn.closest<HTMLDialogElement>("dialog")?.close()));
+  document.querySelectorAll<HTMLDialogElement>("dialog.gdd-dialog").forEach((dlg) => { dlg.addEventListener("click", (e) => { if (e.target === dlg) dlg.close(); }); dlg.addEventListener("close", () => { unlockScroll(); if (lastTrigger) { lastTrigger.focus({ preventScroll: true }); lastTrigger = null; } }); });
+</script>
+<style>
+  .gdd-dialog[open] { animation: gdd-dialog-in 220ms cubic-bezier(0.2, 0.8, 0.2, 1); }
+  .gdd-dialog::backdrop { animation: gdd-backdrop-in 220ms ease-out; }
+  @keyframes gdd-dialog-in { from { opacity: 0; transform: scale(0.96); } to { opacity: 1; transform: scale(1); } }
+  @keyframes gdd-backdrop-in { from { opacity: 0; } to { opacity: 1; } }
+  @media (prefers-reduced-motion: reduce) { .gdd-dialog[open], .gdd-dialog::backdrop { animation: none; } }
+</style>

@@ -1,0 +1,173 @@
+---
+export type SolviSlideVariant = "dashboard" | "capture" | "categories" | "insight";
+interface Props { variant: SolviSlideVariant; }
+const { variant } = Astro.props;
+---
+
+<div
+  class="relative h-full w-full flex flex-col overflow-hidden"
+  style="padding: var(--slide-pad, 14px); background: linear-gradient(160deg, #0f1a16 0%, #1a2a24 100%); color: #ffe8d4;"
+>
+  <!-- mobile status bar -->
+  <div class="relative flex items-center justify-between font-mono uppercase tracking-[0.22em] text-white/50" style="font-size: var(--slide-meta, 7px);">
+    <span class="text-[#a8e6cf]">● Solvi</span>
+    <span>9:41 AM · 100%</span>
+  </div>
+
+  {variant === "dashboard" && (
+    <div class="relative flex-1 mt-[5%] flex flex-col">
+      <div class="font-mono uppercase tracking-[0.2em] text-white/60" style="font-size: var(--slide-meta, 7px);">Abril 2026</div>
+      <div class="mt-[3%] font-display font-black leading-none tabular-nums" style="font-size: var(--slide-title, 30px);">
+        S/ 1,847<span class="text-white/40" style="font-size: var(--slide-body-lg, 10px);">.50</span>
+      </div>
+      <div class="mt-[2%] font-mono text-[#a8e6cf] uppercase tracking-[0.14em]" style="font-size: var(--slide-meta, 7px);">▼ 12% vs. marzo</div>
+
+      <!-- mini chart bars -->
+      <div class="mt-[6%] flex items-end gap-[3px] h-[24%]">
+        {[40, 65, 30, 80, 55, 90, 45, 70, 60, 35, 85, 50].map((h, i) => (
+          <div class:list={["flex-1 rounded-[1px]", i === 10 ? "bg-[#a8e6cf]" : "bg-white/15"]} style={`height: ${h}%;`}></div>
+        ))}
+      </div>
+
+      <!-- top categories -->
+      <ul class="mt-[6%] flex flex-col font-mono" style="gap: var(--slide-gap-sm, 4px); font-size: var(--slide-body, 7px);">
+        {[
+          { n: "Comida", v: "420.30", pct: "23%", c: "#a8e6cf" },
+          { n: "Transporte", v: "385.00", pct: "21%", c: "#f4d35e" },
+          { n: "Entretenimiento", v: "240.80", pct: "13%", c: "#ff6b4a" },
+          { n: "Servicios", v: "210.00", pct: "11%", c: "#937cff" },
+        ].map((row) => (
+          <li class="flex items-center justify-between border-b border-white/10 pb-[3px]">
+            <span class="flex items-center gap-[5px] text-white/80">
+              <span class="inline-block size-[6px] rounded-sm" style={`background: ${row.c};`}></span>
+              <span>{row.n}</span>
+            </span>
+            <div class="flex items-center gap-[8px]">
+              <span class="text-white/50 tabular-nums">S/ {row.v}</span>
+              <span class="text-white/40 tabular-nums">{row.pct}</span>
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      <!-- bottom tabs -->
+      <div class="mt-auto pt-[5%] flex items-center justify-around font-mono uppercase tracking-[0.16em] text-white/40" style="font-size: calc(var(--slide-footer, 6px) + 0px);">
+        <span class="text-[#a8e6cf]">● Mes</span>
+        <span>Tarjetas</span>
+        <span>Metas</span>
+        <span>Yo</span>
+      </div>
+    </div>
+  )}
+
+  {variant === "capture" && (
+    <div class="relative flex-1 mt-[5%] flex flex-col">
+      <div class="font-mono uppercase tracking-[0.2em] text-white/60" style="font-size: var(--slide-meta, 7px);">▸ Auto-captura en vivo</div>
+
+      <div class="mt-[5%] rounded-[6px] border border-[#a8e6cf]/40 bg-[#a8e6cf]/5 p-[4%]">
+        <div class="flex items-center justify-between font-mono uppercase tracking-[0.14em] text-[#a8e6cf]" style="font-size: calc(var(--slide-footer, 6px) - 0px);">
+          <span>BCP · notif capturada</span>
+          <span>hace 2 seg</span>
+        </div>
+        <div class="mt-[8%] font-display font-black tabular-nums" style="font-size: var(--slide-sub, 20px);">
+          - S/ 42.50
+        </div>
+        <div class="mt-[2%] font-mono text-white/80" style="font-size: var(--slide-body, 7px);">Starbucks · Miraflores</div>
+        <div class="mt-[5%] flex items-center gap-[5px] font-mono" style="font-size: var(--slide-body, 7px);">
+          <span class="inline-flex items-center gap-[3px] rounded-full bg-[#a8e6cf]/15 border border-[#a8e6cf]/40 px-[6px] py-[2px] text-[#a8e6cf]">
+            <span class="size-[5px] rounded-sm bg-[#a8e6cf]"></span>
+            Comida
+          </span>
+          <span class="text-white/40 uppercase tracking-[0.14em]">IA · Gemini</span>
+        </div>
+      </div>
+
+      <!-- history -->
+      <ul class="mt-[6%] flex flex-col font-mono" style="gap: var(--slide-gap-sm, 3px); font-size: var(--slide-body, 7px);">
+        <li class="text-white/50 uppercase tracking-[0.14em]" style="font-size: calc(var(--slide-footer, 6px) - 0px);">Hoy · 23 abr</li>
+        {[
+          { t: "Uber", v: "18.90", c: "Transporte" },
+          { t: "Tambo", v: "12.50", c: "Comida" },
+          { t: "Yape a Juan", v: "50.00", c: "Otros" },
+        ].map((row) => (
+          <li class="flex items-center justify-between pb-[2px]">
+            <span class="text-white/80">{row.t}</span>
+            <div class="flex items-center gap-[8px]">
+              <span class="text-white/50 truncate">{row.c}</span>
+              <span class="text-white/80 tabular-nums">S/ {row.v}</span>
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      <div class="mt-auto pt-[4%] font-mono text-white/50 uppercase tracking-[0.14em] text-center" style="font-size: calc(var(--slide-footer, 6px) - 0px);">
+        Sin ingresar un solo dato manual
+      </div>
+    </div>
+  )}
+
+  {variant === "categories" && (
+    <div class="relative flex-1 mt-[5%] flex flex-col">
+      <div class="font-mono uppercase tracking-[0.2em] text-white/60" style="font-size: var(--slide-meta, 7px);">Ranking del mes</div>
+      <div class="mt-[3%] font-pixel font-bold text-[#a8e6cf]" style="font-size: var(--slide-sub, 14px);">Categorías</div>
+
+      <ul class="mt-[5%] flex flex-col" style="gap: var(--slide-gap-sm, 5px); font-size: var(--slide-body, 7px);">
+        {[
+          { n: "Comida", v: 420, pct: 72, c: "#a8e6cf" },
+          { n: "Transporte", v: 385, pct: 66, c: "#f4d35e" },
+          { n: "Entretenimiento", v: 240, pct: 41, c: "#ff6b4a" },
+          { n: "Servicios", v: 210, pct: 36, c: "#937cff" },
+          { n: "Otros", v: 180, pct: 30, c: "#7a6cc0" },
+        ].map((row, i) => (
+          <li class="font-mono">
+            <div class="flex items-center justify-between">
+              <span class="flex items-center gap-[5px] text-white/85"><span class="text-white/40 tabular-nums" style="font-size: calc(var(--slide-footer, 6px) - 0px);">{String(i + 1).padStart(2, "0")}</span><span>{row.n}</span></span>
+              <span class="tabular-nums text-white/70">S/ {row.v}</span>
+            </div>
+            <div class="mt-[3px] h-[3px] rounded-full bg-white/10 overflow-hidden">
+              <div class="h-full rounded-full" style={`width: ${row.pct}%; background: ${row.c};`}></div>
+            </div>
+          </li>
+        ))}
+      </ul>
+
+      <div class="mt-auto pt-[4%] rounded-[4px] border border-white/10 p-[4%] font-mono text-white/70" style="font-size: var(--slide-body, 7px);">
+        <span class="text-[#a8e6cf]">▸</span> 92% categorizado automáticamente
+      </div>
+    </div>
+  )}
+
+  {variant === "insight" && (
+    <div class="relative flex-1 mt-[5%] flex flex-col">
+      <div class="font-mono uppercase tracking-[0.2em] text-white/60" style="font-size: var(--slide-meta, 7px);">Push notification · 9:00 AM</div>
+
+      <div class="mt-[4%] rounded-[10px] bg-white/90 text-[#0f1a16] p-[5%] shadow-[0_4px_12px_rgba(0,0,0,0.3)]">
+        <div class="flex items-center gap-[6px] font-mono uppercase tracking-[0.14em]" style="font-size: calc(var(--slide-footer, 6px) - 0px);">
+          <span class="inline-block size-[10px] rounded-[2px]" style="background: #a8e6cf;"></span>
+          <span class="font-bold">Solvi</span>
+          <span class="text-[#0f1a16]/50">· ahora</span>
+        </div>
+        <div class="mt-[5%] font-display font-bold" style="font-size: var(--slide-body-lg, 9px);">Insight semanal 📊</div>
+        <div class="mt-[2%] font-mono leading-[1.4]" style="font-size: var(--slide-body, 7px);">
+          Estás gastando <strong style="color: #2d9e4f;">18% menos en entretenimiento</strong> esta semana. Si mantienes el ritmo, cierras el mes con <strong>S/ 280 ahorrados</strong>.
+        </div>
+      </div>
+
+      <!-- more insights -->
+      <ul class="mt-[6%] flex flex-col font-mono" style="gap: var(--slide-gap-sm, 4px); font-size: var(--slide-body, 7px);">
+        <li class="flex items-start gap-[5px] text-white/70"><span class="text-[#a8e6cf]">▸</span>Comida subió 8% vs. semana pasada</li>
+        <li class="flex items-start gap-[5px] text-white/70"><span class="text-[#a8e6cf]">▸</span>Nuevo patrón: gastas más los viernes</li>
+        <li class="flex items-start gap-[5px] text-white/70"><span class="text-[#a8e6cf]">▸</span>Quedan 6 días para tu meta de S/ 1,900</li>
+      </ul>
+
+      <div class="mt-auto pt-[4%] font-mono text-white/50 uppercase tracking-[0.16em] text-center" style="font-size: calc(var(--slide-footer, 6px) - 0px);">
+        Sin abrir la app · todo llega solo
+      </div>
+    </div>
+  )}
+
+  <div class="relative mt-auto pt-[4%] border-t border-white/10 flex items-center justify-between font-mono uppercase tracking-[0.22em] text-white/50" style="font-size: var(--slide-footer, 6px);">
+    <span>THONKING · Solvi</span>
+    <span class="text-[#a8e6cf]">beta</span>
+  </div>
+</div>

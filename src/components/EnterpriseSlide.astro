@@ -1,0 +1,127 @@
+---
+export type EnterpriseSlideVariant = "module" | "puzzle" | "progression" | "signoff";
+interface Props { variant: EnterpriseSlideVariant; }
+const { variant } = Astro.props;
+---
+
+<div
+  class="relative h-full w-full flex flex-col overflow-hidden"
+  style="padding: var(--slide-pad, 14px); background: linear-gradient(140deg, #1a1815 0%, #2a2621 50%, #1a1815 100%); color: #ffe8d4;"
+>
+  <!-- corporate grid bg -->
+  <div aria-hidden="true" class="absolute inset-0 opacity-[0.12]" style="background-image: linear-gradient(to right, #f4d35e 1px, transparent 1px), linear-gradient(to bottom, #f4d35e 1px, transparent 1px); background-size: 24px 24px;"></div>
+
+  <!-- Header meta with NDA badge -->
+  <div class="relative flex items-center justify-between font-mono uppercase tracking-[0.22em]" style="font-size: var(--slide-meta, 7px);">
+    <span class="text-secondary">🔒 NDA</span>
+    {variant === "module" && <span class="text-white/60">Módulo 01</span>}
+    {variant === "puzzle" && <span class="text-white/60">Reto · Pág 02</span>}
+    {variant === "progression" && <span class="text-white/60">XP · Pág 03</span>}
+    {variant === "signoff" && <span class="text-white/60">Sign-off · Pág 04</span>}
+  </div>
+
+  {variant === "module" && (
+    <div class="relative flex-1 flex flex-col items-center justify-center text-center">
+      <div class="font-mono text-secondary uppercase tracking-[0.22em]" style="font-size: var(--slide-meta, 7px);">MÓDULO</div>
+      <div class="mt-[3%] font-display font-black leading-none tabular-nums" style="font-size: var(--slide-title, 48px); color: #f4d35e;">01</div>
+      <div class="mt-[4%] font-pixel font-bold text-white" style="font-size: var(--slide-sub, 14px);">GESTIÓN DE STOCK</div>
+      <div class="mt-[4%] font-mono text-white/60 uppercase tracking-[0.16em] max-w-[72%] leading-[1.5]" style="font-size: var(--slide-body, 7px);">
+        Simulación del piso de venta. Toma decisiones. Consecuencias reales.
+      </div>
+      <div class="mt-[8%] inline-flex items-center gap-[6px] rounded-full border border-secondary/60 px-[8px] py-[4px] font-mono text-secondary uppercase tracking-[0.16em]" style="font-size: var(--slide-meta, 7px);">
+        <span class="size-[5px] rounded-full bg-secondary animate-pulse"></span>
+        Iniciar entrenamiento
+      </div>
+    </div>
+  )}
+
+  {variant === "puzzle" && (
+    <div class="relative flex-1 mt-[5%] flex flex-col">
+      <div class="font-pixel font-bold text-secondary" style="font-size: var(--slide-sub, 12px);">RETO 03</div>
+      <div class="mt-[3%] font-display font-bold text-white leading-[1.3]" style="font-size: var(--slide-body-lg, 9px);">
+        Un cliente pide un producto que está próximo a vencer. ¿Qué haces?
+      </div>
+
+      <ul class="mt-[6%] flex flex-col" style="gap: var(--slide-gap-sm, 4px); font-size: var(--slide-body, 7px);">
+        {["Lo vendo, es responsabilidad del cliente", "Avísolo discretamente", "Retiro el producto del anaquel", "Consulto con supervisor"].map((opt, i) => (
+          <div class:list={["w-full text-left px-[8px] py-[6px] rounded-[3px] border font-mono flex items-center gap-[6px]", i === 2 ? "border-secondary bg-secondary/10 text-secondary" : "border-white/15 text-white/70"]}>
+            <span class:list={["grid size-[12px] place-items-center rounded-full border border-white/25", i === 2 && "border-secondary bg-secondary/30"]}>
+              {i === 2 && <span class="size-[5px] rounded-full bg-secondary" />}
+            </span>
+            <span>{opt}</span>
+          </div>
+        ))}
+      </ul>
+
+      <div class="mt-auto pt-[4%] flex items-center justify-between font-mono uppercase tracking-[0.16em] text-white/50" style="font-size: calc(var(--slide-footer, 6px) - 0px);">
+        <span>Tiempo · 00:24</span>
+        <span>+50 XP disponibles</span>
+      </div>
+    </div>
+  )}
+
+  {variant === "progression" && (
+    <div class="relative flex-1 mt-[5%] flex flex-col">
+      <div class="font-mono uppercase tracking-[0.2em] text-white/60" style="font-size: var(--slide-meta, 7px);">Nivel · Progreso</div>
+      <div class="mt-[3%] flex items-end gap-[8px]">
+        <div class="font-display font-black text-secondary tabular-nums leading-none" style="font-size: var(--slide-title, 42px);">04</div>
+        <div class="font-mono text-white/60 pb-[3px]" style="font-size: var(--slide-body, 7px);">/ 08</div>
+      </div>
+      <div class="font-pixel font-bold text-white" style="font-size: var(--slide-sub, 12px);">Supervisor de piso</div>
+
+      <!-- xp bar -->
+      <div class="mt-[5%] h-[4px] rounded-full bg-white/10 overflow-hidden">
+        <div class="h-full rounded-full" style="width: 72%; background: linear-gradient(90deg, #f4d35e, #ff6b4a);" />
+      </div>
+      <div class="mt-[4px] flex items-center justify-between font-mono uppercase tracking-[0.14em] text-white/50" style="font-size: calc(var(--slide-footer, 6px) - 0px);">
+        <span>1,840 XP</span>
+        <span>/ 2,500 XP</span>
+      </div>
+
+      <!-- logros -->
+      <div class="mt-[8%] font-mono uppercase tracking-[0.16em] text-white/60" style="font-size: var(--slide-meta, 7px);">Logros desbloqueados</div>
+      <div class="mt-[3%] grid grid-cols-4 gap-[4%]">
+        {[
+          { c: "#f4d35e", u: true },
+          { c: "#ff6b4a", u: true },
+          { c: "#937cff", u: true },
+          { c: "#fff", u: false },
+        ].map((m) => (
+          <div class:list={["aspect-square rounded-[4px] border-2 flex items-center justify-center", m.u ? "" : "border-dashed opacity-30"]} style={`border-color: ${m.c}; background: ${m.u ? `${m.c}22` : "transparent"};`}>
+            <div class="size-[70%] rounded-full" style={`background: ${m.u ? m.c : "transparent"};`}></div>
+          </div>
+        ))}
+      </div>
+
+      <div class="mt-auto pt-[4%] font-mono uppercase tracking-[0.16em] text-white/50" style="font-size: calc(var(--slide-footer, 6px) - 0px);">
+        Ranking interno · top 8% nacional
+      </div>
+    </div>
+  )}
+
+  {variant === "signoff" && (
+    <div class="relative flex-1 mt-[5%] flex flex-col items-center justify-center text-center">
+      <div class="grid place-items-center rounded-full border-2 border-secondary bg-secondary/10" style="width: var(--slide-ring, 56px); height: var(--slide-ring, 56px);">
+        <span class="text-secondary font-bold" style="font-size: var(--slide-sub, 24px);">✓</span>
+      </div>
+      <div class="mt-[5%] font-pixel font-bold text-secondary" style="font-size: var(--slide-sub, 14px);">MÓDULO COMPLETADO</div>
+      <div class="mt-[3%] font-display font-bold text-white" style="font-size: var(--slide-body-lg, 10px);">Gestión de Stock · 01</div>
+
+      <div class="mt-[7%] grid grid-cols-2 gap-[6%] w-full font-mono" style="font-size: var(--slide-body, 7px);">
+        <div class="rounded-[4px] border border-white/10 p-[6%] text-left">
+          <div class="text-white/50 uppercase tracking-[0.14em]" style="font-size: calc(var(--slide-footer, 6px) - 0px);">XP ganados</div>
+          <div class="mt-[4px] text-secondary font-bold tabular-nums" style="font-size: var(--slide-sub-sm, 14px);">+ 450</div>
+        </div>
+        <div class="rounded-[4px] border border-white/10 p-[6%] text-left">
+          <div class="text-white/50 uppercase tracking-[0.14em]" style="font-size: calc(var(--slide-footer, 6px) - 0px);">Próximo</div>
+          <div class="mt-[4px] text-white font-bold" style="font-size: var(--slide-sub-sm, 11px);">Módulo 02</div>
+        </div>
+      </div>
+    </div>
+  )}
+
+  <div class="relative mt-auto pt-[4%] border-t border-white/10 flex items-center justify-between font-mono uppercase tracking-[0.22em] text-white/50" style="font-size: var(--slide-footer, 6px);">
+    <span>THONKING · Enterprise</span>
+    <span class="text-secondary">NDA · 2026</span>
+  </div>
+</div>
