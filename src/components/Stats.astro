@@ -50,7 +50,7 @@ const stats: Stat[] = [
           >
             <div class="flex items-baseline whitespace-nowrap font-display font-black text-4xl sm:text-5xl md:text-6xl lg:text-[2.75rem] xl:text-[3.25rem] leading-none tracking-[-0.03em] text-ink tabular-nums">
               <span data-count data-target={s.value}>0</span>
-              {s.suffix && <span class="text-primary ml-0.5">{s.suffix}</span>}
+              {s.suffix && <span class={`text-primary ${i === 3 ? 'ml-3 lg:ml-5 xl:ml-6' : 'ml-0.5'}`}>{s.suffix}</span>}
             </div>
             <div class="mt-4 font-mono text-[11px] md:text-xs uppercase tracking-[0.18em] font-semibold text-[#b89a3d]">
               {s.label}
