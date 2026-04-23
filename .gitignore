@@ -22,3 +22,19 @@ pnpm-debug.log*
 
 # jetbrains setting folder
 .idea/
+
+# vscode
+.vscode/
+
+# internal docs (Claude context, no necesita ir al repo)
+docs/
+
+# one-shot asset generation scripts (correr manualmente, no en CI)
+scripts/
+
+# env local
+.env.local
+.env.*.local
+
+# vercel
+.vercel/

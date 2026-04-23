@@ -1,7 +1,7 @@
 ---
 interface Props {
   image?: string;
-  placeholder?: "gdd" | "telacreiste" | "elevenlabs" | "revertpong" | "soriana";
+  placeholder?: "gdd" | "telacreiste" | "elevenlabs" | "revertpong" | "enterprise";
   title: string;
   statusLabel?: string;
   /** When true, renders as a huge hero (used on product detail page). */
@@ -172,7 +172,7 @@ const {
   }
 
   {
-    placeholder === "soriana" && (
+    placeholder === "enterprise" && (
       <div
         class="absolute inset-0 overflow-hidden"
         style="background: linear-gradient(135deg, #1a1815 0%, #2a2621 50%, #1a1815 100%);"

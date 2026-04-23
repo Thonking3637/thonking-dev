@@ -208,12 +208,12 @@ function labelFor(id: string, status: string): string {
 
     <a
       href="/#sobre"
-      class="rounded-full px-3 py-1.5 text-sm font-medium text-ink/75 hover:text-ink hover:bg-ink/5 transition"
+      class="hidden md:inline-flex rounded-full px-3 py-1.5 text-sm font-medium text-ink/75 hover:text-ink hover:bg-ink/5 transition"
       >Sobre</a
     >
     <a
       href="/now"
-      class="group rounded-full px-3 py-1.5 text-sm font-medium text-ink/75 hover:text-ink hover:bg-ink/5 transition inline-flex items-center gap-1.5"
+      class="group hidden md:inline-flex rounded-full px-3 py-1.5 text-sm font-medium text-ink/75 hover:text-ink hover:bg-ink/5 transition items-center gap-1.5"
     >
       Ahora
       <span
@@ -222,12 +222,12 @@ function labelFor(id: string, status: string): string {
     </a>
     <a
       href="/#contacto"
-      class="rounded-full px-3 py-1.5 text-sm font-medium text-ink/75 hover:text-ink hover:bg-ink/5 transition"
+      class="hidden md:inline-flex rounded-full px-3 py-1.5 text-sm font-medium text-ink/75 hover:text-ink hover:bg-ink/5 transition"
       >Contacto</a
     >
 
     <!-- Theme toggle -->
-    <span class="mx-1 h-5 w-px bg-ink/10" aria-hidden="true"></span>
+    <span class="mx-1 h-5 w-px bg-ink/10 hidden md:inline-block" aria-hidden="true"></span>
     <ThemeToggle />
 
     <a

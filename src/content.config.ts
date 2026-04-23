@@ -16,7 +16,7 @@ const products = defineCollection({
     order: z.number().default(100),
     span: z.union([z.literal(1), z.literal(2)]).default(1),
     placeholder: z
-      .enum(["gdd", "telacreiste", "elevenlabs", "revertpong", "soriana"])
+      .enum(["gdd", "telacreiste", "elevenlabs", "revertpong", "enterprise"])
       .optional(),
     image: z.string().optional(),
     note: z.string().optional(),

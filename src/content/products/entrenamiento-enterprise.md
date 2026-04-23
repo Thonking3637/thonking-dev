@@ -7,7 +7,7 @@ tags: ["Unity", "VR", "Enterprise", "Retail MX"]
 stack: ["Unity", "C#", "MetaQuest 3", "XR Toolkit"]
 order: 4
 span: 2
-placeholder: soriana
+placeholder: enterprise
 accent: "#f4d35e"
 note: "Proyecto bajo NDA — detalles técnicos compartidos solo con prospects serios."
 ---
