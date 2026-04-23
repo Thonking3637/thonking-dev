@@ -5,7 +5,11 @@
       "Bash(git commit *)",
       "Bash(npm run *)",
       "Bash(git push *)",
-      "Bash(git rm *)"
+      "Bash(git rm *)",
+      "Bash(ffmpeg -version)",
+      "PowerShell(ffmpeg -version 2>&1)",
+      "PowerShell(winget list --name ffmpeg 2>&1)",
+      "Bash(npm install *)"
     ]
   }
 }

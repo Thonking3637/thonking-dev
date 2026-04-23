@@ -258,56 +258,15 @@ const pageTitle = `${data.title} — Thonking`;
       </header>
 
       <!-- ========== HERO VISUAL ========== -->
-      <div
-        class="mt-14 relative aspect-[16/9] rounded-3xl border-2 border-ink overflow-hidden shadow-[0_30px_60px_-20px_rgba(26,24,21,0.3)]"
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        class="mt-14 w-full aspect-video rounded-3xl border-2 border-ink object-cover shadow-[0_30px_60px_-20px_rgba(26,24,21,0.3)]"
       >
-        <div
-          class="absolute inset-0 overflow-hidden"
-          style="background: radial-gradient(800px 500px at 50% 50%, #1b1040, #08051a);"
-        >
-          {/* stars */}
-          {
-            Array.from({ length: 70 }).map((_, i) => {
-              const x = (i * 137) % 100;
-              const y = (i * 61) % 100;
-              const s = (i % 3) + 1;
-              return (
-                <div
-                  class="absolute rounded-full bg-base-soft"
-                  style={`left: ${x}%; top: ${y}%; width: ${s}px; height: ${s}px; opacity: ${0.4 + (i % 4) * 0.15};`}
-                />
-              );
-            })
-          }
-          {/* center meteor */}
-          <div
-            class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2"
-          >
-            <div
-              class="size-28 md:size-40 rounded-full"
-              style="background: radial-gradient(circle, #ff6b4a, #c93a3a 60%, #7a1f1f 100%); box-shadow: 0 0 80px #ff6b4a, -50px 0 100px #ff6b4a80;"
-            >
-            </div>
-            <div
-              class="absolute right-full top-1/2 -translate-y-1/2 h-2 w-56 rounded-full"
-              style="background: linear-gradient(to right, transparent, #ff6b4a);"
-              aria-hidden="true"
-            >
-            </div>
-          </div>
-          {/* label overlay */}
-          <div
-            class="absolute bottom-6 left-6 font-pixel font-bold text-[#f5f0e8] tracking-[0.1em] text-3xl md:text-5xl"
-          >
-            REVERT<span class="text-[#ff6b4a]"> PONG</span>
-          </div>
-          <div
-            class="absolute bottom-6 right-6 font-mono text-xs uppercase tracking-[0.2em] text-[#f5f0e8]/60"
-          >
-            2017 · Unity · Pixel Art
-          </div>
-        </div>
-      </div>
+        <source src="/videos/revert-pong-clip.mp4" type="video/mp4" />
+      </video>
 
       <!-- ========== GALLERY ========== -->
       <section class="mt-24 md:mt-28">
