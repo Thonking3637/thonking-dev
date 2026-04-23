@@ -327,7 +327,7 @@ node scripts/convert-webp.mjs     # mascots PNG → WebP
 2. **Voz de Gabriel:** directo, peruano, primera persona, honesto sobre lo que domina. **Nunca "vibecoding" / "AI-assisted" en público.**
 3. **Numbers matter:** 6 años (no 7, desde 2020) · 6,221 descargas (no 5,600 ni 6.2k) · 20,000+ empleados objetivo.
 4. **Stack purity:** Hero chips exactos = 6 tech (Unity, C#, Kotlin, Firebase, Astro, TypeScript). No inflar con Shaders/Python/React.
-5. **Soriana politics:** nombrar en bio personal, **nunca** en product marketing card. Usar "retailer top-3 México".
+5. **Soriana cleanup total (abril 2026):** TODO el nombre "Soriana" está fuera del repo público. Canonical reemplazo = **"Retail Top 3 México"** o **"cliente enterprise bajo NDA"**. Schema placeholder renombrado `soriana` → `enterprise`. CLAUDE.md movido a `docs/` y `docs/` está en .gitignore → doc interno no se publica. Grep confirma cero "Soriana" en src/ + public/.
 6. **Nested buttons fail:** `<button>` dentro de `<button>` rompe el DOM — browsers separan elementos. Usar `<div>` con role. (Bug galería productos descubierto + arreglado).
 7. **Dialog scroll-jump:** `showModal()` nativo hace scroll al dialog. Fix: `position: fixed` body con `top: -scrollY` antes de abrir, restore al cerrar.
 8. **WebP >> PNG:** quality 85 = ~85% reducción visual-lossless. WebP tiene 97%+ browser support desde 2020 — safe sin `<picture>` wrapper.
@@ -361,16 +361,41 @@ node scripts/convert-webp.mjs     # mascots PNG → WebP
 - JSON-LD (Person + WebSite + CreativeWork per producto)
 - WCAG AA contrast validado (cambio cream/coral → ink/coral)
 
-### 🔜 Próxima sesión
+### 🧪 Sesión marathón parte 2 (2026-04-24)
 
-1. **Deploy a Vercel** — conectar repo, apuntar thonking.dev, verificar SSL
-2. **Submit sitemap a Google Search Console** — indexación
-3. **Test social previews** — compartir URL en WhatsApp/LinkedIn para validar OG image render
-4. **Test mobile real** — iPhone/Android de Gabriel, validar responsive en físico
-5. **Newsletter backend** — conectar form de /now a Resend/Buttondown/ConvertKit
-6. **Primera nota escrita** — "Cómo construí GGleaner con Claude Code" (mencionada en /now)
-7. **OG images per producto** (nice-to-have)
-8. **Motion library** para scroll-triggered reveals (nice-to-have)
+Trabajo adicional sobre la base v1:
+
+- **Soriana cleanup total** — reemplazado por "Retail Top 3 México" en 4 strings user-visible (About timeline, About bio, Stats stat#2 sub, Stats stat#4 sub). Schema rename `"soriana"` → `"enterprise"` en content.config.ts + entrenamiento-enterprise.md + ProductVisual.astro (tipo + condicional).
+- **.gitignore expandido:** añadidos `docs/`, `scripts/`, `.vscode/`, `.env.local`, `.env.*.local`, `.vercel/`. Este CLAUDE.md ya no se sube al repo.
+- **Mobile responsive pass:**
+  - **Navbar mobile:** `Sobre · Ahora · Contacto` + divider del theme toggle ocultos con `hidden md:inline-flex`. Solo quedan logo + Trabajo (dropdown) + ThemeToggle + Colabora CTA.
+  - **Contact email pill:** `text-xl md:text-3xl` → `text-base sm:text-lg md:text-3xl` + padding reducido `px-4 md:px-8 py-3 md:py-5` para que "gabriel@thonking.dev" quepa en iPhone SE (375px).
+  - **Hero title home:** `text-5xl` → `text-[2.5rem]` base. Escala: `text-[2.5rem] sm:text-5xl md:text-7xl lg:text-[5rem]`.
+  - **7 product hero titles:** reducidos con `text-[2.5rem]` o `text-[2.75rem]` base (escalan a md:text-6xl o md:text-7xl → lg:text-[7.5rem/8xl] → xl:text-[7-9rem]).
+- **Stats fixes múltiples iteraciones:** `whitespace-nowrap` + `flex items-baseline` en number+suffix · gap-x-8 md:gap-x-6 gap-y-10 md:gap-y-12 · tamaños `text-4xl sm:text-5xl md:text-6xl lg:text-[2.75rem] xl:text-[3.25rem]` · padding `lg:px-8 xl:px-10` · `min-w-0` en wrappers.
+
+### ⚠️ Bug abierto — stats "+7 pegado"
+
+En desktop lg (5 cols), el stat #4 "20,000+" muestra el "+" coral al borde derecho de su columna. El stat #5 "7 Productos" tiene "7" al borde izquierdo. Con `divide-x` gray + `lg:px-8` (32px padding cada lado = 64px entre números) aún visualmente parece que "+7" está pegado.
+
+**Próximas opciones para atacar:**
+1. Eliminar `divide-x`, usar `lg:gap-x-10` puro (80px de whitespace real entre cols)
+2. Aumentar divider a más visible (`divide-ink/20` o border más grueso)
+3. Hacer el "+" más pequeño relativo al número (`text-[0.6em]` en el suffix)
+4. Ocultar divider entre col #4 y #5 específicamente con `nth-child` CSS
+5. Reducir aún más el font size en lg (ej: `lg:text-[2.5rem]`)
+
+### 🔜 Próxima sesión — prioridades
+
+1. **Fix stats "+7 pegado"** — pendiente desde fin de sesión anterior
+2. **Deploy a Vercel** — conectar repo, apuntar thonking.dev, verificar SSL
+3. **Submit sitemap a Google Search Console** — indexación
+4. **Test social previews** — compartir URL en WhatsApp/LinkedIn para validar OG image render
+5. **Test mobile físico** — iPhone/Android de Gabriel, validar responsive en dispositivo real
+6. **Newsletter backend** — conectar form de /now a Resend/Buttondown/ConvertKit
+7. **Primera nota escrita** — "Cómo construí GGleaner con Claude Code" (mencionada en /now)
+8. **OG images per producto** (nice-to-have)
+9. **Motion library** para scroll-triggered reveals (nice-to-have)
 
 ### Decisiones abiertas (post-deploy)
 
@@ -386,9 +411,19 @@ node scripts/convert-webp.mjs     # mascots PNG → WebP
 - **Dominio email activo:** `gabriel@thonking.dev` — ya funciona. No uses gmail en copy pública.
 - **Stack claro:** respeta las listas exactas de la sección 1. 4+ iteraciones me llevó a que quedara bien. No inventes.
 - **Mascot es el gato, no el emoji.** Si ves `/mascot/mascot-*` en código = correcto. Si ves `/thonking-mascot.png` = obsoleto, borrarlo.
+- **Cliente enterprise = "Retail Top 3 México" o "cliente bajo NDA".** Jamás escribas "Soriana" en archivos que van al repo. Grep antes de commitear.
+- **Schema placeholder para Enterprise card = `"enterprise"`** (renombrado desde `"soriana"`). Verificar `src/content.config.ts` + `src/content/products/entrenamiento-enterprise.md` + `src/components/ProductVisual.astro`.
 - **Dark mode ya funciona.** Para colores hex hardcoded en inline styles, usa light mode colors por defecto (la mayoría de fondos decorativos son siempre dark intencional).
 - **Antes de añadir una página nueva:** añade `<main id="main">` + pasa `path` al Layout (para canonical correcto).
 - **Antes de cambiar algo visual:** corre `npx astro build` después, verifica sin errors, y prueba el dark mode toggle.
+- **Mobile-first breakpoints exactos:**
+  - `< 640px` (base) — mobile, 1-col grids, fuentes reducidas (`text-[2.5rem]` / `text-4xl`)
+  - `sm:` 640-767px — escalado
+  - `md:` 768-1023px — 2-3 cols grids
+  - `lg:` 1024-1279px — desktop pleno, 5 cols stats
+  - `xl:` 1280px+ — desktop ancho, tamaños máximos
+- **En mobile la Navbar sólo muestra:** logo + Trabajo (dropdown) + ThemeToggle + Colabora. Sobre/Ahora/Contacto están `hidden md:inline-flex`. Son accesibles via Footer sitemap.
 - **Content Collections:** Los body de los .md están vacíos. Las páginas custom no usan markdown body — todo contenido está hardcoded en los `.astro` por producto. El markdown solo sirve frontmatter (metadata).
-- **Nunca commitees** `scripts/generate-assets.mjs` ni `convert-webp.mjs` corriendo en CI — son one-shot locales. Si cambia el mascot, correlos una vez manualmente.
-- **docs/CLAUDE.md** (este archivo) es tu fuente de verdad para re-contextualización rápida.
+- **Nunca commitees** `scripts/generate-assets.mjs` ni `convert-webp.mjs` corriendo en CI — son one-shot locales. Si cambia el mascot, correlos una vez manualmente. `scripts/` está en .gitignore.
+- **docs/CLAUDE.md** (este archivo) es tu fuente de verdad para re-contextualización rápida. Está en .gitignore → vive local únicamente.
+- **Bug activo pendiente:** stats "20,000+" → el "+" coral toca visualmente el "7" del siguiente stat en lg. Sección 13 lista 5 opciones para atacarlo.
