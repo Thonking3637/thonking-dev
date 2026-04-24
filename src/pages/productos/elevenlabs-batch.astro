@@ -144,17 +144,39 @@ const pageTitle = `${data.title} — Thonking`;
           />
         </svg>
 
-        <!-- Video centered on stage with sticker shadow -->
-        <div class="relative flex justify-center p-8 md:p-12">
-          <video
-            autoplay
-            muted
-            loop
-            playsinline
-            class="w-full aspect-video rounded-2xl border-2 border-[#1a1815] object-cover shadow-[6px_6px_0_0_#1a1815]"
-          >
-            <source src="/videos/elevenlabs-batch-clip.mp4" type="video/mp4" />
-          </video>
+        <!-- Browser window mockup centered on stage -->
+        <div class="relative flex justify-center py-10 md:py-14 px-4 md:px-8">
+          <div class="relative w-full max-w-[900px] rounded-2xl border-[6px] border-[#1a1815] bg-[#1a1815] shadow-[8px_8px_0_0_#1a1815] overflow-hidden">
+            <!-- Browser chrome -->
+            <div class="flex items-center gap-3 px-3 py-2.5 md:px-4 md:py-3 bg-[#2a2621] border-b-2 border-[#1a1815]">
+              <!-- Traffic lights -->
+              <div class="flex items-center gap-1.5 md:gap-2">
+                <span class="size-3 rounded-full bg-[#ff5f57]"></span>
+                <span class="size-3 rounded-full bg-[#febc2e]"></span>
+                <span class="size-3 rounded-full bg-[#28c840]"></span>
+              </div>
+              <!-- URL bar -->
+              <div class="flex-1 min-w-0 rounded-md bg-[#1a1815] px-3 py-1 font-mono text-[10px] md:text-xs text-[#f5f0e8]/70 text-center truncate">
+                🔒 thonking.itch.io/11uds
+              </div>
+              <!-- Right icons -->
+              <div class="hidden md:flex items-center gap-1.5">
+                <span class="size-2 rounded-full bg-[#f5f0e8]/30"></span>
+                <span class="size-2 rounded-full bg-[#f5f0e8]/30"></span>
+                <span class="size-2 rounded-full bg-[#f5f0e8]/30"></span>
+              </div>
+            </div>
+            <!-- Video as page content -->
+            <video
+              autoplay
+              muted
+              loop
+              playsinline
+              class="w-full aspect-video object-cover block"
+            >
+              <source src="/videos/elevenlabs-batch-clip.mp4" type="video/mp4" />
+            </video>
+          </div>
         </div>
       </div>
 
