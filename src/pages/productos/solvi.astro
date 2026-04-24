@@ -150,20 +150,24 @@ const pageTitle = `${data.title} — Thonking`;
         <div class="relative flex justify-center py-12 md:py-16">
           <div class="relative w-[300px] md:w-[360px]">
             <div class="relative rounded-[40px] border-[6px] border-[#1a1815] bg-[#1a1815] shadow-[8px_8px_0_0_#1a1815] overflow-hidden">
-              <!-- Notch (smaller, less intrusive) -->
-              <div class="absolute top-0 left-1/2 -translate-x-1/2 w-16 h-4 bg-[#1a1815] rounded-b-xl z-10"></div>
-              <!-- Video -->
+              <!-- Top chrome with notch (outside video area) -->
+              <div class="relative h-7 bg-[#1a1815] flex items-center justify-center">
+                <div class="w-16 h-4 bg-[#0a0a0a] rounded-b-xl"></div>
+              </div>
+              <!-- Video (actual screen area, not covered) -->
               <video
                 autoplay
                 muted
                 loop
                 playsinline
-                class="w-full aspect-[9/16] object-cover"
+                class="w-full aspect-[9/16] object-cover block"
               >
                 <source src="/videos/solvi-clip.mp4" type="video/mp4" />
               </video>
-              <!-- Home bar -->
-              <div class="absolute bottom-2 left-1/2 -translate-x-1/2 w-20 h-1 bg-[#f5f0e8]/40 rounded-full"></div>
+              <!-- Bottom chrome with home bar (outside video area) -->
+              <div class="relative h-6 bg-[#1a1815] flex items-center justify-center">
+                <div class="w-20 h-1 bg-[#f5f0e8]/40 rounded-full"></div>
+              </div>
             </div>
           </div>
         </div>

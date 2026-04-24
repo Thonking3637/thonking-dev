@@ -93,16 +93,70 @@ const pageTitle = `${data.title} — Thonking`;
         </div>
       </header>
 
-      <!-- Hero visual: tool screen recording -->
-      <video
-        autoplay
-        muted
-        loop
-        playsinline
-        class="mt-14 w-full aspect-video rounded-3xl border-2 border-ink object-cover shadow-[0_30px_60px_-20px_rgba(26,24,21,0.3)]"
-      >
-        <source src="/videos/elevenlabs-batch-clip.mp4" type="video/mp4" />
-      </video>
+      <!-- Hero visual: tool screen recording on branded stage -->
+      <div class="relative mt-14 rounded-3xl border-2 border-ink overflow-hidden shadow-[0_30px_60px_-20px_rgba(26,24,21,0.3)]">
+        <!-- Stage: dark yellow-tinted gradient bg -->
+        <div
+          class="absolute inset-0"
+          style="background: radial-gradient(1000px 600px at 50% 40%, #2a2016, #0a0a0f);"
+          aria-hidden="true"
+        ></div>
+        <!-- Grid pattern overlay -->
+        <div
+          class="absolute inset-0 opacity-[0.1]"
+          style="background-image: linear-gradient(to right, #f4c430 1px, transparent 1px), linear-gradient(to bottom, #f4c430 1px, transparent 1px); background-size: 32px 32px;"
+          aria-hidden="true"
+        ></div>
+        <!-- Giant outlined background type -->
+        <div
+          class="absolute inset-0 flex items-center justify-center pointer-events-none select-none"
+          aria-hidden="true"
+        >
+          <span class="font-pixel font-bold text-[18vw] md:text-[12vw] leading-none tracking-tight text-[#f5f0e8]/10">BATCH</span>
+        </div>
+
+        <!-- Decorative sparkle top-left -->
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 100 100"
+          class="absolute top-6 left-6 w-10 md:w-14 float-b"
+        >
+          <path
+            d="M50 8 C 52 32 68 48 92 50 C 68 52 52 68 50 92 C 48 68 32 52 8 50 C 32 48 48 32 50 8 Z"
+            fill="#f4c430"
+            stroke="#1a1815"
+            stroke-width="5"
+            stroke-linejoin="round"
+          />
+        </svg>
+        <!-- Decorative star bottom-right -->
+        <svg
+          aria-hidden="true"
+          viewBox="0 0 110 110"
+          class="absolute bottom-8 right-8 w-12 md:w-16 float-a rotate-[14deg]"
+        >
+          <path
+            d="M55 10 L66 42 L100 44 L72 64 L82 96 L55 78 L28 96 L38 64 L10 44 L44 42 Z"
+            fill="#f4c430"
+            stroke="#1a1815"
+            stroke-width="5"
+            stroke-linejoin="round"
+          />
+        </svg>
+
+        <!-- Video centered on stage with sticker shadow -->
+        <div class="relative flex justify-center p-8 md:p-12">
+          <video
+            autoplay
+            muted
+            loop
+            playsinline
+            class="w-full aspect-video rounded-2xl border-2 border-[#1a1815] object-cover shadow-[6px_6px_0_0_#1a1815]"
+          >
+            <source src="/videos/elevenlabs-batch-clip.mp4" type="video/mp4" />
+          </video>
+        </div>
+      </div>
 
       <section class="mt-24 md:mt-28">
         <header class="mb-6">
