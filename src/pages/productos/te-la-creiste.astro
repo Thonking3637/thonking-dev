@@ -215,14 +215,14 @@ const pageTitle = `${data.title} — Thonking`;
         <!-- Phone frame (centered) -->
         <div class="relative flex justify-center py-12 md:py-16">
           <div class="relative w-[300px] md:w-[360px]">
-            <div class="relative rounded-[40px] border-[6px] border-[#1a1815] bg-[#1a1815] shadow-[0_20px_40px_-10px_rgba(0,0,0,0.5)] overflow-hidden">
-              <!-- Video fills frame (source includes its own status bar + nav) -->
+            <div class="relative rounded-[40px] border-[6px] border-[#1a1815] bg-[#1a1815] shadow-[0_20px_40px_-10px_rgba(0,0,0,0.5)] overflow-hidden aspect-[9/19.5]">
+              <!-- Video fills frame with forced aspect ratio -->
               <video
                 autoplay
                 muted
                 loop
                 playsinline
-                class="w-full h-auto block"
+                class="w-full h-full object-cover block"
               >
                 <source src="/videos/te-la-creiste-clip.mp4" type="video/mp4" />
               </video>
