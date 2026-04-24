@@ -8,6 +8,7 @@ tags: ["Unity", "Audio", "ElevenLabs", "Tool"]
 stack: ["HTML/CSS", "TypeScript", "ElevenLabs API"]
 order: 5
 placeholder: elevenlabs
+video: "/videos/elevenlabs-batch-clip.mp4"
 note: "Requiere cuenta ElevenLabs"
 accent: "#f4d35e"
 ---

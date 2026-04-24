@@ -8,5 +8,6 @@ tags: ["Unity", "Pixel Art", "Arcade", "VMP"]
 stack: ["Unity", "C#", "Pixel Art"]
 order: 7
 placeholder: revertpong
+video: "/videos/revert-pong-clip.mp4"
 accent: "#e8546f"
 ---

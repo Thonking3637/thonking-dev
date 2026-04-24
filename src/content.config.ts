@@ -10,7 +10,7 @@ const products = defineCollection({
     statusLabel: z.string(),
     url: z.string().url().optional(),
     github: z.string().url().optional(),
-    video: z.string().url().optional(),
+    video: z.string().optional(),
     tags: z.array(z.string()),
     stack: z.array(z.string()),
     order: z.number().default(100),

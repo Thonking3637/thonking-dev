@@ -1,6 +1,7 @@
 ---
 interface Props {
   image?: string;
+  video?: string;
   placeholder?: "gdd" | "telacreiste" | "elevenlabs" | "revertpong" | "enterprise";
   title: string;
   statusLabel?: string;
@@ -10,6 +11,7 @@ interface Props {
 
 const {
   image,
+  video,
   placeholder,
   title,
   statusLabel,
@@ -19,7 +21,19 @@ const {
 
 <div class="absolute inset-0 bg-ink">
   {
-    image && (
+    video ? (
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        preload="metadata"
+        aria-label={title}
+        class="absolute inset-0 w-full h-full object-cover object-top"
+      >
+        <source src={video} type="video/mp4" />
+      </video>
+    ) : image && (
       <img
         src={image}
         alt={title}
@@ -31,7 +45,7 @@ const {
   }
 
   {
-    placeholder === "gdd" && (
+    !video && placeholder === "gdd" && (
       <div
         class="absolute inset-0 flex items-center justify-center"
         style="background: radial-gradient(800px 400px at 30% 20%, #2a2621, #1a1815);"
@@ -59,7 +73,7 @@ const {
   }
 
   {
-    placeholder === "telacreiste" && (
+    !video && placeholder === "telacreiste" && (
       <div
         class="absolute inset-0 flex flex-col items-center justify-center"
         style="background: radial-gradient(600px 400px at 50% 40%, #c93a3a, #7a1f1f);"
@@ -83,7 +97,7 @@ const {
   }
 
   {
-    placeholder === "elevenlabs" && (
+    !video && placeholder === "elevenlabs" && (
       <div
         class="absolute inset-0 flex flex-col items-center justify-center"
         style="background: linear-gradient(135deg, #0a0a0f 0%, #1a1815 100%);"
@@ -124,7 +138,7 @@ const {
   }
 
   {
-    placeholder === "revertpong" && (
+    !video && placeholder === "revertpong" && (
       <div
         class="absolute inset-0 overflow-hidden"
         style="background: radial-gradient(500px 400px at 50% 50%, #1b1040, #08051a);"
