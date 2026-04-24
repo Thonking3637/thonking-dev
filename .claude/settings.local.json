@@ -9,7 +9,9 @@
       "Bash(ffmpeg -version)",
       "PowerShell(ffmpeg -version 2>&1)",
       "PowerShell(winget list --name ffmpeg 2>&1)",
-      "Bash(npm install *)"
+      "Bash(npm install *)",
+      "Bash(git mv *)",
+      "Bash(kill %1)"
     ]
   }
 }
