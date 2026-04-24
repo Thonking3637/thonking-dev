@@ -93,18 +93,16 @@ const pageTitle = `${data.title} — Thonking`;
         </div>
       </header>
 
-      <div class="mt-14 relative aspect-[16/9] rounded-3xl border-2 border-ink overflow-hidden shadow-[0_30px_60px_-20px_rgba(26,24,21,0.3)]">
-        <div class="absolute inset-0 flex flex-col items-center justify-center" style="background: linear-gradient(135deg, #0a0a0f 0%, #1a1815 100%);">
-          <div class="font-display font-black text-[#f5f0e8] text-center leading-tight text-5xl md:text-7xl">ElevenLabs <span class="text-secondary">Batch</span></div>
-          <div class="mt-4 font-mono text-sm md:text-base uppercase tracking-[0.2em] text-[#f5f0e8]/60">TXT · JSON · .DOCX → OGG</div>
-          <svg aria-hidden="true" class="mt-8 w-64 md:w-96" viewBox="0 0 160 32">
-            {Array.from({ length: 40 }).map((_, i) => {
-              const h = 4 + Math.abs(Math.sin(i * 0.7)) * 22;
-              return <rect x={i * 4} y={16 - h / 2} width="2" height={h} rx="1" fill="#f4d35e" opacity={0.4 + Math.abs(Math.sin(i * 0.7)) * 0.5} />;
-            })}
-          </svg>
-        </div>
-      </div>
+      <!-- Hero visual: tool screen recording -->
+      <video
+        autoplay
+        muted
+        loop
+        playsinline
+        class="mt-14 w-full aspect-video rounded-3xl border-2 border-ink object-cover shadow-[0_30px_60px_-20px_rgba(26,24,21,0.3)]"
+      >
+        <source src="/videos/elevenlabs-batch-clip.mp4" type="video/mp4" />
+      </video>
 
       <section class="mt-24 md:mt-28">
         <header class="mb-6">
