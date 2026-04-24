@@ -154,13 +154,13 @@ const pageTitle = `${data.title} — Thonking`;
               <div class="relative h-7 bg-[#1a1815] flex items-center justify-center">
                 <div class="w-16 h-4 bg-[#0a0a0a] rounded-b-xl"></div>
               </div>
-              <!-- Video (actual screen area, not covered) -->
+              <!-- Video (actual screen area, native ratio — no crop) -->
               <video
                 autoplay
                 muted
                 loop
                 playsinline
-                class="w-full aspect-[9/16] object-cover block"
+                class="w-full h-auto block"
               >
                 <source src="/videos/solvi-clip.mp4" type="video/mp4" />
               </video>
