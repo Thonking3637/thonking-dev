@@ -57,10 +57,10 @@ function labelFor(id: string, status: string): string {
         aria-hidden="true"></span>
     </a>
 
-    <span class="h-5 w-px bg-ink/10 mx-1" aria-hidden="true"></span>
+    <span class="hidden md:inline-block h-5 w-px bg-ink/10 mx-1" aria-hidden="true"></span>
 
-    <!-- TRABAJO con dropdown -->
-    <div class="group relative">
+    <!-- TRABAJO con dropdown (hidden en mobile, scroll via CTA del hero) -->
+    <div class="group relative hidden md:block">
       <a
         href="/#trabajo"
         class="rounded-full px-3 py-1.5 text-sm font-medium text-ink/75 hover:text-ink hover:bg-ink/5 transition inline-flex items-center gap-1"
