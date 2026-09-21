@@ -226,7 +226,7 @@ const pageTitle = `${data.title} — Thonking`;
               {howItWorks.map((step, i) => (
                 <li class="grid grid-cols-[auto_1fr] gap-x-3 md:gap-x-4 py-8 md:py-10 first:pt-0 last:pb-0">
                   <div class="font-display font-black text-5xl md:text-6xl leading-[0.9] text-primary tabular-nums tracking-[-0.04em]">{String(i + 1).padStart(2, "0")}</div>
-                  <div class="pt-1"><h3 class="font-display font-bold text-xl md:text-2xl leading-tight tracking-tight">{step.title}</h3><p class="mt-2 text-base md:text-lg text-muted leading-[1.6] max-w-lg">{step.body}</p></div>
+                  <div class="pt-1"><h3 class="font-display font-bold text-xl md:text-2xl leading-tight tracking-tight">{step.title}</h3><p class="mt-2 text-[1rem] md:text-lg text-muted leading-[1.6] max-w-lg">{step.body}</p></div>
                 </li>
               ))}
             </ol>
@@ -251,7 +251,7 @@ const pageTitle = `${data.title} — Thonking`;
                     </div>
                     <div class="flex-1 min-w-0">
                       <div class="font-mono text-[10px] uppercase tracking-[0.2em] text-muted tabular-nums">{String(i + 1).padStart(2, "0")} / {String(lessons.length).padStart(2, "0")}</div>
-                      <p class="mt-3 text-base md:text-[17px] leading-[1.6] text-ink">{lesson.text}</p>
+                      <p class="mt-3 text-[1rem] md:text-[17px] leading-[1.6] text-ink">{lesson.text}</p>
                     </div>
                   </div>
                 </li>
