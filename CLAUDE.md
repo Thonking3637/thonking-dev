@@ -9,6 +9,7 @@ Este archivo es el punto de entrada para cualquier sesión (humana o con Claude)
 |---|---|
 | Voz y reglas de escritura en español (idioma del sitio) | `docs/lang/STYLE.es.md` |
 | Voice and writing rules in English (READMEs, itch.io, futura versión EN) | `docs/lang/STYLE.en.md` |
+| **Brief del rediseño** (qué se queda, qué se va, inventario, entrega) | `docs/DESIGN-BRIEF.md` |
 | Historial de decisiones y snapshot de abril 2026 | `docs/CLAUDE.md` (interno, desactualizado en partes) |
 
 ## Quién es Gabriel (para no inventar)
@@ -47,5 +48,5 @@ npm run preview
 
 ## Estado (septiembre 2026)
 
-- Sitio en producción. Se está preparando un rediseño completo (solo el gato se queda).
+- Sitio en producción. Rediseño completo en curso: el brief está en `docs/DESIGN-BRIEF.md`; el diseño lo hace Claude Design y la implementación en Astro viene después.
 - Pendientes de negocio: newsletter backend en /now, primera nota del blog, OG por producto.
