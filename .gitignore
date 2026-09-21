@@ -29,8 +29,8 @@ pnpm-debug.log*
 # visual studio
 .vs/
 
-# internal docs (Claude context, no necesita ir al repo)
-docs/
+# notas internas (no van al repo). docs/lang/ y docs/CLAUDE.md sí se versionan
+docs/internal/
 
 # one-shot asset generation scripts (correr manualmente, no en CI)
 scripts/
