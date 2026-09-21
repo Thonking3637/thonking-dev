@@ -201,7 +201,7 @@ const pageTitle = `${data.title} — Thonking`;
           <div class="relative aspect-[3/4] w-full" style="--slide-pad: 30px; --slide-meta: 13px; --slide-sub: 26px; --slide-body: 13px; --slide-footer: 11px; --slide-gap-sm: 7px; --slide-bar-h: 7px;">
             <ElevenLabsSlide variant={s.variant} />
           </div>
-          <button type="button" data-slide-close aria-label="Cerrar preview" class="absolute top-4 right-4 grid size-11 place-items-center rounded-full bg-secondary text-ink border-2 border-ink shadow-[3px_3px_0_0_#1a1815] hover:bg-primary hover:text-base-soft transition-colors"><svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12" /></svg></button>
+          <button type="button" data-slide-close aria-label="Cerrar preview" class="absolute top-4 right-4 grid size-11 place-items-center rounded-full bg-secondary text-ink border-2 border-ink shadow-[3px_3px_0_0_#1a1815] hover:bg-primary hover:text-[#1a1815] transition-colors"><svg viewBox="0 0 24 24" class="size-5" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M18 6L6 18M6 6l12 12" /></svg></button>
         </dialog>
       ))}
 
@@ -292,7 +292,7 @@ const pageTitle = `${data.title} — Thonking`;
               <h2 class="mt-4 font-display font-black text-4xl md:text-5xl lg:text-6xl leading-[0.92] tracking-[-0.035em]">Descarga ElevenLabs Batch<br />gratis en itch.io</h2>
               <div class="mt-8 flex flex-wrap items-center gap-4">
                 {data.url && (
-                  <a href={data.url} target="_blank" rel="noopener" class="group inline-flex items-center gap-3 rounded-full bg-ink text-base-soft pl-6 pr-2 py-2.5 font-display font-bold text-lg md:text-xl hover:bg-primary transition-colors">
+                  <a href={data.url} target="_blank" rel="noopener" class="group inline-flex items-center gap-3 rounded-full bg-ink text-base-soft pl-6 pr-2 py-2.5 font-display font-bold text-lg md:text-xl hover:bg-primary hover:text-[#1a1815] transition-colors">
                     Ver en itch.io
                     <span class="grid size-11 place-items-center rounded-full bg-primary text-ink group-hover:bg-secondary group-hover:text-ink transition-colors"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.8" stroke-linecap="round" stroke-linejoin="round" class="size-5"><path d="M12 5v14M5 12l7 7 7-7" /></svg></span>
                   </a>
